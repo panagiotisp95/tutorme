@@ -2,13 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 # Import the Category model
-from rango.models import Category
-from rango.models import Page
-from rango.forms import CategoryForm
+from tutorme.models import Category
+from tutorme.models import Page
+from tutorme.forms import CategoryForm
 from django.shortcuts import redirect
-from rango.forms import PageForm
+from tutorme.forms import PageForm
 from django.urls import reverse
-from rango.forms import UserForm, UserProfileForm
+from tutorme.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -29,7 +29,7 @@ def index(request):
     context_dict['pages'] = page_list
 
     visitor_cookie_handler(request)
-    response = render(request, 'rango/index.html', context=context_dict)
+    response = render(request, 'tutorme/index.html', context=context_dict)
 
     return response
 
@@ -38,7 +38,7 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict = {}
     context_dict['visits'] = request.session['visits']
-    response = render(request, 'rango/about.html', context=context_dict)
+    response = render(request, 'tutorme/about.html', context=context_dict)
     return response
 
 
@@ -71,7 +71,7 @@ def show_category(request, category_name_slug):
         context_dict['pages'] = None
 
     # Go render the response and return it to the client.
-    return render(request, 'rango/category.html', context=context_dict)
+    return render(request, 'tutorme/category.html', context=context_dict)
 
 @login_required
 def add_category(request):
@@ -87,14 +87,14 @@ def add_category(request):
             form.save(commit=True)
             # Now that the category is saved, we could confirm this.
             #  For now, just redirect the user back to the index view.
-            return redirect('/rango/')
+            return redirect('/tutorme/')
         else:
             # The supplied form contained errors -
             # just print them to the terminal.
             print(form.errors)
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
-    return render(request, 'rango/add_category.html', {'form': form})
+    return render(request, 'tutorme/add_category.html', {'form': form})
 
 @login_required
 def add_page(request, category_name_slug):
@@ -105,7 +105,7 @@ def add_page(request, category_name_slug):
 
     # You cannot add a page to a Category that does not exist...
     if category is None:
-        return redirect('/rango/')
+        return redirect('/tutorme/')
 
     form = PageForm()
 
@@ -119,11 +119,11 @@ def add_page(request, category_name_slug):
                 page.views = 0
                 page.save()
 
-                return redirect(reverse('rango:show_category', kwargs={'category_name_slug': category_name_slug}))
+                return redirect(reverse('tutorme:show_category', kwargs={'category_name_slug': category_name_slug}))
         else:
             print(form.errors)
     context_dict = {'form': form, 'category': category}
-    return render(request, 'rango/add_page.html', context=context_dict)
+    return render(request, 'tutorme/add_page.html', context=context_dict)
 
 
 def register(request):
@@ -180,7 +180,7 @@ def register(request):
         profile_form = UserProfileForm()
 
     # Render the template depending on the context.
-    return render(request, 'rango/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+    return render(request, 'tutorme/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 def user_login(request):
     # If the request is a HTTP POST, try to pull out the relevant information.
@@ -206,7 +206,7 @@ def user_login(request):
             if user.is_active:
                 # If the account is valid and active, we can log the user in. # We'll send the user back to the homepage.
                 login(request, user)
-                return redirect(reverse('rango:index'))
+                return redirect(reverse('tutorme:index'))
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
@@ -219,12 +219,12 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'rango/login.html')
+        return render(request, 'tutorme/login.html')
 
 
 @login_required
 def restricted(request):
-    return render(request, 'rango/restricted.html')
+    return render(request, 'tutorme/restricted.html')
 
 
 # Use the login_required() decorator to ensure only those logged in can # access the view.
@@ -233,7 +233,7 @@ def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
     # Take the user back to the homepage.
-    return redirect(reverse('rango:index'))
+    return redirect(reverse('tutorme:index'))
 
 
 # A helper method
