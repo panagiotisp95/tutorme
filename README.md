@@ -1,4 +1,4 @@
-# tutorme
+# TutorMe!
 
 “Knowledge is power” is a dictum in many countries that goes back to the English philosopher Francis Bacon. And that is exactly what our application is about. Affordable and easy transfer of knowledge on a human level without the necessity to be a highly educated, trained or certified person.
 People might be “just” very talented or learned something over many years without a paper stating this.
