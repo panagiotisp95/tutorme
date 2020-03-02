@@ -209,7 +209,7 @@ def user_login(request):
                 return redirect(reverse('tutorme:index'))
             else:
                 # An inactive account was used - no logging in!
-                return HttpResponse("Your Rango account is disabled.")
+                return HttpResponse("Your account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in. print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
