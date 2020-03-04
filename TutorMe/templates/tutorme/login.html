@@ -1,16 +1,17 @@
-<!DOCTYPE html>
+{%extends 'tutorme/base.html'%}
 {% load staticfiles %}
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="{% static 'javascript/typed.min.js' %}"></script>
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block head_block %}
+
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-<body>
+
+{% endblock %}
+
+{% block body_block %}
     <center>
         <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="400" height="160" alt="Picture of tutorme" />
     </center>
@@ -25,8 +26,8 @@
                     </h2>
                     <p>This website is for a teacher to teach and a student to learn. All about education!</p>
                     <h2>Register Now</h2>
-                    <a href="#" class="btn btn-transparent">As Teacher</a>
-                    <a class="btn btn-blue" href="">As Student</a>
+                    <a href="{% url 'tutorme:register' %}" class="btn btn-transparent">As Teacher</a>
+                    <a href="{% url 'tutorme:register' %}" class="btn btn-blue" >As Student</a>
                 </div>
             </div>
             <div class="col-md-5 offset-md-1 row-color row-centered">
@@ -62,7 +63,10 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+{% block afterBody_block %}
     <script src="{% static 'javascript/login.js' %}"></script>
-</body>
-</html>
+{% endblock %}
+
 
