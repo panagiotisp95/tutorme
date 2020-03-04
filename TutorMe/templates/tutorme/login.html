@@ -2,104 +2,37 @@
 {% load staticfiles %}
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style type="text/css">
-
-    .register-button {
-    background:#e68e00;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 3px;
-    height: 40px;
-    padding: 0;
-}
-
-body {background-color: #b7d4e8;}
-
-.row-centered {
-    vertical-align: middle;
-    text-align: center;
-    padding:10px;
-}
-
-
-	.login-form {
-		margin: 30px auto;
-	}
-    .login-form form {
-    	margin-bottom: 15px;
-        background: #dbd6c8;
-        box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }
-
-    .form {
-    margin: 30px auto;
-        background: #dbd6c8;
-        box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }
-
-    .login-form h2 {
-        margin: 0 0 15px;
-    }
-    .form-control, .login-btn {
-        min-height: 38px;
-        border-radius: 2px;
-    }
-    .input-group-addon .fa {
-        font-size: 18px;
-    }
-    .login-btn {
-        font-size: 15px;
-        font-weight: bold;
-    }
-	.btn {
-		border: none;
-        margin: 10px 3px 0;
-        opacity: 1;
-	}
-	.btn-primary {
-        background: #e68e00;
-    }
-    .or-seperator {
-        margin-top: 20px;
-        text-align: center;
-        border-top: 1px solid #000;
-    }
-    .or-seperator i {
-        padding: 0 10px;
-        background: #dbd6c8;
-        position: relative;
-        top: -11px;
-        z-index: 1;
-    }
-</style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'javascript/typed.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-<center> <h1>TutorMe</h1>
- </center>
+    <center>
+        <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="400" height="160" alt="Picture of tutorme" />
+    </center>
     <div class="container login">
         <div class="row kokos">
-            <div class="col-md-5 offset-md-1 row-color row-centered">
-                <div class="form">
-
-                    <button type="submit" class="btn btn-primary login-btn btn-block">Register as Teacher</button>
-                    <div class="or-seperator"><i>OR</i></div>
-                    <button type="submit" class="btn btn-primary login-btn btn-block">Register as Student</button>
-
-
+            <div class="col-md-5 offset-md-0 row-centered my-auto">
+                <div class="welcome white-text">
+                    <h1>Welcome to TutorMe</h1>
+                    <h2>
+                        <span class="animated-text"></span>
+                        <span class="typed-cursor"></span>
+                    </h2>
+                    <p>This website is for a teacher to teach and a student to learn. All about education!</p>
+                    <h2>Register Now</h2>
+                    <a href="#" class="btn btn-transparent">As Teacher</a>
+                    <a class="btn btn-blue" href="">As Student</a>
                 </div>
             </div>
             <div class="col-md-5 offset-md-1 row-color row-centered">
                 <div class="login-form">
-                    <form action="/examples/actions/confirmation.php" method="post">
-                        <h2 class="text-center">Sign in</h2>
+                    <form action="#" method="post">
+                        <h2 class="text-center black-text">Sign in</h2>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -116,11 +49,11 @@ body {background-color: #b7d4e8;}
                             <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
                         </div>
                         <div class="clearfix">
-                            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                            <label class="pull-left checkbox-inline black-text"><input type="checkbox"> Remember me</label>
                             <a href="#" class="pull-right">Forgot Password?</a>
                         </div>
-                        <div class="or-seperator"><i>OR</i></div>
-                        <p class="text-center">Login with your social media account</p>
+                        <div class="separator black-text">OR</div>
+                        <p class="text-center black-text">Login with your social media account</p>
                         <div class="text-center social-btn">
                             <div class="fb-login-button" data-width="" data-size="medium" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
                         </div>
@@ -129,53 +62,7 @@ body {background-color: #b7d4e8;}
             </div>
         </div>
     </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        function statusChangeCallback(response){
-            console.log(response);
-        }
-
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '2568335126772420',
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v6.0'
-            });
-
-            FB.AppEvents.logPageView();
-
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-        };
-
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-        }
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-    </script>
-
+    <script src="{% static 'javascript/login.js' %}"></script>
 </body>
 </html>
 
