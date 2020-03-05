@@ -38,6 +38,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     # The additional attributes we wish to include.
+    surname = models.CharField(blank=False, max_length=20)
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 

@@ -1,4 +1,4 @@
-.row-centered {
+.centered {
     vertical-align: middle;
     text-align: center;
     padding:10px;
@@ -9,7 +9,6 @@
 }
 
 .login-form form {
-<!--#e6e6e620;-->
     margin-bottom: 15px;
     background: #ffffffe0;
     box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
