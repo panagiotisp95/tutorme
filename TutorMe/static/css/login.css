@@ -164,3 +164,7 @@ div.title {
 .separator::after {
     margin-left: .25em;
 }
+
+.logo {
+    margin-top: 20px;
+}

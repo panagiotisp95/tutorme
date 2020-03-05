@@ -5,20 +5,29 @@
     Register
 {% endblock %}
 
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
 {% block body_block %}
-    <h1>Register for tutorme</h1>
     {% if registered %}
         tutorme says:<strong>thank you for registering!</strong>
 
         <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
     {% else %}
-        tutorme says:<strong>register here!</strong><br/>
-        <form id = "user_form" method = "post" action = "{% url 'tutorme:register' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-                {{ user_form.as_p }}
-                {{ profile_form.as_p }}
-                <!-- Provide a button to click to submit the form. -->
-                <input type="submit" name="submit" value="Register" />
-        </form>
+        <center>
+            tutorme says:<strong>register here!</strong><br/>
+            <div class="col-md-8  row-color row-centered">
+                <div class="login-form">
+                    <form id = "user_form" method = "post" action = "{% url 'tutorme:register' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ user_form.as_p }}
+                        {{ profile_form.as_p }}
+                        <!-- Provide a button to click to submit the form. -->
+                        <input type="submit" name="submit" value="Register" />
+                    </form>
+                </div>
+            </div>
+        </center>
     {% endif %}
 {% endblock %}

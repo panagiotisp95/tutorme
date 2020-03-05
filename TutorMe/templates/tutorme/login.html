@@ -6,15 +6,15 @@
 {% endblock %}
 
 {% block head_block %}
-
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-
 {% endblock %}
 
 {% block body_block %}
-    <center>
-        <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="400" height="160" alt="Picture of tutorme" />
-    </center>
+    <div class="logo">
+        <center>
+            <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="400" height="160" alt="Picture of tutorme" />
+        </center>
+    </div>
     <div class="container login">
         <div class="row kokos">
             <div class="col-md-5 offset-md-0 row-centered my-auto">
@@ -63,10 +63,9 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
+
 {% block afterBody_block %}
     <script src="{% static 'javascript/login.js' %}"></script>
 {% endblock %}
-
 
