@@ -1,7 +1,7 @@
 from django import forms
 from tutorme.models import Page, Category
-from django.contrib.auth.models import User
-from tutorme.models import UserProfile
+from tutorme.models import User
+
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=Category.NAME_MAX_LENGTH,help_text="Please enter the category name.")
@@ -46,19 +46,12 @@ class PageForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password',)
+        fields = ('first_name', 'last_name', 'email', 'password', 'picture',)
 
-
-class UserProfileForm(forms.ModelForm):
-    website = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    picture = forms.FileField(widget=forms.FileInput(attrs={'class': 'inputFile'}))
-    class Meta:
-        model = UserProfile
-        fields = ('website', 'picture',)

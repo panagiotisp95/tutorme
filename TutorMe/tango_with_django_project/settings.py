@@ -76,6 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
+AUTH_USER_MODEL = 'tutorme.User'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
