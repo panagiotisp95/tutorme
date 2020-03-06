@@ -11,9 +11,22 @@
 
 {% block body_block %}
     {% if registered %}
-        tutorme says:<strong>thank you for registering!</strong>
+<center>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 centered">
+                        <div class="register-done">
+                            <strong>Thank you for registering!</strong><br>
+                            <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </center>
 
-        <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
+
+
+
     {% else %}
         <center>
             <div class="container">

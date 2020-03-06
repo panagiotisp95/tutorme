@@ -3,6 +3,7 @@ from django.contrib import admin
 from tutorme.models import Category, Page
 from tutorme.models import UserProfile
 
+
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'url')
 
