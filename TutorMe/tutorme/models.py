@@ -47,6 +47,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
     is_staff = models.BooleanField(default=False)
+    location = models.CharField(_('first name'), max_length=30, blank=False)
+    description = models.CharField(_('first name'), max_length=100, blank=False)
 
     objects = UserManager()
 

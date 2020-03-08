@@ -55,10 +55,14 @@
                         </div>
                         <div class="separator black-text">OR</div>
                         <p class="text-center black-text">Login with your social media account</p>
-                        <div class="text-center social-btn">
-                            <div class="fb-login-button" data-width="" data-size="medium" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                        </div>
                     </form>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <button class="btn fb btn-block white-text" onclick="login()">
+                            <img src="{% static 'images/fbLogoWhite.png' %}" class="img-fluid" width="25" height="15" alt="Picture of tutorme" />
+                            Login with Facebook
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

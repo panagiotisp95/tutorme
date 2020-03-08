@@ -6,10 +6,6 @@
 
 .login-form {
     margin: 30px auto;
-}
-
-.login-form form {
-    margin-bottom: 15px;
     background: #ffffffe0;
     box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
     padding: 30px;
@@ -133,7 +129,6 @@ div.title {
     color: #fff;
 }
 
-
 .typed-cursor {
     opacity: 1;
     -webkit-animation: blink 0.7s infinite;
@@ -167,3 +162,8 @@ div.title {
 .logo {
     margin-top: 20px;
 }
+
+.fb {
+    background: #4267B2;
+}
+

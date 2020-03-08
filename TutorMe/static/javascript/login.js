@@ -13,35 +13,65 @@ $(document).ready(function () {
     });
 });
 
-function statusChangeCallback(response){
-    console.log(response);
+function attemptLogin(){
+    koko = null;
+    FB.getLoginStatus(function(response) {
+        if(response){
+            if(response.status == "unknown"){
+                console.log(response);
+                koko = "lo";
+            }else{
+                sendRequest(response);
+            }
+        }else{
+            console.log("not able to get response");
+        }
+    }, true);
+
+    if(koko == "lo"){
+    console.log("sss");
+    }
 }
 
-window.fbAsyncInit = function() {
-    FB.init({
-        appId      : '2568335126772420',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v6.0'
-    });
-
-    FB.AppEvents.logPageView();
-
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
-};
-
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
+function login(){
+    FB.login(function(response) {
+        console.log(response);
     });
 }
 
-(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+function sendRequest(data){
+    var csrftoken = getCookie('csrftoken');
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    $.post('/tutorme/login/',{koko :'lolo'},function(data){
+        console.log(data);
+    })
+}

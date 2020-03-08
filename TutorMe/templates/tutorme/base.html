@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="{% static 'javascript/typed.min.js' %}"></script>
+        <script src="{% static 'javascript/facebookAPI.js' %}"></script>
         {% block head_block %}
         {% endblock %}
         <title>
@@ -23,10 +23,10 @@
     </head>
     <body class="d-flex flex-column" style="min-height: 100vh">
         <main class="flex-fill">
-            <div>
+            <center>
                 {% block body_block %}
                 {% endblock %}
-            </div>
+            </center>
         </main>
         <footer class="footer">
             <div class="container-fluid text-center text-md-left">
