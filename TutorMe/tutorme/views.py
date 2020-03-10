@@ -9,6 +9,7 @@ from django.urls import reverse
 from tutorme.forms import UserForm, StudentForm, TeacherForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from tutorme.models import Category, Student, Teacher, Review, User
 from datetime import datetime
 
 
@@ -20,9 +21,11 @@ def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
 
     context_dict = {}
+    if not request.user.is_anonymous:
+        student = Student.objects.get(user=request.user)
+        context_dict['username'] = student.first_name
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
-
     visitor_cookie_handler(request)
     response = render(request, 'tutorme/index.html', context=context_dict)
 
@@ -178,7 +181,8 @@ def user_login(request):
 
         # Use Django's machinery to attempt to see if the username/password
         #  combination is valid - a User object is returned if it is.
-        user = authenticate(username=email, password=password)
+        user = authenticate(email=email, password=password)
+
         # If we have a User object, the details are correct.
         # If None (Python's way of representing the absence of a value), no user
         # with matching credentials was found.

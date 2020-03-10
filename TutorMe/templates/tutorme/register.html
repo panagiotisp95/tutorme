@@ -13,14 +13,10 @@
     <div class="container">
         <div class="row">
             {% if registered %}
-                <center>
-                    <div class="col-md-5 centered">
-                        <div class="register-done">
-                            <strong>Thank you for registering!</strong><br>
-                            <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
-                        </div>
-                    </div>
-                </center>
+                <div class="register-done">
+                    <strong>Thank you for registering!</strong><br>
+                    <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
+                </div>
             {% else %}
                 <div class="col-md-5 offset-md-1 my-auto left">
                     <div class="join white-text">

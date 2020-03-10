@@ -20,7 +20,7 @@ class TeacherAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'date_joined')
+    list_display = ('email', 'password', 'date_joined')
 
 
 admin.site.register(Category, CategoryAdmin)
