@@ -43,61 +43,33 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
 
-class Student(AbstractBaseUser):
-    email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=False)
-    last_name = models.CharField(_('last name'), max_length=30, blank=False)
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+class CommonInfo(models.Model):
+    first_name = models.CharField(max_length=30, blank=False, default='')
+    last_name = models.CharField(max_length=30, blank=False, default='')
     picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
-    is_staff = models.BooleanField(default=False)
     location = models.CharField(_('location'), max_length=30, blank=False)
     description = models.CharField(_('description'), max_length=100, blank=False)
 
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
     class Meta:
+        abstract = True
+
+
+class Student(CommonInfo):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    class Meta(CommonInfo.Meta):
+        db_table = 'students'
         verbose_name = _('student')
         verbose_name_plural = _('students')
 
-    def get_full_name(self):
-        '''
-        Returns the first_name plus the last_name, with a space in between.
-        '''
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
 
-    def get_short_name(self):
-        '''
-        Returns the short name for the user.
-        '''
-        return self.first_name
+class Teacher(CommonInfo):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    categories_list = models.CharField(max_length=30, blank=False, default='')
+    categories = models.CharField(_('categories'), max_length=100, blank=False)
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        '''
-        Sends an email to this User.
-        '''
-        send_mail(subject, message, from_email, [self.email], **kwargs)
-
-
-class Teacher(AbstractBaseUser):
-    email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=False)
-    last_name = models.CharField(_('last name'), max_length=30, blank=False)
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
-    picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
-    is_staff = models.BooleanField(default=False)
-    location = models.CharField(_('location'), max_length=30, blank=False)
-    description = models.CharField(_('description'), max_length=100, blank=False)
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    class Meta:
+    class Meta(CommonInfo.Meta):
+        db_table = 'teachers'
         verbose_name = _('teacher')
         verbose_name_plural = _('teachers')
 
@@ -122,12 +94,11 @@ class Teacher(AbstractBaseUser):
 
 
 class Review(models.Model):
-    title = models.CharField(_('description'), max_length=20, blank=False, default="Review")
+    title = models.CharField(_('title'), max_length=20, blank=False, default="Review")
     rating = models.IntegerField(_('rating'), blank=False)
     description = models.CharField(_('description'), max_length=100, blank=False)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     reviewee = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-    reviewer = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = _('review')
