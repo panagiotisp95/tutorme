@@ -6,7 +6,7 @@ from tutorme.models import Category
 from tutorme.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
-from tutorme.forms import UserForm
+from tutorme.forms import UserForm, StudentForm, TeacherForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -84,7 +84,7 @@ def add_category(request):
     return render(request, 'tutorme/add_category.html', {'form': form})
 
 
-def register(request):
+def register_student(request):
     # A boolean value for telling the template
     # whether the registration was successful.
     # Set to False initially. Code changes value to
@@ -96,6 +96,7 @@ def register(request):
         # Attempt to grab information from the raw form information.
         # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(request.POST)
+        student_form = StudentForm(request.POST)
 
         # If the two forms are valid...
         if user_form.is_valid():
@@ -105,11 +106,13 @@ def register(request):
             # Now we hash the password with the set_password method.
             # Once hashed, we can update the user object.
             user.set_password(user.password)
-
+            user.save()
             # Now sort out the UserProfile instance.
             # Since we need to set the user attribute ourselves,
             # we set commit=False. This delays saving the model
             # until we're ready to avoid integrity problems.
+            student = student_form.save(commit=False)
+            student.user = user
 
             # Did the user provide a profile picture?
             # If so, we need to get it from the input form and
@@ -117,7 +120,7 @@ def register(request):
             if 'picture' in request.FILES:
                 user.picture = request.FILES['picture']
 
-            user.save()
+            student.save()
 
             # Update our variable to indicate that the template
             # registration was successful.
@@ -130,9 +133,34 @@ def register(request):
         # Not a HTTP POST, so we render our form using two ModelForm instances.
         # These forms will be blank, ready for user input.
         user_form = UserForm()
-
+        student_form = StudentForm()
     # Render the template depending on the context.
-    return render(request, 'tutorme/register.html', context={'user_form': user_form, 'registered': registered})
+    return render(request, 'tutorme/register.html', context={'student': True, 'student_form': student_form, 'user_form': user_form, 'registered': registered})
+
+
+def register_teacher(request):
+    registered = False
+
+    if request.method == 'POST':
+        user_form = StudentForm(request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+
+            user.set_password(user.password)
+
+            if 'picture' in request.FILES:
+                user.picture = request.FILES['picture']
+
+            user.save()
+
+            registered = True
+        else:
+            print(user_form.errors)
+    else:
+        user_form = UserForm()
+        teacher_form = TeacherForm()
+    return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
 def user_login(request):
@@ -145,12 +173,12 @@ def user_login(request):
         # request.POST.get('<variable>') returns None if the
         # value does not exist, while request.POST['<variable>']
         # will raise a KeyError exception.
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
         # Use Django's machinery to attempt to see if the username/password
         #  combination is valid - a User object is returned if it is.
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=email, password=password)
         # If we have a User object, the details are correct.
         # If None (Python's way of representing the absence of a value), no user
         # with matching credentials was found.

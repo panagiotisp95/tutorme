@@ -13,12 +13,14 @@
     <div class="container">
         <div class="row">
             {% if registered %}
-                <div class="col-md-5 centered">
-                    <div class="register-done">
-                        <strong>Thank you for registering!</strong><br>
-                        <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
+                <center>
+                    <div class="col-md-5 centered">
+                        <div class="register-done">
+                            <strong>Thank you for registering!</strong><br>
+                            <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
+                        </div>
                     </div>
-                </div>
+                </center>
             {% else %}
                 <div class="col-md-5 offset-md-1 my-auto left">
                     <div class="join white-text">
@@ -30,21 +32,28 @@
                 </div>
                 <div class="col-md-5 offset-md-1 centered">
                     <div class="register-form">
-                        <form id = "user_form" method = "post" action = "{% url 'tutorme:register' %}" enctype="multipart/form-data">
-                            <h2 class="text-center black-text">Sign Up</h2>
+                        <form id = "user_form" method = "post" action = "{% if student %} {% url 'tutorme:register_student' %} {% else %} {% url 'tutorme:register_teacher' %} {% endif %}" enctype="multipart/form-data">
                             {% csrf_token %}
-                            {{ user_form.as_p }}
-
-                            {{ profile_form.as_p }}
-
+                            {% if student %}
+                                <h2 class="text-center black-text">Student Sign Up</h2>
+                                {{ user_form.as_p }}
+                                {{ student_form.as_p }}
+                            {% else %}
+                                <h2 class="text-center black-text">Teacher Sign Up</h2>
+                                {{ user_form.as_p }}
+                                {{ teacher_form.as_p }}
+                            {% endif %}
                             <div class="form-group">
                                 <button type="submit" name="submit" class="btn btn-primary login-btn btn-block">Register</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block afterBody_block %}
+    <script src="{% static 'javascript/register.js' %}"></script>
 {% endblock %}

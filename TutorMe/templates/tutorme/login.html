@@ -26,13 +26,14 @@
                     </h2>
                     <p>This website is for a teacher to teach and a student to learn. All about education!</p>
                     <h2>Register Now</h2>
-                    <a href="{% url 'tutorme:register' %}" class="btn btn-transparent">As Teacher</a>
-                    <a href="{% url 'tutorme:register' %}" class="btn btn-blue" >As Student</a>
+                    <a href="{% url 'tutorme:register_teacher' %}" class="btn btn-transparent">As Teacher</a>
+                    <a href="{% url 'tutorme:register_student' %}" class="btn btn-blue" >As Student</a>
                 </div>
             </div>
             <div class="col-md-5 offset-md-1 row-centered">
                 <div class="login-form">
                     <form action="#" method="post">
+                        {% csrf_token %}
                         <h2 class="text-center black-text">Sign in</h2>
                         <div class="form-group">
                             <div class="input-group">
