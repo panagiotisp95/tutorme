@@ -46,7 +46,8 @@
                                 <li><a href="{% url 'tutorme:restricted' %}">Restricted Page</a></li>
                                 <li><a href="{% url 'tutorme:logout' %}">Logout</a></li>
                             {% else %}
-                                <li><a href="{% url 'tutorme:register' %}">Sign Up</a></li>
+                                <li><a href="{% url 'tutorme:register_student' %}">Sign Up as Student</a></li>
+                                <li><a href="{% url 'tutorme:register_teacher' %}">Sign Up as Teacher</a></li>
                                 <li><a href="{% url 'tutorme:login' %}">Login</a></li>
                             {% endif %}
                             <li><a href="{% url 'tutorme:about' %}">About</a></li>

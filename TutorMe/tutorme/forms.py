@@ -1,5 +1,5 @@
 from django import forms
-from tutorme.models import Category, Student, Teacher, Review
+from tutorme.models import Category, Student, Teacher, Review, User
 
 RATING = [
     ('1', '1'),
@@ -7,6 +7,12 @@ RATING = [
     ('3', '3'),
     ('4', '4'),
     ('5', '5'),
+]
+
+CATEGORY_CHOICES = [
+    ('none', 'None'),
+    ('algebra', 'Algebra'),
+    ('mathematics', 'Mathematics'),
 ]
 
 
@@ -24,42 +30,36 @@ class CategoryForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
-        model = Student
-        fields = ('first_name', 'last_name', 'email', 'password', 'description', 'location', 'picture',)
+        model = User
+        fields = ('email', 'password',)
 
 
 class StudentForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Student
-        fields = ('first_name', 'last_name', 'email', 'password', 'description', 'location', 'picture',)
+        fields = ('first_name', 'last_name', 'description', 'location', 'picture',)
 
 
 class TeacherForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    categories_list = forms.CharField(label='Choose any category to add to your list', widget=forms.Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control categories'}))
+    categories = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control teacherCategories', 'readonly': 'readonly', 'id': 'teacherCategories', 'rows': 2}))
 
     class Meta:
         model = Teacher
-        fields = ('first_name', 'last_name', 'email', 'password', 'description', 'location', 'picture',)
+        fields = ('first_name', 'last_name', 'description', 'location', 'categories_list', 'categories', 'picture',)
 
 
 class ReviewForm(forms.ModelForm):
