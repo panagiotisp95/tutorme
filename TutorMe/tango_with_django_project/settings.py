@@ -130,3 +130,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATICFILES_DIRS = [STATIC_DIR,]
 STATIC_URL = '/static/'
+
+# session expiry 2 weeks
+SESSION_EXPIRY = 1209600
