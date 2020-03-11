@@ -14,3 +14,9 @@ $(document).ready(function () {
         }
     });
 });
+
+function register(){
+    registerURL = $('#user_form').attr('action');
+    attemptLogin(registerURL);
+}
+

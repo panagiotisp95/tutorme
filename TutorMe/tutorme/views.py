@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from tutorme.models import Category, Student, Teacher, Review, User
 from datetime import datetime
 from django.conf import settings
+from .picture_downloader import PictureDownloader
 
 
 def index(request):
@@ -98,57 +99,70 @@ def add_category(request):
 
 
 def register_student(request):
-    # A boolean value for telling the template
-    # whether the registration was successful.
-    # Set to False initially. Code changes value to
-    # True when registration succeeds.
     registered = False
+    registered_message = 'Thank you for registering!'
+    if request.method == 'GET':
+        if 'registered' in request.GET:
+            if 'registered_message' in request.GET:
+                registered_message = request.GET['registered_message']
+            return render(request, 'tutorme/register.html', context={'registered': request.GET['registered'], 'registered_message': registered_message})
 
-    # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(request.POST)
         student_form = StudentForm(request.POST)
 
         # If the two forms are valid...
-        if user_form.is_valid():
-            # Save the user's form data to the database.
+        if user_form.is_valid() and student_form.is_valid():
             user = user_form.save()
 
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
-            # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves,
-            # we set commit=False. This delays saving the model
-            # until we're ready to avoid integrity problems.
+
             student = student_form.save(commit=False)
             student.user = user
 
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and
-            # put it in the UserProfile model.
             if 'picture' in request.FILES:
-                user.picture = request.FILES['picture']
+                student.picture = request.FILES['picture']
 
             student.save()
-
-            # Update our variable to indicate that the template
-            # registration was successful.
             registered = True
         else:
-            # Invalid form or forms - mistakes or something else?
-            # Print problems to the terminal.
-            print(user_form.errors)
+            email = request.POST.get('email')
+            if email:
+                if User.objects.get(email=email):
+                    registered = True
+                    registered_message = "Account already exists with email '" + email + "'"
+                    if request.POST.get('fb'):
+                        return HttpResponse("/tutorme/register_student/?registered=True&registered_message="+registered_message)
+            else:
+                if request.POST.get('fb'):
+                    print(request.POST.get('email'))
+                    print(request.POST.get('picture_url'))
+                    print(request.POST.get('last_name'))
+                    print(request.POST.get('first_name'))
+
+                    email = request.POST.get('email')
+                    first_name = request.POST.get('first_name')
+                    last_name = request.POST.get('last_name')
+                    picture_url = request.POST.get('picture_url')
+                    img = PictureDownloader().get_image_from_url(picture_url)
+
+                    user = User.objects.create_user(email, email)
+                    user.save()
+
+                    student = Student()
+                    student.user = user
+                    student.first_name = first_name
+                    student.last_name = last_name
+                    student.picture = img
+                    student.save()
+                    return HttpResponse("/tutorme/register_student/?registered=True")
+                else:
+                    return HttpResponse("Bad request")
     else:
-        # Not a HTTP POST, so we render our form using two ModelForm instances.
-        # These forms will be blank, ready for user input.
         user_form = UserForm()
         student_form = StudentForm()
-    # Render the template depending on the context.
-    return render(request, 'tutorme/register.html', context={'student': True, 'student_form': student_form, 'user_form': user_form, 'registered': registered})
+    return render(request, 'tutorme/register.html', context={'student': True, 'student_form': student_form, 'user_form': user_form, 'registered': registered, 'registered_message': registered_message})
 
 
 def register_teacher(request):
@@ -169,7 +183,7 @@ def register_teacher(request):
 
             registered = True
         else:
-            print(user_form.errors)
+            return HttpResponse("noth here")
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()

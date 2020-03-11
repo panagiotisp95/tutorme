@@ -11,13 +11,13 @@
 
 {% block body_block %}
     <div class="container">
-        <div class="row">
-            {% if registered %}
-                <div class="register-done">
-                    <strong>Thank you for registering!</strong><br>
-                    <a href="{% url 'tutorme:index' %}">Return to the homepage.</a> <br/>
-                </div>
-            {% else %}
+        {% if registered %}
+            <div class="register-done">
+                <strong>{{ registered_message }}</strong><br>
+                <a href="{% url 'tutorme:index' %}">Return to the login page.</a> <br/>
+            </div>
+        {% else %}
+            <div class="row centered">
                 <div class="col-md-5 offset-md-1 my-auto left">
                     <div class="join white-text">
                         <h1>Join the TutorMe community</h1>
@@ -40,13 +40,21 @@
                                 {{ teacher_form.as_p }}
                             {% endif %}
                             <div class="form-group">
-                                <button type="submit" name="submit" class="btn btn-primary login-btn btn-block">Register</button>
+                                <button type="submit" name="submit" class="btn btn-primary login-btn btn-block">Sign up</button>
+                            </div>
+                            <div class="separator black-text">OR</div>
+                            <p class="text-center black-text">Sign up with your social media account</p>
+                            <div class="form-group">
+                                <button class="btn fb btn-block white-text" onclick="register()">
+                                    <img src="{% static 'images/fbLogoWhite.png' %}" class="img-fluid" width="25" height="15" alt="Picture of tutorme" />
+                                    Sign up with Facebook
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
