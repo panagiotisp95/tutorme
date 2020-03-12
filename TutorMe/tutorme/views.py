@@ -136,8 +136,9 @@ def register_student(request):
                     user = User.objects.get(email=email)
                     registered = True
                     registered_message = "Account already exists with email '" + email + "'"
+                    url = "/tutorme/register_student/?registered=True&registered_message="+registered_message
                     if request.POST.get('fb'):
-                        return HttpResponse("/tutorme/register_student/?registered=True&registered_message="+registered_message)
+                        return HttpResponse('{"url" : "'+url+'"}')
                 except User.DoesNotExist:
                     if request.POST.get('fb'):
                         print(request.POST.get('email'))
@@ -154,17 +155,15 @@ def register_student(request):
                         user = User.objects.create_user(email, email)
                         user.save()
 
-                        student = Student()
-                        student.user = user
-                        student.first_name = first_name
-                        student.last_name = last_name
+                        student = Student(user=user, first_name=first_name, last_name=last_name)
 
+                        print(student.last_name)
                         thumb_io = BytesIO()
                         img.save(thumb_io, img.format, quality=60)
-                        student.picture.save("k.jpeg", ContentFile(thumb_io.getvalue()))
+                        student.picture.save(img.filename, ContentFile(thumb_io.getvalue()))
                         student.save()
 
-                        return HttpResponse("/tutorme/register_student/?registered=True")
+                        return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')
                     else:
                         return HttpResponse("Bad request")
             else:
@@ -226,12 +225,16 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in. # We'll send the user back to the homepage.
 
                 login(request, user)
+                if request.POST.get('fb'):
+                    return HttpResponse('{"url" : "/tutorme/homepage/"}')
                 return redirect(reverse('tutorme:index'))
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in. print(f"Invalid login details: {username}, {password}")
+            if request.POST.get('fb'):
+                return HttpResponse('{"registered" : false}')
             return HttpResponse("Invalid login details supplied.")
 
     # The request is not a HTTP POST, so display the login form.

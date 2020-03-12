@@ -58,7 +58,17 @@ function sendRequest(postData, postAddress){
     });
 
     $.post(postAddress, postData, function(data){
-        window.location.href = data;
+        console.log(data)
+        var obj = JSON.parse(data);
+        console.log(obj)
+        if ("registered" in obj){
+            if(!obj.registered){
+                 
+            }
+        }
+        if ("url" in obj) {
+            window.location.href = obj.url;
+        }
         return;
     })
 }
