@@ -13,6 +13,9 @@ from tutorme.models import Category, Student, Teacher, Review, User
 from datetime import datetime
 from django.conf import settings
 from .picture_downloader import PictureDownloader
+from django.core.files.base import ContentFile
+from PIL import Image
+from io import BytesIO
 
 
 def index(request):
@@ -129,36 +132,43 @@ def register_student(request):
         else:
             email = request.POST.get('email')
             if email:
-                if User.objects.get(email=email):
+                try:
+                    user = User.objects.get(email=email)
                     registered = True
                     registered_message = "Account already exists with email '" + email + "'"
                     if request.POST.get('fb'):
                         return HttpResponse("/tutorme/register_student/?registered=True&registered_message="+registered_message)
+                except User.DoesNotExist:
+                    if request.POST.get('fb'):
+                        print(request.POST.get('email'))
+                        print(request.POST.get('picture_url'))
+                        print(request.POST.get('last_name'))
+                        print(request.POST.get('first_name'))
+
+                        email = request.POST.get('email')
+                        first_name = request.POST.get('first_name')
+                        last_name = request.POST.get('last_name')
+                        picture_url = request.POST.get('picture_url')
+                        img = PictureDownloader().get_image_from_url(picture_url)
+
+                        user = User.objects.create_user(email, email)
+                        user.save()
+
+                        student = Student()
+                        student.user = user
+                        student.first_name = first_name
+                        student.last_name = last_name
+
+                        thumb_io = BytesIO()
+                        img.save(thumb_io, img.format, quality=60)
+                        student.picture.save("k.jpeg", ContentFile(thumb_io.getvalue()))
+                        student.save()
+
+                        return HttpResponse("/tutorme/register_student/?registered=True")
+                    else:
+                        return HttpResponse("Bad request")
             else:
-                if request.POST.get('fb'):
-                    print(request.POST.get('email'))
-                    print(request.POST.get('picture_url'))
-                    print(request.POST.get('last_name'))
-                    print(request.POST.get('first_name'))
-
-                    email = request.POST.get('email')
-                    first_name = request.POST.get('first_name')
-                    last_name = request.POST.get('last_name')
-                    picture_url = request.POST.get('picture_url')
-                    img = PictureDownloader().get_image_from_url(picture_url)
-
-                    user = User.objects.create_user(email, email)
-                    user.save()
-
-                    student = Student()
-                    student.user = user
-                    student.first_name = first_name
-                    student.last_name = last_name
-                    student.picture = img
-                    student.save()
-                    return HttpResponse("/tutorme/register_student/?registered=True")
-                else:
-                    return HttpResponse("Bad request")
+                return HttpResponse("Bad request")
     else:
         user_form = UserForm()
         student_form = StudentForm()
@@ -192,9 +202,14 @@ def register_teacher(request):
 
 def user_login(request):
     # If the request is a HTTP POST, try to pull out the relevant information.
+
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+
+        if not password:
+            if request.POST.get('fb'):
+                password = request.POST.get('email')
 
         user = authenticate(email=email, password=password)
         if user:

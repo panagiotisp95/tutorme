@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class CommonInfo(models.Model):
     first_name = models.CharField(max_length=30, blank=False, default='')
     last_name = models.CharField(max_length=30, blank=False, default='')
-    picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
+    picture = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     location = models.CharField(_('location'), max_length=30, blank=False)
     description = models.CharField(_('description'), max_length=100, blank=False)
 
