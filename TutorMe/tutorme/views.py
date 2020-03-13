@@ -160,7 +160,7 @@ def register_student(request):
                         print(student.last_name)
                         thumb_io = BytesIO()
                         img.save(thumb_io, img.format, quality=60)
-                        student.picture.save(img.filename, ContentFile(thumb_io.getvalue()))
+                        student.picture.save(img.filename+".jpeg", ContentFile(thumb_io.getvalue()))
                         student.save()
 
                         return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')

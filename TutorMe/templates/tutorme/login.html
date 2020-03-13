@@ -15,10 +15,10 @@
             <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="400" height="160" alt="Picture of tutorme" />
         </center>
     </div>
-    <div class="container login">
-        <div class="row kokos">
+    <div class="container">
+        <div class="row">
             <div class="col-md-5 offset-md-0 centered my-auto">
-                <div class="welcome white-text">
+                <div class="white-text">
                     <h1>Welcome to TutorMe</h1>
                     <h2>
                         <span class="animated-text"></span>
@@ -26,12 +26,12 @@
                     </h2>
                     <p>This website is for a teacher to teach and a student to learn. All about education!</p>
                     <h2>Register Now</h2>
-                    <a href="{% url 'tutorme:register_teacher' %}" class="btn btn-transparent">As Teacher</a>
-                    <a href="{% url 'tutorme:register_student' %}" class="btn btn-blue" >As Student</a>
+                    <a href="{% url 'tutorme:register_teacher' %}" class="btn btn-transparent" id="registerTeacher">As Teacher</a>
+                    <a href="{% url 'tutorme:register_student' %}" class="btn btn-orange" id="registerStudent">As Student</a>
                 </div>
             </div>
             <div class="col-md-5 offset-md-1 row-centered">
-                <div class="login-form">
+                <div class="my-form">
                     <form action="#" method="post">
                         {% csrf_token %}
                         <h2 class="text-center black-text">Sign in</h2>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                         </div>
                         <div class="clearfix">
                             <label class="pull-left checkbox-inline black-text"><input name="remember_me" type="checkbox"> Remember me</label>
@@ -63,7 +63,9 @@
                             <img src="{% static 'images/fbLogoWhite.png' %}" class="img-fluid" width="25" height="15" alt="Picture of tutorme" />
                             Login with Facebook
                         </button>
+
                     </div>
+                    <div class="bold-red form-group" id="errorMessage"></div>
                 </div>
             </div>
         </div>

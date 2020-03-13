@@ -12,7 +12,7 @@
 {% block body_block %}
     <div class="container">
         {% if registered %}
-            <div class="register-done">
+            <div class="my-form">
                 <strong>{{ registered_message }}</strong><br>
                 <a href="{% url 'tutorme:index' %}">Return to the login page.</a> <br/>
             </div>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-md-5 offset-md-1 centered">
-                    <div class="register-form">
+                    <div class="my-form">
                         <form id = "user_form" method = "post" action = "{% if student %} {% url 'tutorme:register_student' %} {% else %} {% url 'tutorme:register_teacher' %} {% endif %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             {% if student %}

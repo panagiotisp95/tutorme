@@ -63,7 +63,9 @@ function sendRequest(postData, postAddress){
         console.log(obj)
         if ("registered" in obj){
             if(!obj.registered){
-                 
+                let timerId = setInterval(blink, 1200, "#registerStudent");
+                let timerId1 = setInterval(blink, 1200, "#registerTeacher");
+                $("#errorMessage").append("<p>Currently you are not a user please use the buttons on the left to Register!</p>");
             }
         }
         if ("url" in obj) {
@@ -72,3 +74,20 @@ function sendRequest(postData, postAddress){
         return;
     })
 }
+
+function blink(selector) {
+    $(selector).fadeOut(500, function() {
+        $(selector).fadeIn(500, function() {
+
+        });
+    });
+
+}
+
+window.addEventListener( "pageshow", function ( event ) {
+	var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+	if ( historyTraversal ) {
+		// Handle page restore.
+		window.location.reload();
+	}
+});
