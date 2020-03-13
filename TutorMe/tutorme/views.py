@@ -33,8 +33,15 @@ def homepage(request):
 
     context_dict = dict()
     if not request.user.is_anonymous:
-        student = Student.objects.get(user=request.user)
-        context_dict['username'] = student.first_name
+        try:
+            student = Student.objects.get(user=request.user)
+            context_dict['username'] = student.first_name
+            context_dict['user_type'] = 'student'
+        except Student.DoesNotExist:
+            teacher = Teacher.objects.get(user=request.user)
+            context_dict['username'] = teacher.first_name
+            context_dict['user_type'] = 'teacher'
+
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     visitor_cookie_handler(request)

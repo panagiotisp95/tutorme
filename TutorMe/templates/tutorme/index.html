@@ -14,6 +14,11 @@
                 hey there partner!
             {% endif %} <br />
             <strong>{{ boldmessage }}</strong> <br />
+            {% if user_type == 'teacher' %}
+                Teacher!
+            {% else %}
+                Student!
+            {% endif %}
         </div>
         <div>
             <h2>Most Liked Categories</h2>
