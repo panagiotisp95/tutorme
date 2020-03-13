@@ -45,13 +45,14 @@
                                 <li><a href="{% url 'tutorme:add_category' %}">Add New Category</a></li>
                                 <li><a href="{% url 'tutorme:restricted' %}">Restricted Page</a></li>
                                 <li><a href="{% url 'tutorme:logout' %}">Logout</a></li>
+                                <li><a href="{% url 'tutorme:homepage' %}">Homepage</a></li>
                             {% else %}
                                 <li><a href="{% url 'tutorme:register_student' %}">Sign Up as Student</a></li>
                                 <li><a href="{% url 'tutorme:register_teacher' %}">Sign Up as Teacher</a></li>
                                 <li><a href="{% url 'tutorme:login' %}">Login</a></li>
                             {% endif %}
                             <li><a href="{% url 'tutorme:about' %}">About</a></li>
-                            <li><a href="{% url 'tutorme:homepage' %}">Homepage</a></li>
+
                         </ul>
                     </div>
 

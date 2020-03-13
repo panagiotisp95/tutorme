@@ -141,29 +141,7 @@ def register_student(request):
                         return HttpResponse('{"url" : "'+url+'"}')
                 except User.DoesNotExist:
                     if request.POST.get('fb'):
-                        print(request.POST.get('email'))
-                        print(request.POST.get('picture_url'))
-                        print(request.POST.get('last_name'))
-                        print(request.POST.get('first_name'))
-
-                        email = request.POST.get('email')
-                        first_name = request.POST.get('first_name')
-                        last_name = request.POST.get('last_name')
-                        picture_url = request.POST.get('picture_url')
-                        img = PictureDownloader().get_image_from_url(picture_url)
-
-                        user = User.objects.create_user(email, email)
-                        user.save()
-
-                        student = Student(user=user, first_name=first_name, last_name=last_name)
-
-                        print(student.last_name)
-                        thumb_io = BytesIO()
-                        img.save(thumb_io, img.format, quality=60)
-                        student.picture.save(img.filename+".jpeg", ContentFile(thumb_io.getvalue()))
-                        student.save()
-
-                        return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')
+                        return register_with_fb(request)
                     else:
                         return HttpResponse("Bad request")
             else:
@@ -176,27 +154,79 @@ def register_student(request):
 
 def register_teacher(request):
     registered = False
+    registered_message = 'Thank you for registering!'
+    if request.method == 'GET':
+        if 'registered' in request.GET:
+            if 'registered_message' in request.GET:
+                registered_message = request.GET['registered_message']
+            return render(request, 'tutorme/register.html', context={'registered': request.GET['registered'], 'registered_message': registered_message})
 
     if request.method == 'POST':
-        user_form = StudentForm(request.POST)
+        user_form = UserForm(request.POST)
+        teacher_form = TeacherForm(request.POST)
 
-        if user_form.is_valid():
+        if user_form.is_valid() and teacher_form.is_valid():
             user = user_form.save()
 
             user.set_password(user.password)
-
-            if 'picture' in request.FILES:
-                user.picture = request.FILES['picture']
-
             user.save()
 
+            teacher = teacher_form.save(commit=False)
+            teacher.user = user
+
+            if 'picture' in request.FILES:
+                teacher.picture = request.FILES['picture']
+
+            teacher.save()
             registered = True
         else:
-            return HttpResponse("noth here")
+            email = request.POST.get('email')
+            if email:
+                try:
+                    user = User.objects.get(email=email)
+                    registered = True
+                    registered_message = "Account already exists with email '" + email + "'"
+                    url = "/tutorme/register_student/?registered=True&registered_message="+registered_message
+                    if request.POST.get('fb'):
+                        return HttpResponse('{"url" : "'+url+'"}')
+                except User.DoesNotExist:
+                    if request.POST.get('fb'):
+                        return register_with_fb(request)
+                    else:
+                        return HttpResponse("Bad request")
+            else:
+                return HttpResponse("Bad request")
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()
     return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
+
+
+def register_with_fb(request):
+    print(request.POST.get('email'))
+    print(request.POST.get('picture_url'))
+    print(request.POST.get('last_name'))
+    print(request.POST.get('first_name'))
+
+    email = request.POST.get('email')
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    picture_url = request.POST.get('picture_url')
+    img = PictureDownloader().get_image_from_url(picture_url)
+
+    user = User.objects.create_user(email, email)
+    user.save()
+
+    student = Student(user=user, first_name=first_name, last_name=last_name)
+
+    thumb_io = BytesIO()
+    img.save(thumb_io, img.format, quality=60)
+
+    filename = first_name.lower()+".jpeg"
+
+    student.picture.save(filename, ContentFile(thumb_io.getvalue()))
+    student.save()
+    return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')
 
 
 def user_login(request):

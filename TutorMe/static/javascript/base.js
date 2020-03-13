@@ -76,10 +76,8 @@ function sendRequest(postData, postAddress){
 }
 
 function blink(selector) {
-    $(selector).fadeOut(500, function() {
-        $(selector).fadeIn(500, function() {
-
-        });
+    $(selector).fadeOut(400, function() {
+        $(selector).fadeIn(500);
     });
 
 }
