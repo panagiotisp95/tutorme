@@ -1,20 +1,16 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-# Import the Category model
-from tutorme.models import Category
 from tutorme.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from tutorme.forms import UserForm, StudentForm, TeacherForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from tutorme.models import Category, Student, Teacher, Review, User
+from tutorme.models import Category, Student, Teacher, User
 from datetime import datetime
 from django.conf import settings
 from .picture_downloader import PictureDownloader
 from django.core.files.base import ContentFile
-from PIL import Image
 from io import BytesIO
 
 
@@ -26,6 +22,7 @@ def index(request):
 
     return response
 
+
 @login_required
 def homepage(request):
     # Query the database for a list of ALL categories currently stored.
@@ -34,7 +31,7 @@ def homepage(request):
     # Place the list in our context_dict dictionary (with our boldmessage!) # that will be passed to the template engine.
     category_list = Category.objects.order_by('-likes')[:5]
 
-    context_dict = {}
+    context_dict = dict()
     if not request.user.is_anonymous:
         student = Student.objects.get(user=request.user)
         context_dict['username'] = student.first_name
@@ -48,7 +45,7 @@ def homepage(request):
 
 def about(request):
     visitor_cookie_handler(request)
-    context_dict = {}
+    context_dict = dict()
     context_dict['visits'] = request.session['visits']
     response = render(request, 'tutorme/about.html', context=context_dict)
     return response
@@ -57,7 +54,7 @@ def about(request):
 def show_category(request, category_name_slug):
     # Create a context dictionary which we can pass
     # to the template rendering engine.
-    context_dict = {}
+    context_dict = dict()
 
     try:
         # Can we find a category name slug with the given name?
@@ -133,7 +130,7 @@ def register_student(request):
             email = request.POST.get('email')
             if email:
                 try:
-                    user = User.objects.get(email=email)
+                    User.objects.get(email=email)
                     registered = True
                     registered_message = "Account already exists with email '" + email + "'"
                     url = "/tutorme/register_student/?registered=True&registered_message="+registered_message
@@ -141,7 +138,7 @@ def register_student(request):
                         return HttpResponse('{"url" : "'+url+'"}')
                 except User.DoesNotExist:
                     if request.POST.get('fb'):
-                        return register_with_fb(request)
+                        return register_with_fb(request, False)
                     else:
                         return HttpResponse("Bad request")
             else:
@@ -183,7 +180,7 @@ def register_teacher(request):
             email = request.POST.get('email')
             if email:
                 try:
-                    user = User.objects.get(email=email)
+                    User.objects.get(email=email)
                     registered = True
                     registered_message = "Account already exists with email '" + email + "'"
                     url = "/tutorme/register_student/?registered=True&registered_message="+registered_message
@@ -191,7 +188,7 @@ def register_teacher(request):
                         return HttpResponse('{"url" : "'+url+'"}')
                 except User.DoesNotExist:
                     if request.POST.get('fb'):
-                        return register_with_fb(request)
+                        return register_with_fb(request, True)
                     else:
                         return HttpResponse("Bad request")
             else:
@@ -202,30 +199,28 @@ def register_teacher(request):
     return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
-def register_with_fb(request):
-    print(request.POST.get('email'))
-    print(request.POST.get('picture_url'))
-    print(request.POST.get('last_name'))
-    print(request.POST.get('first_name'))
-
+def register_with_fb(request, teacher_student_flag):
     email = request.POST.get('email')
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
     picture_url = request.POST.get('picture_url')
     img = PictureDownloader().get_image_from_url(picture_url)
+    image_io = BytesIO()
+    img.save(image_io, img.format, quality=60)
 
+    filename = first_name.lower()+".jpeg"
     user = User.objects.create_user(email, email)
     user.save()
 
-    student = Student(user=user, first_name=first_name, last_name=last_name)
+    if teacher_student_flag:
+        teacher = Teacher(user=user, first_name=first_name, last_name=last_name)
+        teacher.picture.save(filename, ContentFile(image_io.getvalue()))
+        teacher.save()
+    else:
+        student = Student(user=user, first_name=first_name, last_name=last_name)
+        student.picture.save(filename, ContentFile(image_io.getvalue()))
+        student.save()
 
-    thumb_io = BytesIO()
-    img.save(thumb_io, img.format, quality=60)
-
-    filename = first_name.lower()+".jpeg"
-
-    student.picture.save(filename, ContentFile(thumb_io.getvalue()))
-    student.save()
     return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')
 
 
