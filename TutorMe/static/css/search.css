@@ -1,7 +1,9 @@
-textarea {
-   resize: none;
+.form-control-borderless {
+    border: none;
 }
 
-.fb {
-    background: #4267B2;
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
 }

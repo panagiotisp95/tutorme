@@ -58,6 +58,15 @@ def about(request):
     return response
 
 
+@login_required
+def search(request):
+    if request.method == 'POST':
+        koko = request.POST.get('search')
+        print(request.POST)
+    response = render(request, 'tutorme/search.html')
+    return response
+
+
 def show_category(request, category_name):
     # Create a context dictionary which we can pass
     # to the template rendering engine.
