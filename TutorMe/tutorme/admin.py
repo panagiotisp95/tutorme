@@ -2,13 +2,12 @@ from django.contrib import admin
 from tutorme.models import Category, Student, Teacher, Review, User
 
 
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('title', 'rating', 'description', 'date_created', 'reviewee')
-
-
-# Add in this class to customise the Admin Interface
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name',)
+
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('rating', 'date_created', 'reviewee')
 
 
 class StudentAdmin(admin.ModelAdmin):
@@ -16,7 +15,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'picture', 'categories_list', 'categories',)
+    list_display = ('first_name', 'last_name', 'picture', )
 
 
 class UserAdmin(admin.ModelAdmin):

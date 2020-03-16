@@ -1,57 +1,70 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'tango_with_django_project.settings')
-
 import django
 django.setup()
-from tutorme.models import Category
+from tutorme.models import Category, Student, Teacher, User
 
 
 def populate():
-    # First, we will create lists of dictionaries containing the pages
-    # we want to add into each category.
-    # Then we will create a dictionary of dictionaries for our categories. # This might seem a little bit confusing, but it allows us to iterate # through each data structure, and add the data to our models.
-    python_pages = [
-        {'title': 'Official Python Tutorial', 'url': 'http://docs.python.org/3/tutorial/', 'views': 15},
-        {'title': 'How to Think like a Computer Scientist', 'url': 'http://www.greenteapress.com/thinkpython/', 'views': 239},
-        {'title': 'Learn Python in 10 Minutes', 'url': 'http://www.korokithakis.net/tutorials/python/', 'views': 98}
-    ]
-    django_pages = [
-        {'title': 'Official Django Tutorial', 'url': 'https://docs.djangoproject.com/en/2.1/intro/tutorial01/', 'views': 67},
-        {'title': 'Django Rocks', 'url': 'http://www.djangorocks.com/', 'views': 156},
-        {'title': 'How to Tango with Django', 'url': 'http://www.tangowithdjango.com/', 'views': 190}
-    ]
-
-    other_pages = [
-        {'title': 'Bottle', 'url': 'http://bottlepy.org/docs/dev/', 'views': 154},
-        {'title': 'Flask', 'url': 'http://flask.pocoo.org', 'views': 13}
-    ]
 
     cats = {
-        'Python': {'pages': python_pages, 'views': 64, 'likes': 12},
-        'Django': {'pages': django_pages, 'views': 53, 'likes': 67},
-        'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16}
+        'Mathematics': {'teachers': []},
+        'Physics': {'teachers': []},
+        'Chemistry': {'teachers': []}
     }
 
-    # If you want to add more categories or pages,
-    # add them to the dictionaries above.
-
-    # The code below goes through the cats dictionary, then adds each category,
-    #  and then adds all the associated pages for that category.
     for cat, cat_data in cats.items():
-        add_cat(cat, cat_data['views'], cat_data['likes'])
+        add_cat(cat)
 
-    # Print out the categories we have added.
+    for i in range(10):
+        email = "student"+str(i)+"@gmail.com"
+        password = "password"+str(i)
+        first_name = "student"+str(i)
+        last_name = "student"+str(i)
+        description = "I'm a student"
+        location = "Glasgow"
+        add_student(email, password, first_name, last_name, description, location)
+
+    for i in range(10):
+        email = "teacher"+str(i)+"@gmail.com"
+        password = "password"+str(i)
+        first_name = "teacher"+str(i)
+        last_name = "teacher"+str(i)
+        description = "I'm a student"
+        location = "Glasgow"
+        if i % 2 == 0:
+            add_teacher(email, password, first_name, last_name, description, location, ["Mathematics", ])
+        else:
+            add_teacher(email, password, first_name, last_name, description, location, ["Chemistry", ])
+
     for c in Category.objects.all():
         print(f'- {c}')
 
 
-def add_cat(name, views, likes):
+def add_cat(name):
     c = Category.objects.get_or_create(name=name)[0]
-    c.views = views
-    c.likes = likes
     c.save()
     return c
+
+
+def add_student(email, password, first_name, last_name, description, location):
+    user = User.objects.create_user(email, password)
+    user.save()
+    student = Student(user=user, first_name=first_name, last_name=last_name, description=description, location=location)
+    student.save()
+    return student
+
+
+def add_teacher(email, password, first_name, last_name, description, location, categories):
+    user = User.objects.create_user(email, password)
+    user.save()
+    teacher = Teacher(user=user, first_name=first_name, last_name=last_name, description=description, location=location)
+    teacher.save()
+    for category in categories:
+        teacher.categories.add(Category.objects.get(name=category))
+    teacher.save()
+    return teacher
 
 
 # Start execution here!

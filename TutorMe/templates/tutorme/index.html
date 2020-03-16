@@ -27,7 +27,7 @@
                 <ul>
                     {% for category in categories %}
                         <li>
-                            <a href="{% url 'tutorme:show_category' category.slug %}">{{ category.name }}</a>
+                            <a href="{% url 'tutorme:show_category' category.name %}">{{ category.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>

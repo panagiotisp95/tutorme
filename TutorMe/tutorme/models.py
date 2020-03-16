@@ -13,9 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 class Category(models.Model):
     NAME_MAX_LENGTH = 128
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
-    slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -29,7 +26,7 @@ class Category(models.Model):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(_('email address'), blank=False, unique=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_staff = models.BooleanField(default=False)
 
@@ -65,8 +62,7 @@ class Student(CommonInfo):
 
 class Teacher(CommonInfo):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    categories_list = models.CharField(max_length=30, blank=False, default='')
-    categories = models.CharField(_('categories'), max_length=100, blank=False)
+    categories = models.ManyToManyField(Category)
 
     class Meta(CommonInfo.Meta):
         db_table = 'teachers'
@@ -94,11 +90,10 @@ class Teacher(CommonInfo):
 
 
 class Review(models.Model):
-    title = models.CharField(_('title'), max_length=20, blank=False, default="Review")
     rating = models.IntegerField(_('rating'), blank=False)
-    description = models.CharField(_('description'), max_length=100, blank=False)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     reviewee = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
+    reviewer = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = _('review')
