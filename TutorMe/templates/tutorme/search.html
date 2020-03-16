@@ -1,0 +1,19 @@
+{%extends 'tutorme/base.html'%}
+{% load staticfiles %}
+
+{% block title_block %}
+    About
+{% endblock %}
+
+{% block body_block %}
+    <h1>here is the about page.</h1>
+    <div>
+        hey there partner! <br />
+        <strong>This tutorial has been put together by Panayiotis</strong> <br />
+        <p>Visits: {{ visits }}</p>
+    </div>
+    <div>
+        <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" />
+    </div>
+{% endblock %}
+
