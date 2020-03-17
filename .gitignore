@@ -12,3 +12,4 @@ TutorMe/tutorme/migrations/__pycache__/0001_initial.cpython-37.pyc
 TutorMe/tutorme/migrations/__pycache__/__init__.cpython-37.pyc
 TutorMe/tutorme/templatetags/__pycache__/__init__.cpython-37.pyc
 TutorMe/tutorme/templatetags/__pycache__/tutorme_templates_tags.cpython-37.pyc
+*.pyc
