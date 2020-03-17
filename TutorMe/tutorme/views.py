@@ -12,7 +12,7 @@ from django.conf import settings
 from .picture_downloader import PictureDownloader
 from django.core.files.base import ContentFile
 from io import BytesIO
-
+import re
 
 def index(request):
     response = redirect(reverse('tutorme:login'))
@@ -62,24 +62,41 @@ def about(request):
 def search(request):
     context_dict = dict()
     if request.method == 'POST':
-        koko = request.POST.get('search')
-        try:
-            category = Category.objects.get(name=koko)
-            teacher_list = category.teacher_set.all()
-            context_dict = dict()
-            context_dict['category'] = category
-            context_dict['teachers'] = teacher_list
-            print(koko)
-        except Category.DoesNotExist:
-            print(koko)
-        try:
-            teacher = Teacher.objects.get(first_name=koko)
-            context_dict['teachers'] = [teacher, ]
-        except Teacher.DoesNotExist:
-            print(koko)
+        search_string = request.POST.get('search')
+        search_string = re.sub('[^A-Za-z0-9 ]+', '', search_string)
+
+        search_list = search_string.split()
+
+        by_category = list()
+        by_name = list()
+        for item in search_list:
+            a = find_teacher(item)
+            by_name.append(a) if a is not None else None
+            item = item.capitalize()
+
+            for teacher in find_teachers_by_category(item) or []:
+                by_category.append(teacher)
+
+        context_dict['teachers'] = {'by_category': by_category, 'by_name': by_name}
 
     response = render(request, 'tutorme/search.html', context=context_dict)
     return response
+
+
+def find_teacher(first_name):
+    try:
+        teacher = Teacher.objects.get(first_name=first_name)
+        return teacher
+    except Teacher.DoesNotExist:
+        return None
+
+
+def find_teachers_by_category(name):
+    try:
+        category = Category.objects.get(name=name)
+        return category.teacher_set.all()
+    except Category.DoesNotExist:
+        return None
 
 
 def show_category(request, category_name):

@@ -33,13 +33,27 @@
 </div>
 <div>
     {% if teachers %}
-        <ul>
-            {% for teacher in teachers %}
-                <li>{{ teacher.first_name }}</li>
-            {% endfor %}
-        </ul>
+        {% if teachers.by_category %}
+            <div>
+               By Category
+            </div>
+            <ul>
+                {% for teacher in teachers.by_category %}
+                    <li>{{ teacher.first_name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if teachers.by_name %}
+            <div>
+               By Name
+            </div>
+            <ul>
+                {% for teacher in teachers.by_name %}
+                    <li>{{ teacher.first_name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     {% endif %}
-
 </div>
 {% endblock %}
 
