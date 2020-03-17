@@ -60,10 +60,25 @@ def about(request):
 
 @login_required
 def search(request):
+    context_dict = dict()
     if request.method == 'POST':
         koko = request.POST.get('search')
-        print(request.POST)
-    response = render(request, 'tutorme/search.html')
+        try:
+            category = Category.objects.get(name=koko)
+            teacher_list = category.teacher_set.all()
+            context_dict = dict()
+            context_dict['category'] = category
+            context_dict['teachers'] = teacher_list
+            print(koko)
+        except Category.DoesNotExist:
+            print(koko)
+        try:
+            teacher = Teacher.objects.get(first_name=koko)
+            context_dict['teachers'] = [teacher, ]
+        except Teacher.DoesNotExist:
+            print(koko)
+
+    response = render(request, 'tutorme/search.html', context=context_dict)
     return response
 
 
