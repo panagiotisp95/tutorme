@@ -42,10 +42,6 @@ def homepage(request):
             teacher = Teacher.objects.get(user=request.user)
 
             context_dict['username'] = teacher.first_name
-            context_dict['usernamelast'] = teacher.last_name
-            context_dict['locationteacher'] = teacher.location
-
-
             context_dict['user_type'] = 'teacher'
 
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
@@ -66,7 +62,11 @@ def about(request):
 
 @login_required
 def teacherDashboard(request):
+    teacher = Teacher.objects.get(user=request.user)
     context_dict = dict()
+    context_dict['usernamefirst'] = teacher.first_name
+    context_dict['usernamelast'] = teacher.last_name
+    context_dict['locationteacher'] = teacher.location
     response = render(request, 'tutorme/teacherDashboard.html', context=context_dict)
     return response
 
