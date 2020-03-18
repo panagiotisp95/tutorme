@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +62,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584465168980</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Index page almost finished.">
+      <created>1584549048406</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584549048406</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -81,33 +85,34 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Second Commit" />
+    <MESSAGE value="Index page almost finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="Index page almost finished." />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="0" key="#manage" timestamp="1584464565211">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="361" y="0" key="#manage/0.0.1280.680@0.0.1280.680" timestamp="1584464565211" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584465167187">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584549047803">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584465167187" />
-    <state width="1259" height="170" key="GridCell.Tab.0.bottom" timestamp="1584548533529">
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584549047803" />
+    <state width="1259" height="170" key="GridCell.Tab.0.bottom" timestamp="1584549398814">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="170" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584548533529" />
-    <state width="1259" height="170" key="GridCell.Tab.0.center" timestamp="1584548533528">
+    <state width="1259" height="170" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584549398814" />
+    <state width="1259" height="170" key="GridCell.Tab.0.center" timestamp="1584549398814">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="170" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584548533528" />
-    <state width="1259" height="170" key="GridCell.Tab.0.left" timestamp="1584548533528">
+    <state width="1259" height="170" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584549398814" />
+    <state width="1259" height="170" key="GridCell.Tab.0.left" timestamp="1584549398814">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="170" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584548533528" />
-    <state width="1259" height="170" key="GridCell.Tab.0.right" timestamp="1584548533528">
+    <state width="1259" height="170" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584549398814" />
+    <state width="1259" height="170" key="GridCell.Tab.0.right" timestamp="1584549398814">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="170" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584548533528" />
+    <state width="1259" height="170" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584549398814" />
     <state x="490" y="52" key="RollbackChangesDialog" timestamp="1584547937770">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
