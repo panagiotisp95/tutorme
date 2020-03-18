@@ -4,10 +4,10 @@ display: table;
 clear: both;
 }
 
-img-fluid {
-float: left;
+nav {
+background-color: #c3eff745;
+border: 5px solid #E68E00;
 }
-
 
 ul {
 margin: 0;
@@ -23,7 +23,7 @@ margin-left: 70px;
 }
 
 li a {
-  color: #444;
+  color: #000000;
   text-align: center;
   padding: 14ox 16px;
   text-decoration: none;
@@ -32,9 +32,7 @@ li a {
   display: block;
 }
 
-li a:hover {
-  color: #000;
-}
+
 
 li a::before {
   content: '';
@@ -48,22 +46,13 @@ li a::before {
   transition: all ease-in-out 250ms;
 }
 
-li a:hover::before {
-  width: 100%;
+
+img.soc {
+max-width: 100%;
+max-height: 100%;
 }
 
-soc {
-background-size: 100% 100%;
-}
 
-carouselExampleIndicators {
-}
 
-carousel-item {
- height: 50px;
- width: 50px;
-}
 
-carousel p {
-width: 100%
-}
+
