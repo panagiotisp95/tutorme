@@ -16,5 +16,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('search/', views.search, name='search'),
     path('teacherDashboard/', views.teacherDashboard, name='teacherDashboard'),
+    #url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 
 ]

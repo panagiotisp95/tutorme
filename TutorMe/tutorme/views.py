@@ -40,7 +40,12 @@ def homepage(request):
             context_dict['user_type'] = 'student'
         except Student.DoesNotExist:
             teacher = Teacher.objects.get(user=request.user)
+
             context_dict['username'] = teacher.first_name
+            context_dict['usernamelast'] = teacher.last_name
+            context_dict['locationteacher'] = teacher.location
+
+
             context_dict['user_type'] = 'teacher'
 
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'

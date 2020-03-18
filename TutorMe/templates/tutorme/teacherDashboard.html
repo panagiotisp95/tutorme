@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block head_block %}
-
+<link rel="stylesheet" href="{% static 'css/teacherdashboard.css' %}">
 
 <div class="container">
     <div class="row">
@@ -56,14 +56,15 @@
       <div class="col-md-8"><div class="card-deck">
         <div class="card">
           <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3 class="card-title">User 1</h3>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card-footer">
+            <div class="card-body">
+              <h3 class="card-title">User 1</h3>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+        <div class="card-footer">
             <a href="#" class="card-link">Rate</a>
             <a href="#" class="card-link">Send E-Mail</a>
-          </div>
+      </div>
+          
         </div>
         <div class="card">
           <img src="..." class="card-img-top" alt="...">
@@ -92,6 +93,8 @@
     </div>
 </div>
 
+{% endblock %}
 
-
+{% block afterBody_block %}
+    <script src="{% static 'javascript/.js' %}"></script>
 {% endblock %}
