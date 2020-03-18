@@ -10,6 +10,7 @@
 {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/teacherdashboard.css' %}">
 
+
 <div class="container">
     <div class="row">
         <div class="col-4">               
@@ -61,7 +62,9 @@
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             </div>
         <div class="card-footer">
-            <a href="#" class="card-link">Rate</a>
+            <a href="#" class="card-link"><h4>Star rating </h4>
+              <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+              </div></a>
             <a href="#" class="card-link">Send E-Mail</a>
       </div>
           
