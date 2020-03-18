@@ -43,6 +43,7 @@
                         <ul class="list-unstyled href-color">
                             {% if user.is_authenticated %}
                                 <li><a href="{% url 'tutorme:search' %}">Search for Tutor</a></li>
+                                <li><a href="{% url 'tutorme:teacherDashboard' %}">Dashboard Teacher</a></li>
                                 <li><a href="{% url 'tutorme:restricted' %}">Restricted Page</a></li>
                                 <li><a href="{% url 'tutorme:logout' %}">Logout</a></li>
                                 <li><a href="{% url 'tutorme:homepage' %}">Homepage</a></li>

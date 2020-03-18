@@ -60,6 +60,14 @@ def about(request):
 
 
 @login_required
+def teacherDashboard(request):
+    context_dict = dict()
+    response = render(request, 'tutorme/teacherDashboard.html', context=context_dict)
+    return response
+
+
+
+@login_required
 def search(request):
     context_dict = dict()
     if request.method == 'POST':
@@ -326,6 +334,7 @@ def user_login(request):
 @login_required
 def restricted(request):
     return render(request, 'tutorme/restricted.html')
+
 
 
 # Use the login_required() decorator to ensure only those logged in can # access the view.

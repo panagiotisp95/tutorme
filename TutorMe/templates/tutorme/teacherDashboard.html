@@ -1,0 +1,95 @@
+{%extends 'tutorme/base.html'%}
+
+{% load staticfiles %}
+
+{% block title_block %}
+    Dashboard (Teacher)
+{% endblock %}
+
+{% block head_block %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">               
+            <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="266" height="106" alt="Picture of tutorme" />
+        </div>
+            <div class="col-8-fluid"> 
+            {% if user.is_authenticated %}
+            <center>
+                </br> <h1>Greetings <strong>{{ username }}!</strong> This is your Dashboard</h1>
+            </center>
+            {% endif %}
+            </div>
+
+        </div>
+        <hr>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block body_block %}
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="profilepicture">
+            <div class="card-body">
+              <h5 class="card-title">{{ username }}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Your categories</li>
+              <li class="list-group-item">Algebra</li>
+              <li class="list-group-item">Python</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Settings</a>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-md-8"><div class="card-deck">
+        <div class="card">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h3 class="card-title">User 1</h3>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="card-link">Rate</a>
+            <a href="#" class="card-link">Send E-Mail</a>
+          </div>
+        </div>
+        <div class="card">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h3 class="card-title">User 2</h3>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="card-link">Rate</a>
+            <a href="#" class="card-link">Send E-Mail</a>      
+        </div>
+        </div>
+        <div class="card">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h3 class="card-title">User 3</h3>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="card-link">Rate</a>
+            <a href="#" class="card-link">Send E-Mail</a>      
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
