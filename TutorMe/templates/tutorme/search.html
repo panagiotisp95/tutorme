@@ -21,8 +21,7 @@
                         <i class="fa fa-search h4 text-body"></i>
                     </div>
                     <div class="col">
-
-                        <input id="search" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Search by category or tutor name">
+                        <input id="round" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Search by category or tutor name">
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary" type="submit">Search</button>
@@ -60,8 +59,7 @@
 
 {% block afterBody_block %}
     <script>
-        var data = { data: [ {% for category in all_categories %}"{{ category }}", {% endfor %}"{{ last_category }}"]};
-
+        var categories = [{% for category in all_categories %}"{{ category }}", {% endfor %}"{{ last_category }}"];
     </script>
     <script src="{% static 'javascript/search.js' %}"></script>
 {% endblock %}
