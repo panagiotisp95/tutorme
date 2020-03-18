@@ -13,6 +13,7 @@ from .picture_downloader import PictureDownloader
 from django.core.files.base import ContentFile
 from io import BytesIO
 import re
+from django.core import serializers
 
 
 def index(request):
@@ -62,6 +63,7 @@ def about(request):
 @login_required
 def search(request):
     context_dict = dict()
+
     if request.method == 'POST':
         search_string = request.POST.get('search')
         search_string = re.sub('[^A-Za-z0-9 ]+', '', search_string)
@@ -80,6 +82,10 @@ def search(request):
 
         context_dict['teachers'] = {'by_category': by_category, 'by_name': by_name}
 
+    all_categories = get_all_categories()
+    length = len(all_categories)
+    context_dict['all_categories'] = all_categories[:length-1]
+    context_dict['last_category'] = all_categories[length-1]
     response = render(request, 'tutorme/search.html', context=context_dict)
     return response
 
@@ -96,6 +102,13 @@ def find_teachers_by_category(name):
     try:
         category = Category.objects.get(name=name)
         return category.teacher_set.all()
+    except Category.DoesNotExist:
+        return None
+
+
+def get_all_categories():
+    try:
+        return Category.objects.all()
     except Category.DoesNotExist:
         return None
 
