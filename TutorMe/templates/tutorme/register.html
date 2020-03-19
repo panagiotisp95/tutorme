@@ -14,7 +14,7 @@
         {% if registered %}
             <div class="my-form">
                 <strong>{{ registered_message }}</strong><br>
-                <a href="{% url 'tutorme:index' %}">Return to the login page.</a> <br/>
+                <a href="{% url 'tutorme:index' %}">Return to the login page.</a> </br>
             </div>
         {% else %}
             <div class="row centered">
@@ -40,34 +40,7 @@
                                 {{ user_form.as_p }}
                                 {% for field in teacher_form %}
                                     {% if field ==  teacher_form.categories %}
-                                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#myModal">Please select categories</a>
-
-                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                        <h4 class="modal-title">Please choose your categories?</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-
-                                                        {% for radio in field %}
-
-    <div class="custom-control custom-switch">
-      <input class="custom-control-input" name="{{ radio.name }}" type="checkbox" id="radio_{{ radio.index }}" value={{ radio.choice_value }}>
-      <label class="custom-control-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
-    </div>
-
-                                                        {% endfor %}
-
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {{ field }}
                                     {% else %}
                                         <div class="mydiv">
                                             <label class="mylabel">{{ field.label }}:</label>

@@ -39,11 +39,13 @@ def homepage(request):
             student = Student.objects.get(user=request.user)
             context_dict['username'] = student.first_name
             context_dict['user_type'] = 'student'
+
         except Student.DoesNotExist:
             teacher = Teacher.objects.get(user=request.user)
 
             context_dict['username'] = teacher.first_name
             context_dict['user_type'] = 'teacher'
+            context_dict['picture'] = teacher.picture
 
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
@@ -265,9 +267,11 @@ def register_teacher(request):
                     if request.POST.get('fb'):
                         return register_with_fb(request, True)
                     else:
-                        return HttpResponse("Bad request")
+                        print(user_form.errors)
+                        print(teacher_form.errors)
+                        return HttpResponse(teacher_form.errors)
             else:
-                return HttpResponse("Bad request")
+                return HttpResponse("popo")
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()

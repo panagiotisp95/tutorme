@@ -46,10 +46,7 @@ class TeacherForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    categories = forms.MultipleChoiceField(
-            required=True,
-            widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check mb-2'}),
-        )
+    categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple())
 
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
