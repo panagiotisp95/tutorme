@@ -9,17 +9,9 @@ RATING = [
     ('5', '5'),
 ]
 
-CATEGORY_CHOICES = [
-    ('none', 'None'),
-    ('algebra', 'Algebra'),
-    ('mathematics', 'Mathematics'),
-]
-
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=Category.NAME_MAX_LENGTH,help_text="Please enter the category name.")
-    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     # An inline class to provide additional information on the form.
@@ -54,12 +46,18 @@ class TeacherForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    categories_list = forms.CharField(label='Choose any category to add to your list', widget=forms.Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control categories'}))
-    categories = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control teacherCategories', 'readonly': 'readonly', 'id': 'teacherCategories', 'rows': 2}))
+    categories = forms.MultipleChoiceField(
+            required=True,
+            widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check mb-2'}),
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+        self.fields['categories'].choices = [(c.name, c.name) for c in Category.objects.all()]
 
     class Meta:
         model = Teacher
-        fields = ('first_name', 'last_name', 'description', 'location', 'categories_list', 'categories', 'picture',)
+        fields = ('first_name', 'last_name', 'description', 'location', 'picture', 'categories',)
 
 
 class ReviewForm(forms.ModelForm):

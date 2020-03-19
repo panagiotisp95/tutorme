@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="">
+    <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3">
+      <change afterPath="$PROJECT_DIR$/TutorMe/media/profile_images/panayiotis.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.themes.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.themes.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.themes.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/easy-autocomplete.themes.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/jquery.easy-autocomplete.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/EasyAutocomplete/jquery.easy-autocomplete.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TutorMe/static/javascript/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/search.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/search.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/static/javascript/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/javascript/base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/tutorme/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/tutorme/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/tutorme/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/tutorme/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/tutorme/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/tutorme/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +40,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -86,17 +115,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second Commit" />
     <MESSAGE value="Index page almost finished." />
-    <option name="LAST_COMMIT_MESSAGE" value="Index page almost finished." />
+    <MESSAGE value="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="0" key="#manage" timestamp="1584464565211">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="361" y="0" key="#manage/0.0.1280.680@0.0.1280.680" timestamp="1584464565211" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584549047803">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584620771221">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584549047803" />
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584620771221" />
     <state width="1259" height="170" key="GridCell.Tab.0.bottom" timestamp="1584549398814">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -113,6 +143,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="170" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584549398814" />
+    <state x="354" y="57" key="MultipleFileMergeDialog" timestamp="1584620223488">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="354" y="57" key="MultipleFileMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1584620223488" />
     <state x="490" y="52" key="RollbackChangesDialog" timestamp="1584547937770">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -121,6 +155,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1584465255982" />
+    <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584620160473">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1584620160473" />
     <state x="-7" y="0" width="653" height="687" maximized="true" key="dock-window-1" timestamp="1584471764902">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
