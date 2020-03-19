@@ -3,7 +3,7 @@ from django.shortcuts import render
 from tutorme.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
-from tutorme.forms import UserForm, StudentForm, TeacherForm, TeacherCategoriesForm
+from tutorme.forms import UserForm, StudentForm, TeacherForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from tutorme.models import Category, Student, Teacher, User
@@ -223,7 +223,6 @@ def register_teacher(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         teacher_form = TeacherForm(request.POST)
-        teacher_category_form = TeacherCategoriesForm()
 
         if user_form.is_valid() and teacher_form.is_valid():
             user = user_form.save()
@@ -259,8 +258,8 @@ def register_teacher(request):
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()
-        teacher_category_form = TeacherCategoriesForm()
-    return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'teacher_category_form': teacher_category_form, 'user_form': user_form, 'registered': registered})
+
+    return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
 def register_with_fb(request, teacher_student_flag):

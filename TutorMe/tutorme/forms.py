@@ -46,17 +46,10 @@ class TeacherForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-
-    class Meta:
-        model = Teacher
-        fields = ('first_name', 'last_name', 'description', 'location', 'picture',)
-
-
-class TeacherCategoriesForm(forms.ModelForm):
     categories = forms.MultipleChoiceField(
-        required=True,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check mb-2'}),
-    )
+            required=True,
+            widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check mb-2'}),
+        )
 
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
@@ -64,7 +57,7 @@ class TeacherCategoriesForm(forms.ModelForm):
 
     class Meta:
         model = Teacher
-        fields = ('categories',)
+        fields = ('first_name', 'last_name', 'description', 'location', 'picture', 'categories',)
 
 
 class ReviewForm(forms.ModelForm):
