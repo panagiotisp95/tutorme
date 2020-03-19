@@ -63,6 +63,8 @@ class Student(CommonInfo):
 class Teacher(CommonInfo):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     categories = models.ManyToManyField(Category)
+    active = models.BooleanField(default=True, blank=False)
+    students = models.ManyToManyField(Student)
 
     class Meta(CommonInfo.Meta):
         db_table = 'teachers'
