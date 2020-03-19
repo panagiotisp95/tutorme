@@ -50,16 +50,14 @@
                                                         <h4 class="modal-title">Please choose your categories?</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        {% for radio in field %}
-                                                            <li class="list-group-item">
-                                                                {{ radio.choice_label }}
-                                                                <label class="switch ">
-                                                                    <input type="checkbox" value={{ radio.choice_value }} id="radio_{{ radio.index }}" class="default">
-                                                                    <span class="slider round"></span>
+                                                        {% for checkbox in field %}
+                                                            <li class="list-group-item my-auto left">
+                                                                <label for="{{ checkbox.id_for_label }}">
+                                                                    {{ checkbox.choice_label }}
+                                                                    {{ checkbox.tag.value }}
                                                                 </label>
+                                                                <span class="checkboxes" >{{ checkbox.tag }}</span>
                                                             </li>
-
-
                                                         {% endfor %}
                                                     </div>
                                                     <div class="modal-footer">

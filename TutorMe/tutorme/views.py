@@ -276,7 +276,7 @@ def register_teacher(request):
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()
-
+        print(teacher_form)
     return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
