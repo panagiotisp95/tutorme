@@ -10,6 +10,15 @@
 {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/teacherdashboard.css' %}">
 
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
 
 <div class="container">
     <div class="row">
@@ -32,19 +41,21 @@
 {% endblock %}
 
 {% block body_block %}
+ <!-- <a href="#" class="card-link"><h4>Star rating </h4>
+  <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+</div></a> -->
 
-
-<div class="container">
-    <div class="row">
+<div class="container" style="margin-left: 20px;margin-right: 20px;">
+  <div class="row row-cols-3">
       <div class="col-sm-4">
         <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="profilepicture">
             <div class="card-body">
-              <h5 class="card-title">{{ username }}</h5>
+              <h5 class="card-title">{{ usernamefirst }}{{ usernamelast }}</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Your categories</li>
+              <li class="list-group-item">{{ locationteacher }}</li>
               <li class="list-group-item">Algebra</li>
               <li class="list-group-item">Python</li>
             </ul>
@@ -54,50 +65,68 @@
           </div>
       </div>
 
-      <div class="col-md-8"><div class="card-deck">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h3 class="card-title">User 1</h3>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        <div class="card-footer">
-            <a href="#" class="card-link"><h4>Star rating </h4>
-              <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-              </div></a>
-            <a href="#" class="card-link">Send E-Mail</a>
-      </div>
-          
-        </div>
-        <div class="card">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3 class="card-title">User 2</h3>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+
+      <div class="col-8">
+        <div class="container-fluid px-3 px-sm-5 my-5 text-center">
+          <h4 class="mb-5 font-weight-bold">Your Students</h4>
+          <div class="owl-carousel owl-theme">
+              <div class="item first prev">
+                  <div class="card border-0 py-3 px-4">
+                      <div class="row justify-content-center"> <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                      <h6 class="mb-3 mt-2">Marielle Haag</h6>
+                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                      <a href="#" class="card-link"><h4>Star rating </h4>
+                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                      </div></a>
+                  </div>
+              </div>
+              <div class="item show">
+                  <div class="card border-0 py-3 px-4">
+                      <div class="row justify-content-center"> <img src="https://i.imgur.com/oW8Wpwi.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                      <h6 class="mb-3 mt-2">Ximena Vegara</h6>
+                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                      <a href="#" class="card-link"><h4>Star rating </h4>
+                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                      </div></a>
+                  </div>
+              </div>
+              <div class="item next">
+                  <div class="card border-0 py-3 px-4">
+                      <div class="row justify-content-center"> <img src="https://i.imgur.com/ndQx2Rg.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                      <h6 class="mb-3 mt-2">John Paul</h6>
+                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                      <a href="#" class="card-link"><h4>Star rating </h4>
+                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                      </div></a>
+                  </div>
+              </div>
+              <div class="item last">
+                  <div class="card border-0 py-3 px-4">
+                      <div class="row justify-content-center"> <img src="https://i.imgur.com/T5aOhwh.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                      <h6 class="mb-3 mt-2">William Doe</h6>
+                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                      <a href="#" class="card-link"><h4>Star rating </h4>
+                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                      </div></a>
+                  </div>
+              </div>
           </div>
-          <div class="card-footer">
-            <a href="#" class="card-link">Rate</a>
-            <a href="#" class="card-link">Send E-Mail</a>      
-        </div>
-        </div>
-        <div class="card">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3 class="card-title">User 3</h3>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="card-link">Rate</a>
-            <a href="#" class="card-link">Send E-Mail</a>      
-        </div>
-        </div>
       </div>
-    </div>
-    </div>
+  </div>
 </div>
+
 
 {% endblock %}
 
 {% block afterBody_block %}
-    <script src="{% static 'javascript/.js' %}"></script>
+    <script src="{% static 'javascript/teacherdashboard.js' %}"></script>
+
+
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
 {% endblock %}
