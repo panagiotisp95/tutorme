@@ -116,7 +116,7 @@ def find_teacher(first_name):
 def find_teachers_by_category(name):
     try:
         category = Category.objects.get(name=name)
-        return category.teacher_set.all()
+        return category.teachers.all()
     except Category.DoesNotExist:
         return None
 
@@ -138,7 +138,7 @@ def show_category(request, category_name):
         # If we can't, the .get() method raises a DoesNotExist exception.
         # The .get() method returns one model instance or raises an exception.
         category = Category.objects.get(name=category_name)
-        teacher_list = category.teacher_set.all()
+        teacher_list = category.teachers.all()
         context_dict['category'] = category
         context_dict['teachers'] = teacher_list
     except Category.DoesNotExist:
@@ -252,6 +252,7 @@ def register_teacher(request):
                 teacher.picture = request.FILES['picture']
 
             teacher.save()
+            teacher_form.save_m2m()
             registered = True
         else:
             email = request.POST.get('email')
