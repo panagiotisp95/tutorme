@@ -85,17 +85,16 @@ def search(request):
 
         search_list = search_string.split()
 
-        by_category = list()
-        by_name = list()
+        teachers = list()
         for item in search_list:
             a = find_teacher(item)
-            by_name.append(a) if a is not None else None
+            teachers.append(a) if a is not None else None
             item = item.capitalize()
 
             for teacher in find_teachers_by_category(item) or []:
-                by_category.append(teacher)
+                teachers.append(teacher)
 
-        context_dict['teachers'] = {'by_category': by_category, 'by_name': by_name}
+        context_dict['teachers'] = {'results': teachers, 'length': len(teachers)}
 
     all_categories = get_all_categories()
     length = len(all_categories)

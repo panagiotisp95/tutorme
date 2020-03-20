@@ -7,6 +7,9 @@
 
 {% block head_block %}
     <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet" />
 {% endblock %}
 
 {% block body_block %}
@@ -31,35 +34,61 @@
         </div>
     </div>
 </div>
-<div>
-    {% if teachers %}
-        {% if teachers.by_category %}
-            <div>
-               By Category
-            </div>
-            <ul>
-                {% for teacher in teachers.by_category %}
-                    <li>{{ teacher.first_name }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% if teachers.by_name %}
-            <div>
-               By Name
-            </div>
-            <ul>
-                {% for teacher in teachers.by_name %}
-                    <li>{{ teacher.first_name }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endif %}
+<div class="col-8">
+    <div class="container-fluid px-3 px-sm-5 my-10 text-center">
+        <div class="owl-carousel owl-theme">
+            {% if teachers %}
+                {% if length == 1 %}
+                    <div class="card border-0 py-3 px-4">
+                        <div class="row justify-content-center"> <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                        <h6 class="mb-3 mt-2">{{ teacher.first_name }}</h6>
+                        <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                    </div>
+                {% else %}
+                    {% for teacher in teachers %}
+                        {% if forloop.first %}
+                            {% if forloop.last %}
+                                <div class="item show">
+                            {% else %}
+                                <div class="item first prev">
+                            {% endif %}
+                        {% elif forloop.last %}
+                            {% if forloop.counter0 == 1 %}
+                                <div class="item show">
+                            {% else %}
+                                <div class="item last">
+                            {% endif %}
+                        {% elif forloop.counter0 == 1 %}
+                            <div class="item show">
+                        {% else %}
+                            <div class="item next">
+                        {% endif %}
+                                <div class="card border-0 py-3 px-4">
+                                    <div class="row justify-content-center"> <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                                    <h6 class="mb-3 mt-2">{{ teacher.first_name }}</h6>
+                                    <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block afterBody_block %}
     <script>
-        var categories = [{% for category in all_categories %}"{{ category }}", {% endfor %}"{{ last_category }}"];
+        var categories = [  {% for category in all_categories %}
+                                {% if forloop.last %}
+                                    "{{ last_category }}"
+                                {% else %}
+                                    "{{ category }}",
+                                {% endif %}
+                            {% endfor %}
+                         ];
     </script>
     <script src="{% static 'javascript/search.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 {% endblock %}

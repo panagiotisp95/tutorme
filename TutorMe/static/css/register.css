@@ -9,3 +9,7 @@ textarea {
 .checkboxes {
     float: right;
 }
+
+.textarea {
+    margin-top:10px;
+}
