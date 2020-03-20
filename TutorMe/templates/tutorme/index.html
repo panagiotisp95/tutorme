@@ -64,48 +64,17 @@
                     <p class="message">
                         The quickest way to find a tutor!
                     </p>
-=======
-    <h1>tutorme says...</h1>
-
-        <div>
-            {% if user.is_authenticated %}
-                howdy {{ username }}!
-            {% else %}
-                hey there partner!
-            {% endif %} <br />
-            {% if user_type == 'teacher' %}
-                <img src="{{ MEDIA_URL }}{{ picture }}">
-                Teacher!
-            {% else %}
-                Student!
-            {% endif %}
-        </div>
-        <div>
-            <h2>Most Liked Categories</h2>
-            <div>
-            {% if categories %}
-                <ul>
-                    {% for category in categories %}
-                        <li>
-                            <a href="{% url 'tutorme:show_category' category.name %}">{{ category.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <strong>There are no categories present.</strong>
-            {% endif %}
->>>>>>> master
                 </div>
-                    <div class="carousel-item">
-                        <p class="message">
-                            Knowledge is just a click away!
-                        </p>
-                    </div>
-                         <div class="carousel-item">
-                             <p class="message">
-                                This is the third slide
-                             </p>
-                         </div>
+                <div class="carousel-item">
+                    <p class="message">
+                        Knowledge is just a click away!
+                    </p>
+                </div>
+                 <div class="carousel-item">
+                     <p class="message">
+                        This is the third slide
+                     </p>
+                 </div>
             </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
