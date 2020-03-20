@@ -45,35 +45,6 @@
     opacity: 0.4
 }
 
-
-
-h1,
-p {
-    text-align: center
-}
-
-h1 {
-    margin-top: 150px
-}
-
-p {
-    font-size: 1.2rem
-}
-
-@media only screen and (max-width: 600px) {
-    h1 {
-        font-size: 14px
-    }
-
-    p {
-        font-size: 12px
-    }
-}
-
-
-
-
-
 body {
     color: #000;
     overflow-x: hidden;
@@ -91,67 +62,39 @@ body {
     box-shadow: 0px 4px 8px 0px #BDBDBD
 }
 
-.owl-carousel .owl-nav button.owl-next,
-.owl-carousel .owl-nav button.owl-prev {
-    background: 0 0;
-    color: #1E88E5 !important;
-    border: none;
-    padding: 5px 20px !important;
-    font: inherit;
-    font-size: 50px !important
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  background-image: none;
+}
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 45px;
+  color: #e68e00;
 }
 
-.owl-carousel .owl-nav button.owl-next:hover,
-.owl-carousel .owl-nav button.owl-prev:hover {
-    color: #0D47A1 !important;
-    background-color: transparent !important
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 45px;
+  color: #e68e00;
 }
 
-.owl-dots {
-    display: none
+.btn-circle.btn-sm {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    font-size: 8px;
+    text-align: center;
 }
 
-button:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0
-}
-
-.item {
-    display: none
-}
-
-.next {
-    display: block !important;
-    position: relative;
-    transform: scale(0.8);
-    transition-duration: 0.3s;
-    opacity: 0.6
-}
-
-.prev {
-    display: block !important;
-    position: relative;
-    transform: scale(0.8);
-    transition-duration: 0.3s;
-    opacity: 0.6
-}
-
-.item.show {
-    display: block;
-    transition-duration: 0.4s
-}
-
-@media screen and (max-width: 999px) {
-
-    .next,
-    .prev {
-        transform: scale(1);
-        opacity: 1
-    }
-
-    .item {
-        display: block !important
-    }
+.carou {
+    max-width: 500px;
+    margin-bottom:20px;
 }
