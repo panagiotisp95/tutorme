@@ -39,10 +39,13 @@ def homepage(request):
             student = Student.objects.get(user=request.user)
             context_dict['username'] = student.first_name
             context_dict['user_type'] = 'student'
+
         except Student.DoesNotExist:
             teacher = Teacher.objects.get(user=request.user)
+
             context_dict['username'] = teacher.first_name
             context_dict['user_type'] = 'teacher'
+            context_dict['picture'] = teacher.picture
 
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
@@ -61,6 +64,18 @@ def about(request):
 
 
 @login_required
+def teacherDashboard(request):
+    teacher = Teacher.objects.get(user=request.user)
+    context_dict = dict()
+    context_dict['usernamefirst'] = teacher.first_name
+    context_dict['usernamelast'] = teacher.last_name
+    context_dict['locationteacher'] = teacher.location
+    response = render(request, 'tutorme/teacherDashboard.html', context=context_dict)
+    return response
+
+
+
+@login_required
 def search(request):
     context_dict = dict()
 
@@ -70,17 +85,16 @@ def search(request):
 
         search_list = search_string.split()
 
-        by_category = list()
-        by_name = list()
+        teachers = list()
         for item in search_list:
             a = find_teacher(item)
-            by_name.append(a) if a is not None else None
+            teachers.append(a) if a is not None else None
             item = item.capitalize()
 
             for teacher in find_teachers_by_category(item) or []:
-                by_category.append(teacher)
+                teachers.append(teacher)
 
-        context_dict['teachers'] = {'by_category': by_category, 'by_name': by_name}
+        context_dict['teachers'] = {'results': teachers, 'length': len(teachers)}
 
     all_categories = get_all_categories()
     length = len(all_categories)
@@ -101,7 +115,7 @@ def find_teacher(first_name):
 def find_teachers_by_category(name):
     try:
         category = Category.objects.get(name=name)
-        return category.teacher_set.all()
+        return category.teachers.all()
     except Category.DoesNotExist:
         return None
 
@@ -123,7 +137,7 @@ def show_category(request, category_name):
         # If we can't, the .get() method raises a DoesNotExist exception.
         # The .get() method returns one model instance or raises an exception.
         category = Category.objects.get(name=category_name)
-        teacher_list = category.teacher_set.all()
+        teacher_list = category.teachers.all()
         context_dict['category'] = category
         context_dict['teachers'] = teacher_list
     except Category.DoesNotExist:
@@ -237,6 +251,7 @@ def register_teacher(request):
                 teacher.picture = request.FILES['picture']
 
             teacher.save()
+            teacher_form.save_m2m()
             registered = True
         else:
             email = request.POST.get('email')
@@ -252,13 +267,15 @@ def register_teacher(request):
                     if request.POST.get('fb'):
                         return register_with_fb(request, True)
                     else:
-                        return HttpResponse("Bad request")
+                        print(user_form.errors)
+                        print(teacher_form.errors)
+                        return HttpResponse(teacher_form.errors)
             else:
-                return HttpResponse("Bad request")
+                return HttpResponse("popo")
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()
-
+        print(teacher_form)
     return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
@@ -338,6 +355,7 @@ def user_login(request):
 @login_required
 def restricted(request):
     return render(request, 'tutorme/restricted.html')
+
 
 
 # Use the login_required() decorator to ensure only those logged in can # access the view.

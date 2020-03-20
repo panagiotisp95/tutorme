@@ -46,18 +46,17 @@ class TeacherForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    categories = forms.MultipleChoiceField(
-            required=True,
-            widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check mb-2'}),
-        )
-
-    def __init__(self, *args, **kwargs):
-        super(forms.ModelForm, self).__init__(*args, **kwargs)
-        self.fields['categories'].choices = [(c.name, c.name) for c in Category.objects.all()]
 
     class Meta:
         model = Teacher
         fields = ('first_name', 'last_name', 'description', 'location', 'picture', 'categories',)
+
+    def __init__ (self, *args, **kwargs):
+
+        super(TeacherForm, self).__init__(*args, **kwargs)
+        self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["categories"].help_text = ""
+        self.fields["categories"].queryset = Category.objects.all()
 
 
 class ReviewForm(forms.ModelForm):

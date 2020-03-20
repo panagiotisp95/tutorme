@@ -1,20 +1,3 @@
-var options = {
-    data : categories,
-
-    list: {
-        maxNumberOfElements: 8,
-        match: {
-            enabled: true
-        },
-        sort: {
-            enabled: true
-        }
-    },
-};
-
-$("#round").easyAutocomplete(options);
-
-
 $(document).ready(function() {
 
     $('.owl-carousel').owlCarousel({
@@ -34,7 +17,7 @@ $(document).ready(function() {
     }
     }
     });
-
+    
     $('.owl-prev').click(function() {
     $active = $('.owl-item .item.show');
     $('.owl-item .item.show').removeClass('show');
@@ -56,7 +39,7 @@ $(document).ready(function() {
     }
     }
     });
-
+    
     $('.owl-next').click(function() {
     $active = $('.owl-item .item.show');
     $('.owl-item .item.show').removeClass('show');
