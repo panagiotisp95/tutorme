@@ -1,64 +1,58 @@
-header::after {
-content: '';
-display: table;
-clear: both;
-}
 
 nav {
-background-color: #c3eff745;
-border: 5px solid #E68E00;
+    background-color: #c3eff745;
+    border: 5px solid #E68E00;
 }
 
-ul {
-margin: 0;
-padding:0;
-list-style-type: none;
-overflow: hidden;
-display-inline;
+.carousel ul {
+    margin: 0;
+    padding:0;
+    list-style-type: none;
+    overflow: hidden;
+    display-inline;
 }
 
-li {
-float: right;
-margin-left: 70px;
+.carousel li {
+    float: right;
+    margin-left: 70px;
 }
 
-li a {
-  color: #000000;
-  text-align: center;
-  padding: 14ox 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 18px;
-  display: block;
+.carousel li a {
+    color: #000000;
+    text-align: center;
+    padding: 14ox 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    display: block;
 }
 
+.carousel li a::before {
+    content: '';
+    display: block;
+    height: 10px;
+    background-color: #444;
 
-
-li a::before {
-  content: '';
-  display: block;
-  height: 10px;
-  background-color: #444;
-
-  position: absolute;
-  top: 0;
-  width: 0%;
-  transition: all ease-in-out 250ms;
+    position: absolute;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
 }
 
-
-img.soc {
-max-width: 100%;
-max-height: 100%;
+body{
+    background-image: url('/static/images/Socrates1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
-.ima{
-	background-image: url("/static/images/Socrates1.jpg ");
-	background-repeat:no-repeat;
-	background-size:cover;
-	height: 100vw;
-	width: 70vh;
+.carouselcarousel{
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
-
-
+.card{
+    background-color: #ffffff45;
+    min-height: 300px;
+    max-width: 400px;
+}

@@ -1,148 +1,140 @@
 {%extends 'tutorme/base.html'%}
 
 {% load staticfiles %}
-{% load ratings %}
 
 {% block title_block %}
     Dashboard (Teacher)
 {% endblock %}
 
 {% block head_block %}
-<link rel="stylesheet" href="{% static 'css/teacherdashboard.css' %}">
-
-<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet" />
-
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-4">               
-            <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="266" height="106" alt="Picture of tutorme" />
-        </div>
-            <div class="col-8-fluid"> 
-            {% if user.is_authenticated %}
-            <center>
-                </br> <h2>Greetings <strong>{{ usernamefirst }}{{ usernamelast }}!</strong> This is your Dashboard</h2>
-            </center>
-            {% endif %}
-            </div>
-
-        </div>
-        <hr>
-
-    </div>
-</div>
+    <link rel="stylesheet" href="{% static 'css/teacherdashboard.css' %}">
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 {% endblock %}
 
 {% block body_block %}
- <!-- <a href="#" class="card-link"><h4>Star rating </h4>
-  <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-</div></a> -->
-
-<div class="container-fluid px-3 px-sm-5 my-10 text-center">
-  <div class="row">
-      <div class="col-sm-4">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="profilepicture">
-            <div class="card-body">
-              <h5 class="card-title">{{ usernamefirst }}{{ usernamelast }}</h5>
-              <p class="card-text"></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="266" height="106" alt="Picture of tutorme" />
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">{{ locationteacher }}</li>
-            </ul>
-            <div class="card-body">
-              <a href="#" class="card-link">Edit Profile</a>
+            <div class="col-8-fluid">
+                {% if user.is_authenticated %}
+                    <center>
+                        </br> <h2>Greetings <strong>{{ usernamefirst }}{{ usernamelast }}!</strong> This is your Dashboard</h2>
+                    </center>
+                {% endif %}
             </div>
-          </div>
-      </div>
+        </div>
+        <hr>
+    </div>
 
-
-      <div class="col-8">
-        <div class="container-fluid px-3 px-sm-5 my-10 text-center">
-          <h4 class="mb-5 font-weight-bold">Your Students</h4>
-          <div class="owl-carousel owl-theme">
-              <div class="item first prev">
-                  <div class="card border-0 py-3 px-4">
-                      <div class="row justify-content-center"> <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
-                      <h6 class="mb-3 mt-2">Marielle Haag</h6>
-                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
-                      <div class="{{ teacher.user.email }}">
-                      <div class='rating-stars text-center'>
-                            <ul id='stars'>
-                                <li class='star' title='Poor' data-value='1'>
-                                <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star' title='Fair' data-value='2'>
-                                <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star' title='Good' data-value='3'>
-                                <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star' title='Excellent' data-value='4'>
-                                <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star' title='WOW!!!' data-value='5'>
-                                <i class='fa fa-star fa-fw'></i>
-                                </li>
-                            </ul>
+    <div class="container-fluid px-3 px-sm-5 my-10 text-center">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="profilepicture">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ usernamefirst }} {{ usernamelast }}</h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ locationteacher }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="container-fluid px-3 px-sm-5 my-10 text-center">
+                    <h4 class="mb-5 font-weight-bold">Your Students</h4>
+                    <div class="owl-carousel owl-theme">
+                        <div class="item first prev">
+                            <div class="card border-0 py-3 px-4">
+                                <div class="row justify-content-center"> <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                                <h6 class="mb-3 mt-2">Marielle Haag</h6>
+                                <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                <div class="{{ teacher.user.email }}">
+                                    <h4>Star rating </h4>
+                                    <div class='rating-stars text-center'>
+                                        <ul id='stars' class="stars">
+                                            <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
+                                            <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
+                                            <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
+                                            <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
+                                            <li class='star' title='WOW!!!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="item show">
-                  <div class="card border-0 py-3 px-4">
-                      <div class="row justify-content-center"> <img src="https://i.imgur.com/oW8Wpwi.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
-                      <h6 class="mb-3 mt-2">Ximena Vegara</h6>
-                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
-                      <a href="#" class="card-link"><h4>Star rating </h4>
-                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                      </div></a>
-                  </div>
-              </div>
-              <div class="item next">
-                  <div class="card border-0 py-3 px-4">
-                      <div class="row justify-content-center"> <img src="https://i.imgur.com/ndQx2Rg.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
-                      <h6 class="mb-3 mt-2">John Paul</h6>
-                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
-                      <a href="#" class="card-link"><h4>Star rating </h4>
-                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                      </div></a>
-                  </div>
-              </div>
-              <div class="item last">
-                  <div class="card border-0 py-3 px-4">
-                      <div class="row justify-content-center"> <img src="https://i.imgur.com/T5aOhwh.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
-                      <h6 class="mb-3 mt-2">William Doe</h6>
-                      <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
-                      <a href="#" class="card-link"><h4>Star rating </h4>
-                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                      </div></a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-
-
+                        <div class="item show">
+                            <div class="card border-0 py-3 px-4">
+                                <div class="row justify-content-center"> <img src="https://i.imgur.com/oW8Wpwi.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                                <h6 class="mb-3 mt-2">Ximena Vegara</h6>
+                                <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                <h4>Star rating </h4>
+                                <div class='rating-stars text-center'>
+                                    <ul id='stars1' class="stars">
+                                        <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='WOW!!!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item next">
+                            <div class="card border-0 py-3 px-4">
+                                <div class="row justify-content-center"> <img src="https://i.imgur.com/ndQx2Rg.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                                <h6 class="mb-3 mt-2">John Paul</h6>
+                                <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                <h4>Star rating </h4>
+                                <div class='rating-stars text-center'>
+                                    <ul id='stars2' class="stars">
+                                        <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='WOW!!!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item last">
+                            <div class="card border-0 py-3 px-4">
+                                <div class="row justify-content-center"> <img src="https://i.imgur.com/T5aOhwh.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                                <h6 class="mb-3 mt-2">William Doe</h6>
+                                <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                <h4>Star rating </h4>
+                                <div class='rating-stars text-center'>
+                                    <ul id='stars3' class="stars">
+                                        <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
+                                        <li class='star' title='WOW!!!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block afterBody_block %}
     <script src="{% static 'javascript/teacherdashboard.js' %}"></script>
-
-
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 {% endblock %}
