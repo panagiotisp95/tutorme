@@ -32,7 +32,7 @@
     </div>
 </div>
 </br>
-<div class="col-5 carou">
+<div class="col-5 carousel-card">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             {% if teachers %}
@@ -43,10 +43,9 @@
                             <h6 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h6>
                             <div class="col-8">
                                 <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
-                                <a href="#" class="card-link"><h4>Rating</h4>
-                                    <div class="rating_{{ forloop.counter0 }}"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                                </div></a>
-                                <p align="left" class="content mb-5 mx-2">Contact Info: {{ teacher.user.email }}</p>
+
+                                    <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
+                                <div><p align="left" class="content mb-5 mx-2">Contact Info: {{ teacher.user.email }}</p></div>
                             </div>
                             <div class="col-8 mb-3">
                                 <button type="button" class="btn btn-danger btn-circle btn-xl float-left">Decline</button>

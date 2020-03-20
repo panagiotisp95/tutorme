@@ -10,8 +10,31 @@ def populate():
 
     cats = {
         'Mathematics': {'teachers': []},
+        'Algebra': {'teachers': []},
+        'Geometry': {'teachers': []},
+        'Trigonometry': {'teachers': []},
+        'Statistics': {'teachers': []},
+        'Calculus': {'teachers': []},
+        'Differential': {'teachers': []},
+        'Linear': {'teachers': []},
         'Physics': {'teachers': []},
-        'Chemistry': {'teachers': []}
+        'Chemistry': {'teachers': []},
+        'Organic': {'teachers': []},
+        'Biology': {'teachers': []},
+        'Health': {'teachers': []},
+        'Electrical': {'teachers': []},
+        'Cosmology': {'teachers': []},
+        'Computing': {'teachers': []},
+        'Programming': {'teachers': []},
+        'Science': {'teachers': []},
+        'History': {'teachers': []},
+        'Art': {'teachers': []},
+        'Grammar': {'teachers': []},
+        'Storytelling': {'teachers': []},
+        'Economics': {'teachers': []},
+        'Microeconomics': {'teachers': []},
+        'Macroeconomics': {'teachers': []},
+        'Entrepreneurship': {'teachers': []}
     }
 
     for cat, cat_data in cats.items():
@@ -33,10 +56,12 @@ def populate():
         last_name = "teacher"+str(i)
         description = "I'm a student"
         location = "Glasgow"
+        rating = i/2;
+
         if i % 2 == 0:
-            add_teacher(email, password, first_name, last_name, description, location, ["Mathematics", ])
+            add_teacher(email, password, first_name, last_name, description, location, rating, ["Mathematics", ])
         else:
-            add_teacher(email, password, first_name, last_name, description, location, ["Chemistry", ])
+            add_teacher(email, password, first_name, last_name, description, location, rating, ["Chemistry", ])
 
     for c in Category.objects.all():
         print(f'- {c}')
@@ -56,10 +81,10 @@ def add_student(email, password, first_name, last_name, description, location):
     return student
 
 
-def add_teacher(email, password, first_name, last_name, description, location, categories):
+def add_teacher(email, password, first_name, last_name, description, location, rating, categories):
     user = User.objects.create_user(email, password)
     user.save()
-    teacher = Teacher(user=user, first_name=first_name, last_name=last_name, description=description, location=location)
+    teacher = Teacher(user=user, first_name=first_name, last_name=last_name, description=description, rating=rating, location=location)
     teacher.save()
     for category in categories:
         teacher.categories.add(Category.objects.get(name=category))
