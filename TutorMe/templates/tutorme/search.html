@@ -34,8 +34,43 @@
         </div>
     </div>
 </div>
-<div class="col-8">
-    <div class="container-fluid px-3 px-sm-5 my-10 text-center">
+</br>
+<div class="col-6">
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+      <div class="container-fluid px-3 px-sm-5 my-10 text-center">
+    <div class="carousel-item active">
+        <div class="container">
+            <div class="card border-0 py-3 px-4">
+                        <div class="row justify-content-center"> <img src="https://i.imgur.com/gazoShk.jpg" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                        <h6 class="mb-3 mt-2">{{ teacher.first_name }}</h6>
+                        <p class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                    </div>
+            </div>
+    </div>
+      </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+</div>
+
+
+
         <div class="owl-carousel owl-theme">
             {% if teachers %}
                 {% if length == 1 %}
