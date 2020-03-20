@@ -74,7 +74,6 @@ def teacherDashboard(request):
     return response
 
 
-
 @login_required
 def search(request):
     context_dict = dict()
@@ -94,7 +93,9 @@ def search(request):
             for teacher in find_teachers_by_category(item) or []:
                 teachers.append(teacher)
 
-        context_dict['teachers'] = {'results': teachers, 'length': len(teachers)}
+        context_dict['teachers'] = teachers
+    else:
+        context_dict['teachers'] = Teacher.objects.order_by('-first_name')[:5]
 
     all_categories = get_all_categories()
     length = len(all_categories)
