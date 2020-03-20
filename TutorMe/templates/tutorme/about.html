@@ -5,12 +5,79 @@
     About
 {% endblock %}
 
-{% block body_block %}
-    <h1>here is the about page.</h1>
-    <div>
-        hey there partner! <br />
-        <strong>This tutorial has been put together by Panayiotis</strong> <br />
-        <p>Visits: {{ visits }}</p>
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block body_block %}s
+    <h1>About TutorMe</h1>
+    <h2 class="tlc"><strong>Teach, Learn, Connect!</strong></h2>
+    <div class="container">
+        <p>"Knowledge is power" is a dictum in many countries that goes back to the English philospher Francis Bacon
+            And that is exactly what TutorMe is about. Affordable and easy to transfer knowledge on a human level without
+            the necessity to be a highly educated, trained or certified person.
+        </p>
+        <h3><strong>Teach</strong> useful skills and share your experience</h3>
+        <p>
+            Perhaps you are an expert in a field and want to help people who don't have access to an official
+            education system expand their knowledge and horizons. Or maybe, due to your work, experience and talents 
+            you have obtained useful skills, that potential sstudents might be interested in obtaining. In every case, if you enjoy
+            teaching and want to help others, TutorMe allows you to share your knowledge with the community. And who knows? Maybe you'll get the chance to learn 
+            something new yourself!
+        </p>
+        <div>
+            <img src="{% static 'images/teach.jpg' %}" alt="Two people" style="width:100%;height:500px;"  />
+        </div>
+        <h3><strong>Learn</strong> something new</h3>
+        <p>
+            In TutorMe you have access to a large selection of local teachers and mentors, who can help you learn anything
+            from maths and physics, to tennis and sculpting. Your passion to learn is the only limit!
+        </p>
+        <div>
+            <img src="{% static 'images/learn.jpg' %}" alt="Two people" style="width:100%;height:500px;"  />
+        </div>
+        <h3><strong>Connect</strong> with your fellow citizens</h3>
+        <p>
+            Teaching and learning are at the forefront of TutorMe, and during the process you will meet and get to know
+            local people, from different backgrounds, neighborhoods, ages. We, at TutorMe, strongly believe and encourage
+            stronger ties in the local community. Our goal is to bring different people together and help them impove each other 
+            and achieve their goals.
+        </p>
+        <div>
+            <img src="{% static 'images/connect.jpg' %}" alt="Two people" style="width:100%;height:500px;" />
+        </div>
+    </div>
+    <div class="container">
+        <h3 class="faq">FAQ</h3>
+        <h4>Is TutorMe free to use?</h4>
+        <p>
+            Yes! We want TutorMe to offer an alternative to what is usually expensive teaching methods, as helping people with 
+            different financial capabilities obtain knowledge is one of our core values. In the future, the website will offer teachers
+            the opportunity to charge for their lessons, but the core of TutorMe will always remain free. 
+        </p>
+        <h4>Do I need any certification?</h4>
+        <p>
+            No certification is needed! We believe that many skills can be learned in ways that do not neccesitate certifications, through life experience,
+            self-teaching, side activities, and of course, tutoring. However, if you are certified in an area, that is a plus, and you can display such certifications on
+            your teacher's profile.
+        </p>
+        <h4>Since no certification is needed, how can i trust the quality of the teaching?</h4>
+        <p>
+            The website features a rating system, that allows you to review your teacher. In addition, our team will be moderating the website to make sure
+            that all the teachers and users are genuine. But since TutorMe's focus is on bringing people together, you are still expected to practice common sense when it comes 
+            to choosing and communicating with other users (teachers and learners). In every case, our team will work as hard as possible to make sure you have a quality and
+            hassle-free experience on the website.
+        </p>
+        <h4>The category/skill that I want to learn is not on the website</h4>
+        <p>
+            Our team will be reguraly updating the categories list, to make sure you can learn and teach everything that you want to. We also expect the list to grow
+            as more and more people join TutorMe. If you have a suggestion for a category/skill you want to learn or teach, please email us.
+        </p>
+        <h4>A teacher asked me for money in return for a lesson</h4>
+        <p>
+           As of right now, TutorMe is meant to be 100% free. Please send us the teacher's username and the email where he asks for compensation. 
+           In the future, we will add an optional payment option, that will be visible on the teacher's profile.
+        </p>
     </div>
     <div>
         <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" />
