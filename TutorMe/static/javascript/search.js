@@ -13,3 +13,9 @@ var options = {
 };
 
 $("#search_box").easyAutocomplete(options);
+
+$(document).ready(function () {
+    $( ".card-link" ).find("input").change(function(){
+
+    });
+});
