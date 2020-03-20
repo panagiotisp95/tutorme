@@ -55,3 +55,26 @@ $(document).ready(function(){
 
 
 });
+
+function accept(teacher_email, teacher_name, url, student){
+    var postData = {"teacher_email": teacher_email, "student_email": student};
+
+    ajaxSetup();
+    $.post(url, postData, function(data){
+        if(data == "ok"){
+            var name = "#accepted_"+teacher_name+" p"
+            $(name ).text( "Accepted" );
+        }
+        return;
+    })
+}
+
+function decline(id){
+
+    carousel = $("#"+id).parent().children('.carousel-item').first();
+    if(carousel.attr("id") == id){
+        carousel = $("#"+id).parent().children('.carousel-item').last();
+    }
+    carousel.addClass("active");
+    $("#"+id).remove();
+}

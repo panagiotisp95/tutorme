@@ -37,19 +37,19 @@
         <div class="carousel-inner">
             {% if teachers %}
                 {% for teacher in teachers %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" id="{{ teacher.first_name }}">
                         <div class="card">
                             <div class="row justify-content-center"> <img src="{{ MEDIA_URL }}{{ teacher.picture }}" class="img-fluid profile-pic mb-4 mt-3"> </div>
                             <h6 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h6>
                             <div class="col-8">
                                 <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
-
-                                    <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
+                                <div id="accepted_{{ teacher.first_name }}"><p></p></div>
+                                <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
                                 <div><p align="left" class="content mb-5 mx-2">Contact Info: {{ teacher.user.email }}</p></div>
                             </div>
                             <div class="col-8 mb-3">
-                                <button type="button" class="btn btn-danger btn-circle btn-xl float-left">Decline</button>
-                                <button type="button" class="btn btn-success btn-circle btn-xl float-right">Accept</button>
+                                <button type="button" onclick='decline("{{ teacher.first_name }}")' class="btn btn-danger btn-circle btn-xl float-left">Decline</button>
+                                <button type="button" onclick='accept("{{ teacher.user.email }}", "{{ teacher.first_name }}", "{% url "tutorme:accept" %}", "{{ user.email }}" )' class="btn btn-success btn-circle btn-xl float-right">Accept</button>
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,10 @@ urlpatterns = [
     path('restricted/', views.restricted, name='restricted'),
     path('logout/', views.user_logout, name='logout'),
     path('search/', views.search, name='search'),
-    path('teacherDashboard/', views.teacherDashboard, name='teacherDashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('accept/', views.accept, name='accept'),
+    path('decline/', views.accept, name='decline'),
+
     #url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 
 ]

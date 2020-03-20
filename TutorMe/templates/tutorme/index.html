@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-item">
                     {% if user.is_authenticated %}
-                     You are logged in as {{ username }}
+                        You are logged in as {{ user_obj.first_name }}
                     {% else %}
                     {% endif %}<br />
                     {% if user_type == 'teacher' %}

@@ -46,11 +46,10 @@
                         <h5 class="text-uppercase">Site Map</h5>
                         <ul class="list-unstyled href-color">
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'tutorme:search' %}">Search for Tutor</a></li>
-                                {% if user_type == 'teacher' %}
-                                    <li><a href="{% url 'tutorme:teacherDashboard' %}">Dashboard Teacher</a></li>
+                                {% if not user_obj.categories %}
+                                    <li><a href="{% url 'tutorme:search' %}">Search for Tutor</a></li>
                                 {% endif %}
-
+                                <li><a href="{% url 'tutorme:dashboard' %}">Dashboard</a></li>
                                 <li><a href="{% url 'tutorme:restricted' %}">Restricted Page</a></li>
                                 <li><a href="{% url 'tutorme:logout' %}">Logout</a></li>
                                 <li><a href="{% url 'tutorme:homepage' %}">Homepage</a></li>

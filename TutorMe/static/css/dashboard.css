@@ -1,0 +1,72 @@
+.rating-stars ul {
+    list-style-type:none;
+    padding:0;
+
+    -moz-user-select:none;
+    -webkit-user-select:none;
+}
+
+.rating-stars ul > li.star {
+    display:inline-block;
+}
+
+.rating-stars ul > li.star > i.fa {
+    font-size:1.2em;
+    color:#ccc;
+}
+
+
+.rating-stars ul > li.star.hover > i.fa {
+    color:#FFCC36;
+}
+
+
+.rating-stars ul > li.star.selected > i.fa {
+    color:#FF912C;
+}
+
+.card {
+    box-shadow: 0px 4px 8px 0px #BDBDBD
+}
+
+.profile-pic {
+    width: 100px !important;
+    height: 100px;
+    box-shadow: 0px 4px 8px 0px #BDBDBD
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after {
+  content: '>';
+  font-size: 45px;
+  color: #e68e00;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 45px;
+  color: #e68e00;
+}
+
+.btn-circle.btn-sm {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    font-size: 8px;
+    text-align: center;
+}
+
+.carousel-card {
+    max-width: 500px;
+    margin-bottom:20px;
+}

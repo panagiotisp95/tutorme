@@ -76,7 +76,7 @@ function sendRequest(postData, postAddress){
             window.location.href = obj.url;
         }
         return;
-    })
+    });
 }
 
 function blink(selector) {

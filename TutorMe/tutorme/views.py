@@ -34,19 +34,8 @@ def homepage(request):
     category_list = Category.objects.order_by('-name')[:5]
 
     context_dict = dict()
-    if not request.user.is_anonymous:
-        try:
-            student = Student.objects.get(user=request.user)
-            context_dict['username'] = student.first_name
-            context_dict['user_type'] = 'student'
-
-        except Student.DoesNotExist:
-            teacher = Teacher.objects.get(user=request.user)
-
-            context_dict['username'] = teacher.first_name
-            context_dict['user_type'] = 'teacher'
-            context_dict['picture'] = teacher.picture
-
+    user = get_user(request.user)
+    context_dict['user_obj'] = user
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     visitor_cookie_handler(request)
@@ -64,14 +53,19 @@ def about(request):
 
 
 @login_required
-def teacherDashboard(request):
-    teacher = Teacher.objects.get(user=request.user)
+def dashboard(request):
     context_dict = dict()
-    context_dict['usernamefirst'] = teacher.first_name
-    context_dict['usernamelast'] = teacher.last_name
-    context_dict['locationteacher'] = teacher.location
-    response = render(request, 'tutorme/teacherDashboard.html', context=context_dict)
-    return response
+    user = get_user(request.user)
+    context_dict['user_obj'] = user
+    connections = list()
+
+    if hasattr(user, 'students'):
+        for student in user.students.all() or []:
+            connections.append(student)
+    else:
+        connections = user.teachers.all()
+    context_dict['connections'] = connections
+    return render(request, 'tutorme/dashboard.html', context=context_dict)
 
 
 @login_required
@@ -94,6 +88,7 @@ def search(request):
                 teachers.append(teacher)
 
         context_dict['teachers'] = teachers
+        print(teachers)
     else:
         context_dict['teachers'] = Teacher.objects.order_by('-first_name')[:5]
 
@@ -103,6 +98,17 @@ def search(request):
     context_dict['last_category'] = all_categories[length-1]
     response = render(request, 'tutorme/search.html', context=context_dict)
     return response
+
+
+def accept(request):
+    if request.method == 'POST':
+        user = User.objects.get(email=request.POST.get('teacher_email'))
+        teacher = get_user(user)
+        student_user = User.objects.get(email=request.POST.get('student_email'))
+        student = get_user(student_user)
+        teacher.students.add(student)
+        return HttpResponse("ok")
+    return HttpResponse("Bad request")
 
 
 def find_teacher(first_name):
@@ -126,6 +132,17 @@ def get_all_categories():
         return Category.objects.all()
     except Category.DoesNotExist:
         return None
+
+
+def get_user(user):
+    response = None
+    if not user.is_anonymous:
+        try:
+            response = Student.objects.get(user=user)
+        except Student.DoesNotExist:
+            response = Teacher.objects.get(user=user)
+
+    return response
 
 
 def show_category(request, category_name):
