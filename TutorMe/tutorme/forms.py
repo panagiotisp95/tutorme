@@ -71,7 +71,7 @@ class ReviewForm(forms.ModelForm):
 class TeacherUpdateForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    active = forms.BooleanField(widget=forms.CheckboxInput())
+    active = forms.BooleanField(required=False, widget=forms.CheckboxInput())
 
     class Meta:
         model = Teacher
