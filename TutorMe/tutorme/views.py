@@ -47,9 +47,9 @@ def homepage(request):
 
 
 def about(request):
-    visitor_cookie_handler(request)
     context_dict = dict()
-    context_dict['visits'] = request.session['visits']
+    user = get_user(request.user)
+    context_dict['user_obj'] = user
     response = render(request, 'tutorme/about.html', context=context_dict)
     return response
 
@@ -131,6 +131,7 @@ def search(request):
         print(teachers)
     else:
         context_dict['teachers'] = Teacher.objects.order_by('-first_name').filter(active=True)[:5]
+    context_dict['all_categories'] = get_all_categories()
     response = render(request, 'tutorme/search.html', context=context_dict)
     return response
 
