@@ -71,7 +71,7 @@ function rate(teacher_email, student_email, url, teacher_name, ratingValue){
         if(data == "ok"){
             var koko = "#"+teacher_name;
             $(koko).remove();
-            $("#stars_rating_for_user").append('<div class="Stars" style="--rating: '+ ratingValue +';"></div>');
+            $("#stars_rating_for_user_"+teacher_name).append('<div class="Stars" style="--rating: '+ ratingValue +';"></div>');
         }
         return;
     })

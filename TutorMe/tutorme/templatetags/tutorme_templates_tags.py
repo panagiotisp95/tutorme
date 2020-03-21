@@ -9,6 +9,7 @@ def get_category_list(current_category=None):
     return {'categories': Category.objects.order_by('-name')[:5], 'current_category': current_category}
 
 
-@register.filter
+@register.simple_tag
 def get_at_index(my_list, index):
+    print("koko")
     return my_list[index]
