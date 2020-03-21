@@ -63,7 +63,7 @@ class Student(CommonInfo):
 class Teacher(CommonInfo):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     categories = models.ManyToManyField(Category, related_name="teachers", blank=True)
-    active = models.BooleanField(default=True, blank=False)
+    active = models.BooleanField(default=True)
     students = models.ManyToManyField(Student, related_name="teachers")
     rating = models.IntegerField(_('rating'), default=0)
 
