@@ -51,8 +51,7 @@ class TeacherForm(forms.ModelForm):
         model = Teacher
         fields = ('first_name', 'last_name', 'description', 'location', 'picture', 'categories',)
 
-    def __init__ (self, *args, **kwargs):
-
+    def __init__(self, *args, **kwargs):
         super(TeacherForm, self).__init__(*args, **kwargs)
         self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
         self.fields["categories"].help_text = ""
@@ -67,3 +66,28 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('title', 'description', 'rating',)
+
+
+class TeacherUpdateForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
+    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    active = forms.BooleanField(widget=forms.CheckboxInput())
+
+    class Meta:
+        model = Teacher
+        fields = ('description', 'location', 'picture', 'active', 'categories',)
+
+    def __init__(self, *args, **kwargs):
+        super(TeacherUpdateForm, self).__init__(*args, **kwargs)
+        self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["categories"].help_text = ""
+        self.fields["categories"].queryset = Category.objects.all()
+
+
+class StudentUpdateForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
+    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Student
+        fields = ('description', 'location', 'picture',)

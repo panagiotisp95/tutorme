@@ -60,31 +60,3 @@ body {
     max-width: 500px;
     margin-bottom:20px;
 }
-
-@charset "UTF-8";
-:root {
-  --star-size: 40px;
-  --star-color: #BDBDBD;
-  --star-background: #fc0;
-}
-
-.Stars {
-  --percent: calc(var(--rating) / 5 * 100%);
-  display: inline-block;
-  font-size: var(--star-size);
-  font-family: Times;
-  line-height: 1;
-}
-.Stars::before {
-  content: '★★★★★';
-  letter-spacing: 3px;
-  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-
-* {
-  position: relative;
-  box-sizing: border-box;
-}

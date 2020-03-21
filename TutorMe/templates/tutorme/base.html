@@ -1,7 +1,6 @@
 <!DOCTYPEhtml>
 {% load staticfiles %}
 {% load tutorme_templates_tags %}
-
 <html>
     <head lang="en">
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +15,8 @@
         <script src="{% static 'javascript/EasyAutocomplete/jquery.easy-autocomplete.min.js' %}"></script>
         <link rel="stylesheet" href="{% static 'javascript/EasyAutocomplete/easy-autocomplete.min.css' %}">
         <link rel="stylesheet" href="{% static 'javascript/EasyAutocomplete/easy-autocomplete.themes.min.css' %}">
+        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         {% block head_block %}
         {% endblock %}
         <title>

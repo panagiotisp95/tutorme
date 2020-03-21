@@ -47,6 +47,11 @@
                                 <input type="password" class="form-control" name="password" placeholder="Password" required="required">
                             </div>
                         </div>
+                        {% if message %}
+                            <div class="bold-red form-group">
+                                {{ message }}
+                            </div>
+                        {% endif %}
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                         </div>

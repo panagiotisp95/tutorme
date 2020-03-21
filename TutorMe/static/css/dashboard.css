@@ -70,3 +70,7 @@
     max-width: 500px;
     margin-bottom:20px;
 }
+
+.checkboxes {
+    float: right;
+}

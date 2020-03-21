@@ -65,7 +65,7 @@ class Teacher(CommonInfo):
     categories = models.ManyToManyField(Category, related_name="teachers", blank=True)
     active = models.BooleanField(default=True, blank=False)
     students = models.ManyToManyField(Student, related_name="teachers")
-    rating = models.IntegerField(_('rating'), blank=False)
+    rating = models.IntegerField(_('rating'), default=0)
 
     class Meta(CommonInfo.Meta):
         db_table = 'teachers'

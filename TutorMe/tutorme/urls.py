@@ -8,7 +8,6 @@ urlpatterns = [
     path('homepage/', views.homepage, name='homepage'),
     path('about/', views.about, name='about'),
     path('category/<slug:category_name>/', views.show_category, name='show_category'),
-    path('add_category/', views.add_category, name='add_category'),
     path('register_student/', views.register_student, name='register_student'),
     path('register_teacher/', views.register_teacher, name='register_teacher'),
     path('login/', views.user_login, name='login'),
@@ -17,7 +16,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('accept/', views.accept, name='accept'),
-    path('decline/', views.accept, name='decline'),
+    path('rate/', views.rate, name='rate'),
 
     #url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 

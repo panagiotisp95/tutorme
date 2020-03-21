@@ -33,8 +33,46 @@ $(document).ready(function() {
 
         // JUST RESPONSE (Not needed)
         var ratingValue = parseInt($('.stars li.selected').last().data('value'), 10);
-        var user = $(".stars").parent().parent().attr('class');
-        console.log(user);
+        var name = $(".stars").parent().parent().attr('class');
+        var str = $(".stars").parent().parent().attr('about');
+        var res = str.split(" ");
+
+        console.log(name);
         console.log(ratingValue);
+        $('body').append('<div id="yesno_dialog" title="Yes Or No"><p>Submit review?</p></div>');
+        $("#yesno_dialog").dialog({
+            title: "Yes or No",
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Yes" : function () {
+                    rate(res[0], res[1], res[2], name, ratingValue)
+
+                    $(this).dialog("close");
+                    $(this).remove();
+                },
+                "No" : function (){
+                    $(this).dialog("close");
+                    $(this).remove();
+                }
+
+            }
+        });
     });
+
+
 });
+
+function rate(teacher_email, student_email, url, teacher_name, ratingValue){
+    var postData = {"teacher_email": teacher_email, "student_email": student_email, "rating": ratingValue};
+
+    ajaxSetup();
+    $.post(url, postData, function(data){
+        if(data == "ok"){
+            var koko = "#"+teacher_name;
+            $(koko).remove();
+            $("#stars_rating_for_user").append('<div class="Stars" style="--rating: '+ ratingValue +';"></div>');
+        }
+        return;
+    })
+}
