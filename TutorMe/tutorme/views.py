@@ -399,12 +399,6 @@ def user_login(request):
         return render(request, 'tutorme/login.html', context=context_dict)
 
 
-@login_required
-def restricted(request):
-    return render(request, 'tutorme/restricted.html')
-
-
-
 # Use the login_required() decorator to ensure only those logged in can # access the view.
 @login_required
 def user_logout(request):
