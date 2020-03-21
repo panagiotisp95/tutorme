@@ -91,6 +91,15 @@ class Teacher(CommonInfo):
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    def calculate_rating(self, **kwargs):
+        my_reviews = Review.objects.filter(reviewee=self)
+        mean_rating = 0
+        for review in my_reviews:
+            mean_rating = mean_rating + review.rating
+        mean_rating = mean_rating/len(my_reviews)
+        self.rating = mean_rating
+        self.save()
+
 
 class Review(models.Model):
     rating = models.IntegerField(_('rating'), blank=False)

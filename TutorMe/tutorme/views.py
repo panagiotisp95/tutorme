@@ -192,6 +192,7 @@ def rate(request):
         print(teacher.first_name+student.first_name+request.POST.get('rating'))
         review = Review(reviewee=teacher, reviewer=student, rating=rating)
         review.save()
+        teacher.calculate_rating()
         return HttpResponse("ok")
     return HttpResponse("Bad request")
 
