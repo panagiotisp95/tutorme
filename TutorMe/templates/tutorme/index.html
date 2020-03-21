@@ -1,55 +1,83 @@
 {%extends 'tutorme/base.html'%}
 {% load staticfiles %}
+
 {% block title_block %}
     Homepage
 {% endblock %}
 
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
 {% block body_block %}
-    <h1>tutorme says...</h1>
 
-        <div>
-            {% if user.is_authenticated %}
-                howdy {{ username }}!
-            {% else %}
-                hey there partner!
-            {% endif %} <br />
-            <strong>{{ boldmessage }}</strong> <br />
-            {% if user_type == 'teacher' %}
-                Teacher!
-            {% else %}
-                Student!
-            {% endif %}
-        </div>
-        <div>
-            <h2>Most Liked Categories</h2>
-            <div>
-            {% if categories %}
-                <ul>
-                    {% for category in categories %}
-                        <li>
-                            <a href="{% url 'tutorme:show_category' category.name %}">{{ category.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <strong>There are no categories present.</strong>
-            {% endif %}
+<nav class="navbar navbar-expand-lg navbar-light">
+  <img src="{% static 'images/TutorMeLogoTransparent.png' %}" class="img-fluid" width="400" height="160" alt="Picture of tutorme" />
+    <div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                   <a href="{% url 'tutorme:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                   <a href="{% url 'tutorme:login' %}">Login</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                   <a href="{% url 'tutorme:search' %}">Category</a>
+                </li>
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                        You are logged in as {{ user_obj.first_name }}
+                    {% else %}
+                    {% endif %}<br />
+                    {% if user_type == 'teacher' %}
+                    Teacher!
+                    {% else %}
+                     Student!
+                    {% endif %}
+                </li>
+            </ul>
+          </div>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-sm-6 offset-md-3 row-centered">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ul>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card">
+                        <div class="col-8">
+                            <p align="justify" class="content mb-5 mx-2">agna aliqua Ut enim.</p>
+                        </div>
+                    </div>
                 </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="col-8">
+                            <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="col-8">
+                            <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <h2>Most Viewed Pages</h2>
-            {% if pages %}
-                <ul>
-                    {% for page in pages %}
-                        <li>
-                            <a href="{{ page.url }}">{{ page.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <strong>There are no pages present.</strong>
-            {% endif %}
-        </div>
-
+    </div>
+    </div>
 {% endblock %}

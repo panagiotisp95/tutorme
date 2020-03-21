@@ -49,22 +49,13 @@ class TeacherForm(forms.ModelForm):
 
     class Meta:
         model = Teacher
-        fields = ('first_name', 'last_name', 'description', 'location', 'picture',)
-
-
-class TeacherCategoriesForm(forms.ModelForm):
-    categories = forms.MultipleChoiceField(
-        required=True,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check mb-2'}),
-    )
+        fields = ('first_name', 'last_name', 'description', 'location', 'picture', 'categories',)
 
     def __init__(self, *args, **kwargs):
-        super(forms.ModelForm, self).__init__(*args, **kwargs)
-        self.fields['categories'].choices = [(c.name, c.name) for c in Category.objects.all()]
-
-    class Meta:
-        model = Teacher
-        fields = ('categories',)
+        super(TeacherForm, self).__init__(*args, **kwargs)
+        self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["categories"].help_text = ""
+        self.fields["categories"].queryset = Category.objects.all()
 
 
 class ReviewForm(forms.ModelForm):
@@ -75,3 +66,28 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('title', 'description', 'rating',)
+
+
+class TeacherUpdateForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
+    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    active = forms.BooleanField(widget=forms.CheckboxInput())
+
+    class Meta:
+        model = Teacher
+        fields = ('description', 'location', 'picture', 'active', 'categories',)
+
+    def __init__(self, *args, **kwargs):
+        super(TeacherUpdateForm, self).__init__(*args, **kwargs)
+        self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["categories"].help_text = ""
+        self.fields["categories"].queryset = Category.objects.all()
+
+
+class StudentUpdateForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
+    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Student
+        fields = ('description', 'location', 'picture',)

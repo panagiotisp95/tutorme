@@ -46,7 +46,7 @@ function getUserDetails(login_response, postAddress){
     });
 }
 
-function sendRequest(postData, postAddress){
+function ajaxSetup(){
     var csrftoken = getCookie('csrftoken');
 
     $.ajaxSetup({
@@ -56,6 +56,10 @@ function sendRequest(postData, postAddress){
             }
         }
     });
+}
+
+function sendRequest(postData, postAddress){
+    ajaxSetup();
 
     $.post(postAddress, postData, function(data){
         console.log(data)
@@ -72,7 +76,7 @@ function sendRequest(postData, postAddress){
             window.location.href = obj.url;
         }
         return;
-    })
+    });
 }
 
 function blink(selector) {

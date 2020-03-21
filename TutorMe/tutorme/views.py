@@ -3,16 +3,17 @@ from django.shortcuts import render
 from tutorme.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
-from tutorme.forms import UserForm, StudentForm, TeacherForm, TeacherCategoriesForm
+from tutorme.forms import UserForm, StudentForm, TeacherForm, TeacherUpdateForm, StudentUpdateForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from tutorme.models import Category, Student, Teacher, User
+from tutorme.models import Category, Student, Teacher, User, Review
 from datetime import datetime
 from django.conf import settings
 from .picture_downloader import PictureDownloader
 from django.core.files.base import ContentFile
 from io import BytesIO
 import re
+from django.core import serializers
 
 
 def index(request):
@@ -33,16 +34,10 @@ def homepage(request):
     category_list = Category.objects.order_by('-name')[:5]
 
     context_dict = dict()
-    if not request.user.is_anonymous:
-        try:
-            student = Student.objects.get(user=request.user)
-            context_dict['username'] = student.first_name
-            context_dict['user_type'] = 'student'
-        except Student.DoesNotExist:
-            teacher = Teacher.objects.get(user=request.user)
-            context_dict['username'] = teacher.first_name
-            context_dict['user_type'] = 'teacher'
-
+    user = get_user(request.user)
+    context_dict['user_obj'] = user
+    if user.description == "":
+        return dashboard(request)
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     visitor_cookie_handler(request)
@@ -60,28 +55,96 @@ def about(request):
 
 
 @login_required
+def dashboard(request):
+    context_dict = dict()
+    user = get_user(request.user)
+    context_dict['user_obj'] = user
+
+    if user.description == "":
+        context_dict['empty_fields'] = True
+        context_dict['message'] = "Your account is not complete. Press Edit Profile below complete your registration"
+
+    if request.method == 'POST':
+        print(request.POST)
+        if 'delete' in request.POST:
+            request.user.delete()
+            return user_logout(request)
+        else:
+            if hasattr(user, 'students'):
+                form = TeacherUpdateForm(request.POST, instance=user)
+            else:
+                form = StudentUpdateForm(request.POST, instance=user)
+
+            if form.is_valid():
+                user = form.save(commit=False)
+                if 'picture' in request.FILES:
+                    user.picture = request.FILES['picture']
+
+                user.save()
+                context_dict['user_obj'] = user
+
+    connections = list()
+    if hasattr(user, 'students'):
+        form = TeacherUpdateForm(instance=user)
+        for student in user.students.all() or []:
+            connections.append(student)
+    else:
+        form = StudentUpdateForm(instance=user)
+        context_dict['student'] = True
+        connections = user.teachers.all()
+        has_review = list()
+        for connection in connections:
+            try:
+                review = Review.objects.get(reviewee=connection, reviewer=user)
+                has_review.append(review.rating)
+            except Review.DoesNotExist:
+                has_review.append(None)
+        context_dict['has_review'] = has_review
+
+    context_dict['form'] = form
+    context_dict['connections'] = connections
+    return render(request, 'tutorme/dashboard.html', context=context_dict)
+
+
+@login_required
 def search(request):
     context_dict = dict()
+
     if request.method == 'POST':
         search_string = request.POST.get('search')
         search_string = re.sub('[^A-Za-z0-9 ]+', '', search_string)
 
         search_list = search_string.split()
 
-        by_category = list()
-        by_name = list()
+        teachers = list()
         for item in search_list:
-            a = find_teacher(item)
-            by_name.append(a) if a is not None else None
+            teacher = find_teacher(item)
+            if teacher is not None and teacher.active:
+                    teachers.append(teacher)
             item = item.capitalize()
 
             for teacher in find_teachers_by_category(item) or []:
-                by_category.append(teacher)
+                if teacher.active:
+                    teachers.append(teacher)
 
-        context_dict['teachers'] = {'by_category': by_category, 'by_name': by_name}
-
+        context_dict['teachers'] = teachers
+        print(teachers)
+    else:
+        context_dict['teachers'] = Teacher.objects.order_by('-first_name').filter(active=True)[:5]
     response = render(request, 'tutorme/search.html', context=context_dict)
     return response
+
+
+@login_required
+def accept(request):
+    if request.method == 'POST':
+        user = User.objects.get(email=request.POST.get('teacher_email'))
+        teacher = get_user(user)
+        student_user = User.objects.get(email=request.POST.get('student_email'))
+        student = get_user(student_user)
+        teacher.students.add(student)
+        return HttpResponse("ok")
+    return HttpResponse("Bad request")
 
 
 def find_teacher(first_name):
@@ -95,9 +158,42 @@ def find_teacher(first_name):
 def find_teachers_by_category(name):
     try:
         category = Category.objects.get(name=name)
-        return category.teacher_set.all()
+        return category.teachers.all()
     except Category.DoesNotExist:
         return None
+
+
+def get_all_categories():
+    try:
+        return Category.objects.all()
+    except Category.DoesNotExist:
+        return None
+
+
+def get_user(user):
+    response = None
+    if not user.is_anonymous:
+        try:
+            response = Student.objects.get(user=user)
+        except Student.DoesNotExist:
+            response = Teacher.objects.get(user=user)
+
+    return response
+
+
+@login_required
+def rate(request):
+    if request.method == 'POST':
+        user = User.objects.get(email=request.POST.get('teacher_email'))
+        teacher = get_user(user)
+        student_user = User.objects.get(email=request.POST.get('student_email'))
+        student = get_user(student_user)
+        rating = int(request.POST.get('rating'))
+        print(teacher.first_name+student.first_name+request.POST.get('rating'))
+        review = Review(reviewee=teacher, reviewer=student, rating=rating)
+        review.save()
+        return HttpResponse("ok")
+    return HttpResponse("Bad request")
 
 
 def show_category(request, category_name):
@@ -110,7 +206,7 @@ def show_category(request, category_name):
         # If we can't, the .get() method raises a DoesNotExist exception.
         # The .get() method returns one model instance or raises an exception.
         category = Category.objects.get(name=category_name)
-        teacher_list = category.teacher_set.all()
+        teacher_list = category.teachers.all()
         context_dict['category'] = category
         context_dict['teachers'] = teacher_list
     except Category.DoesNotExist:
@@ -121,30 +217,6 @@ def show_category(request, category_name):
 
     # Go render the response and return it to the client.
     return render(request, 'tutorme/category.html', context=context_dict)
-
-
-@login_required
-def add_category(request):
-    form = CategoryForm()
-
-    # A HTTP POST?
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-
-        # Have we been provided with a valid form?
-        if form.is_valid():
-            # Save the new category to the database.
-            form.save(commit=True)
-            # Now that the category is saved, we could confirm this.
-            #  For now, just redirect the user back to the index view.
-            return redirect('/tutorme/')
-        else:
-            # The supplied form contained errors -
-            # just print them to the terminal.
-            print(form.errors)
-    # Will handle the bad form, new form, or no form supplied cases.
-    # Render the form with error messages (if any).
-    return render(request, 'tutorme/add_category.html', {'form': form})
 
 
 def register_student(request):
@@ -210,7 +282,6 @@ def register_teacher(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         teacher_form = TeacherForm(request.POST)
-        teacher_category_form = TeacherCategoriesForm()
 
         if user_form.is_valid() and teacher_form.is_valid():
             user = user_form.save()
@@ -225,6 +296,7 @@ def register_teacher(request):
                 teacher.picture = request.FILES['picture']
 
             teacher.save()
+            teacher_form.save_m2m()
             registered = True
         else:
             email = request.POST.get('email')
@@ -240,14 +312,16 @@ def register_teacher(request):
                     if request.POST.get('fb'):
                         return register_with_fb(request, True)
                     else:
-                        return HttpResponse("Bad request")
+                        print(user_form.errors)
+                        print(teacher_form.errors)
+                        return HttpResponse(teacher_form.errors)
             else:
-                return HttpResponse("Bad request")
+                return HttpResponse("popo")
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()
-        teacher_category_form = TeacherCategoriesForm()
-    return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'teacher_category_form': teacher_category_form, 'user_form': user_form, 'registered': registered})
+        print(teacher_form)
+    return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
 def register_with_fb(request, teacher_student_flag):
@@ -277,7 +351,7 @@ def register_with_fb(request, teacher_student_flag):
 
 def user_login(request):
     # If the request is a HTTP POST, try to pull out the relevant information.
-
+    context_dict = dict()
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -306,12 +380,14 @@ def user_login(request):
                 return redirect(reverse('tutorme:index'))
             else:
                 # An inactive account was used - no logging in!
-                return HttpResponse("Your account is disabled.")
+                context_dict['message'] = "Your account is disabled."
         else:
             # Bad login details were provided. So we can't log the user in. print(f"Invalid login details: {username}, {password}")
             if request.POST.get('fb'):
                 return HttpResponse('{"registered" : false}')
-            return HttpResponse("Invalid login details supplied.")
+            context_dict['message'] = "Invalid login details supplied."
+
+        return render(request, 'tutorme/login.html', context=context_dict)
 
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
@@ -320,12 +396,13 @@ def user_login(request):
             return redirect(reverse('tutorme:index'))
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'tutorme/login.html')
+        return render(request, 'tutorme/login.html', context=context_dict)
 
 
 @login_required
 def restricted(request):
     return render(request, 'tutorme/restricted.html')
+
 
 
 # Use the login_required() decorator to ensure only those logged in can # access the view.

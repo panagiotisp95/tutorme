@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    About
+    Search
 {% endblock %}
 
 {% block head_block %}
@@ -17,43 +17,67 @@
             <form action="#" class="card card-sm" method="post">
                 {% csrf_token %}
                 <div class="card-body row no-gutters align-items-center">
-                    <div class="col-auto">
+                    <div class="col-md-1">
                         <i class="fa fa-search h4 text-body"></i>
                     </div>
-                    <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Search by category or tutor name">
+                    <div class="col-md-8 my-auto">
+                        <input id="search_box" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Enter your choice">
                     </div>
-                    <div class="col-auto">
-                        <button class="btn btn-primary" type="submit">Search</button>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary float-center" type="submit">Search</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div>
-    {% if teachers %}
-        {% if teachers.by_category %}
-            <div>
-               By Category
-            </div>
-            <ul>
-                {% for teacher in teachers.by_category %}
-                    <li>{{ teacher.first_name }}</li>
+</br>
+<div class="col-5 carousel-card">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% if teachers %}
+                {% for teacher in teachers %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" id="{{ teacher.first_name }}">
+                        <div class="card">
+                            <div class="row justify-content-center"> <img src="{% if teacher.picture %}{{ MEDIA_URL }}{{ teacher.picture }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                            <h6 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h6>
+                            <div class="col-8">
+                                <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                <div id="accepted_{{ teacher.first_name }}"><p></p></div>
+                                <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
+                                <div><p align="left" class="content mb-5 mx-2">Contact Info: {{ teacher.user.email }}</p></div>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <button type="button" onclick='decline("{{ teacher.first_name }}")' class="btn btn-danger btn-circle btn-xl float-left">Decline</button>
+                                <button type="button" onclick='accept("{{ teacher.user.email }}", "{{ teacher.first_name }}", "{% url "tutorme:accept" %}", "{{ user.email }}" )' class="btn btn-success btn-circle btn-xl float-right">Accept</button>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
-        {% endif %}
-        {% if teachers.by_name %}
-            <div>
-               By Name
-            </div>
-            <ul>
-                {% for teacher in teachers.by_name %}
-                    <li>{{ teacher.first_name }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endif %}
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 
+{% block afterBody_block %}
+    <script>
+        var categories = [  {% for category in all_categories %}
+                                {% if forloop.last %}
+                                    "{{ last_category }}"
+                                {% else %}
+                                    "{{ category }}",
+                                {% endif %}
+                            {% endfor %}
+                         ];
+    </script>
+    <script src="{% static 'javascript/search.js' %}"></script>
+{% endblock %}

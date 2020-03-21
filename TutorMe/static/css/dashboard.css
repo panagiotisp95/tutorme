@@ -1,18 +1,28 @@
-.form-control-borderless {
-    border: none;
+.rating-stars ul {
+    list-style-type:none;
+    padding:0;
+
+    -moz-user-select:none;
+    -webkit-user-select:none;
 }
 
-.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
+.rating-stars ul > li.star {
+    display:inline-block;
 }
 
-body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-repeat: no-repeat
+.rating-stars ul > li.star > i.fa {
+    font-size:1.2em;
+    color:#ccc;
+}
+
+
+.rating-stars ul > li.star.hover > i.fa {
+    color:#FFCC36;
+}
+
+
+.rating-stars ul > li.star.selected > i.fa {
+    color:#FF912C;
 }
 
 .card {
@@ -59,4 +69,8 @@ body {
 .carousel-card {
     max-width: 500px;
     margin-bottom:20px;
+}
+
+.checkboxes {
+    float: right;
 }

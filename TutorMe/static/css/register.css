@@ -6,3 +6,10 @@ textarea {
     background: #4267B2;
 }
 
+.checkboxes {
+    float: right;
+}
+
+.textarea {
+    margin-top:10px;
+}
