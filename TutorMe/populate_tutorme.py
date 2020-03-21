@@ -1,6 +1,6 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                      'tango_with_django_project.settings')
+                      'tutorme_project.settings')
 import django
 django.setup()
 from tutorme.models import Category, Student, Teacher, User
