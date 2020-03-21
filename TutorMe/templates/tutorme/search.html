@@ -40,13 +40,21 @@
                     <div class="carousel-item {% if forloop.first %}active{% endif %}" id="{{ teacher.first_name }}">
                         <div class="card">
                             <div class="row justify-content-center"> <img src="{% if teacher.picture %}{{ MEDIA_URL }}{{ teacher.picture }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" class="img-fluid profile-pic mb-4 mt-3"> </div>
-                            <h6 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h6>
+                            <h4 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h4>
                             <div class="row justify-content-center">
                                 <div class="col-8">
                                     <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
                                     <div id="accepted_{{ teacher.first_name }}"><p></p></div>
+                                    <h5 class="mb-3 mt-2">Overall rating</h5>
                                     <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
                                 </div>
+                            </div>
+                            <div class="row justify-content-center p-3">
+                                <div class=""><p align="left" class="content mb-5 mx-2">Contact Info: {{ teacher.user.email }}</p></div>
                             </div>
                             <div class="row justify-content-center">
                             <div class="col-8 mb-3">

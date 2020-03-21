@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
 {% endblock %}
 
-{% block body_block %}s
+{% block body_block %}
     <h1>About TutorMe</h1>
     <h2 class="tlc"><strong>Teach, Learn, Connect!</strong></h2>
     <div class="container">
@@ -26,7 +26,7 @@
             something new yourself!
         </p>
         <div>
-            <img src="{% static 'images/teach.jpg' %}" alt="Two people" style="width:100%;height:500px;"  />
+            <img src="{% static 'images/teach.jpg' %}" alt="Two people" style="width:700px;height:300px;"  />
         </div>
         <h3><strong>Learn</strong> something new</h3>
         <p>
@@ -34,7 +34,7 @@
             from maths and physics, to tennis and sculpting. Your passion to learn is the only limit!
         </p>
         <div>
-            <img src="{% static 'images/learn.jpg' %}" alt="Two people" style="width:100%;height:500px;"  />
+            <img src="{% static 'images/learn.jpg' %}" alt="Two people" style="width:700px;height:300px;"  />
         </div>
         <h3><strong>Connect</strong> with your fellow citizens</h3>
         <p>
@@ -44,7 +44,7 @@
             and achieve their goals.
         </p>
         <div>
-            <img src="{% static 'images/connect.jpg' %}" alt="Two people" style="width:100%;height:500px;" />
+            <img src="{% static 'images/connect.jpg' %}" alt="Two people" style="width:700px;height:300px;" />
         </div>
     </div>
     <div class="container">
@@ -78,9 +78,6 @@
            As of right now, TutorMe is meant to be 100% free. Please send us the teacher's username and the email where he asks for compensation. 
            In the future, we will add an optional payment option, that will be visible on the teacher's profile.
         </p>
-    </div>
-    <div>
-        <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" />
     </div>
 {% endblock %}
 
