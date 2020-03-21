@@ -1,9 +1,3 @@
-
-nav {
-    background-color: #c3eff745;
-    border: 5px solid #E68E00;
-}
-
 .carousel ul {
     margin: 0;
     padding:0;
@@ -17,14 +11,13 @@ nav {
     margin-left: 70px;
 }
 
-.carousel li a {
+
+li a {
+    margin-left: 50px;
     color: #000000;
     text-align: center;
     padding: 14ox 16px;
-    text-decoration: none;
     text-transform: uppercase;
-    font-size: 18px;
-    display: block;
 }
 
 .carousel li a::before {
