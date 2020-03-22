@@ -5,7 +5,6 @@ app_name = 'tutorme'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('homepage/', views.homepage, name='homepage'),
     path('about/', views.about, name='about'),
     path('category/<slug:category_name>/', views.show_category, name='show_category'),
     path('register_student/', views.register_student, name='register_student'),

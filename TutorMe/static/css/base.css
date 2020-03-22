@@ -187,3 +187,13 @@ background-color: #c3eff745;
   position: relative;
   box-sizing: border-box;
 }
+
+.logo {
+    width: 20%;
+}
+
+@media only screen and (max-width: 800px) {
+    .logo {
+        width: 50%;
+    }
+}

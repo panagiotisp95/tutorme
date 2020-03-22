@@ -13,35 +13,18 @@ from .picture_downloader import PictureDownloader
 from django.core.files.base import ContentFile
 from io import BytesIO
 import re
-from django.core import serializers
 
 
 def index(request):
-    response = redirect(reverse('tutorme:login'))
+    response = render(request, 'tutorme/index.html')
     if request.session.get_expiry_age()>0:
         if not request.user.is_anonymous:
-            response = redirect(reverse('tutorme:homepage'))
-
-    return response
-
-
-@login_required
-def homepage(request):
-    # Query the database for a list of ALL categories currently stored.
-    # Order the categories by the number of likes in descending order.
-    # Retrieve the top 5 only -- or all if less than 5.
-    # Place the list in our context_dict dictionary (with our boldmessage!) # that will be passed to the template engine.
-    category_list = Category.objects.order_by('-name')[:5]
-
-    context_dict = dict()
-    user = get_user(request.user)
-    context_dict['user_obj'] = user
-    if user.description == "":
-        return dashboard(request)
-    context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
-    context_dict['categories'] = category_list
-    visitor_cookie_handler(request)
-    response = render(request, 'tutorme/index.html', context=context_dict)
+            context_dict = dict()
+            user = get_user(request.user)
+            context_dict['user_obj'] = user
+            if user.description == "":
+                return dashboard(request)
+            response = render(request, 'tutorme/index.html', context=context_dict)
 
     return response
 
