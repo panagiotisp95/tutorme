@@ -1,3 +1,8 @@
+/*
+ * Function that assignes a listener to the checkboxes of the categories so that
+ * when the user clicks on them the textarea in the form populated with the
+ * selected categories
+ */
 $(document).ready(function () {
     $( "li" ).find("input").change(function(){
         var selected_categories = $("#selected_categories");
@@ -30,6 +35,9 @@ $(document).ready(function () {
     });
 });
 
+/*
+ * Function used to register the user using FB
+ */
 function register(){
     registerURL = $('#user_form').attr('action');
     attemptLogin(registerURL);

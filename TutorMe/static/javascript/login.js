@@ -1,3 +1,7 @@
+/*
+ * When the document is fully loaded the given text will start
+ * typed using the typed function
+ */
 $(document).ready(function () {
     $(".animated-text").typed({
         strings: [
@@ -13,6 +17,9 @@ $(document).ready(function () {
     });
 });
 
+/*
+ * Function call fb attempt login
+ */
 function login(){
     attemptLogin('/tutorme/login/');
 }

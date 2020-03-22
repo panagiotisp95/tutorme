@@ -74,6 +74,7 @@
 
 {% block afterBody_block %}
     <script>
+        <!--  the script here is used to initialize the categories variable used in the autocomplete using the django template -->
         var categories = [  {% for category in all_categories %}
                                 {% if forloop.last %}
                                     "{{ last_category }}"
