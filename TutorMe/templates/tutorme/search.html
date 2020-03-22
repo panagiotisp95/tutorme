@@ -21,7 +21,7 @@
                         <i class="fa fa-search h4 text-body"></i>
                     </div>
                     <div class="col-md-8 my-auto">
-                        <input id="search_box" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Enter your choice">
+                        <input id="search_box" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Enter a category you wish to learn or a teacher">
                     </div>
                     <div class="col-md-3">
                         <button class="btn btn-primary float-center" type="submit">Search</button>
@@ -47,11 +47,7 @@
                                     <div id="accepted_{{ teacher.first_name }}"><p></p></div>
                                     <h5 class="mb-3 mt-2">Overall rating</h5>
                                     <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
-
                                 </div>
-                            </div>
-                            <div class="row justify-content-center p-3">
-                                <div class=""><p align="left" class="content mb-5 mx-2">Contact Info: {{ teacher.user.email }}</p></div>
                             </div>
                             <div class="row justify-content-center">
                             <div class="col-8 mb-3">

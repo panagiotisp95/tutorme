@@ -1,4 +1,4 @@
-"""tango_with_django_project URL Configuration
+"""tutorme_project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -23,8 +23,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     path('tutorme/', include('tutorme.urls')),
-    # needed for the ratings
-    path('ratings/', include('star_ratings.urls', namespace='ratings')),
     # The above maps any URLs starting with tutorme/ to be handled by tutorme.
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
