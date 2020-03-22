@@ -1,4 +1,3 @@
-
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'tutorme_project.settings')
@@ -7,8 +6,9 @@ django.setup()
 from tutorme.models import Category, Student, Teacher, User
 
 
+# Function that populates the application with data
 def populate():
-
+    # Creates a dictionary for the categories and the teachers who teach them
     cats = {
         'Mathematics': {'teachers': []},
         'Algebra': {'teachers': []},
@@ -38,10 +38,11 @@ def populate():
         'Entrepreneurship': {'teachers': []}
     }
 
+    # Adds categories to the database
     for cat, cat_data in cats.items():
         add_cat(cat)
 
-    # "photo": "/profile_images/name",
+    # Creates a list of students with their respective details
     students = [
         {'email': 'conorthatcher@gmail.com', 'password': 'conorthatcher0', 'first_name': 'Conor',
          'last_name': 'Thatcher', 'description': 'Want to learn algebra.', 'location': 'Glasgow'},
@@ -53,9 +54,9 @@ def populate():
          'last_name': 'Cash', 'description': 'Looking for a history teacher, preferably specialized in the Ancient period.', 'location': 'Glasgow'},
         {'email': 'albyglenn@gmail.com', 'password': 'albyglenn0', 'first_name': 'Alby',
          'last_name': 'Glenn', 'description': 'Have a passion for painting. Looking for a real mentor to help me improve.', 'location': 'Glasgow'},
-        {'email': 'nuhabrittonr@gmail.com', 'password': 'nuhabritton0', 'first_name': 'Nuha',
+        {'email': 'nuhabritton@gmail.com', 'password': 'nuhabritton0', 'first_name': 'Nuha',
          'last_name': 'Britton', 'description': 'Wanting to launch my own business but don\'t know where to start.', 'location': 'Glasgow'},
-        {'email': 'ariellamackier@gmail.com', 'password': 'ariellamackie0', 'first_name': 'Ariella',
+        {'email': 'ariellamackie@gmail.com', 'password': 'ariellamackie0', 'first_name': 'Ariella',
          'last_name': 'Mackie', 'description': 'Wannabe singer, could use some lessons.', 'location': 'Glasgow'},
         {'email': 'bjornwilks@gmail.com', 'password': 'bjornwilks0', 'first_name': 'Bjorn',
          'last_name': 'Wilks', 'description': 'Embarrassed to admit I never paid much attention to school. Want to stop looking bad because of my grammar. Any help?', 'location': 'Glasgow'},
@@ -65,9 +66,11 @@ def populate():
          'last_name': 'McGill', 'description': 'Know more than anyone in physics. Prove me wrong', 'location': 'Glasgow'},
     ]
 
+    # Adds students to the database
     for i in students:
         add_student(i['email'], i['password'], i['first_name'], i['last_name'], i['description'], i['location'],)
 
+    # Creates a list of students with their respective details
     teachers = [
         {'email': 'jarrodmoon@gmail.com', 'password': 'jarrodmoon0', 'first_name': 'Jarrod',
          'last_name': 'Moon', 'description': 'Teaching geometry and trigonometry for 23 years now at a high school. Love my job so much, I want to do it in my free time too!', 'location': 'Glasgow', 'rating': 0,
@@ -86,7 +89,7 @@ def populate():
          'categories': ["Entrepreneurship", ]},
         {'email': 'weronikaconolly@gmail.com', 'password': 'weronikaconolly0', 'first_name': 'Weronika',
          'last_name': 'Conolly', 'description': 'You hated algebra as a kid. Maybe now is the time to change your mind? I have been teaching algebra for 14 years and am willing to help both newcomers and more experienced students improve their skills.', 'location': 'Glasgow', 'rating': 0,
-         'categories': ["Mathematics", ]},
+         'categories': ["Mathematics", "Algebra"]},
         {'email': 'ericclark@gmail.com', 'password': 'ericclark0', 'first_name': 'Eric',
          'last_name': 'Clark', 'description': 'Former employee of GoldmanSachs. Expert at macroeconomics.', 'location': 'Glasgow', 'rating': 0,
          'categories': ["Macroeconomics", "Economics", "Microeconomics"]},
@@ -101,21 +104,23 @@ def populate():
          'categories': ["Programming", ]},
     ]
 
+    # Adds teachers to the database
     for i in teachers:
         add_teacher(i['email'], i['password'], i['first_name'], i['last_name'], i['description'], i['location'], i['rating'], i['categories'])
 
-
-
+    # Prints categories for debugging purposes
     for c in Category.objects.all():
         print(f'- {c}')
 
 
+# Function that adds a category to the database
 def add_cat(name):
     c = Category.objects.get_or_create(name=name)[0]
     c.save()
     return c
 
 
+# Function that adds a student to the database
 def add_student(email, password, first_name, last_name, description, location):
     user = User.objects.create_user(email, password)
     user.save()
@@ -124,6 +129,7 @@ def add_student(email, password, first_name, last_name, description, location):
     return student
 
 
+# Function that adds a teacher to the database
 def add_teacher(email, password, first_name, last_name, description, location, rating, categories):
     user = User.objects.create_user(email, password)
     user.save()
