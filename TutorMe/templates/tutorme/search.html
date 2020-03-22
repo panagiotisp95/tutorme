@@ -43,7 +43,7 @@
                             <h4 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h4>
                             <div class="row justify-content-center">
                                 <div class="col-8">
-                                    <p align="justify" class="content mb-5 mx-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim.</p>
+                                    <p align="justify" class="content mb-5 mx-2">{{ teacher.description }}</p>
                                     <div id="accepted_{{ teacher.first_name }}"><p></p></div>
                                     <h5 class="mb-3 mt-2">Overall rating</h5>
                                     <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
