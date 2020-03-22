@@ -14,10 +14,10 @@
         <div class="row justify-content-center">
             {% if user.is_authenticated %}
                 <div class="col-md-5 centered my-auto">
-                    <div class="white-text welcome">
+                    <div class="black-text welcome">
                         <h2>Find teacher or Go to Dashboard</h2>
                         {% if not user_obj.categories %}
-                            <a href="{% url 'tutorme:search' %}" class="btn btn-transparent" id="search">Search</a>
+                            <a href="{% url 'tutorme:search' %}" class="btn btn-orange" id="search">Search</a>
                         {% endif %}
                         <a href="{% url 'tutorme:dashboard' %}" class="btn btn-orange" id="dashboard">Dashboard</a>
                     </div>
