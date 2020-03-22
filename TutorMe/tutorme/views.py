@@ -11,6 +11,7 @@ from django.conf import settings
 import re
 
 
+# function that renders the index page. Checks the user and sends the appropriate dictionary to the page
 def index(request):
     response = render(request, 'tutorme/index.html')
     if request.session.get_expiry_age()>0:
@@ -25,6 +26,7 @@ def index(request):
     return response
 
 
+# function that renders the about page and sends the user if exists
 def about(request):
     context_dict = dict()
     user = get_user(request.user)
@@ -33,18 +35,20 @@ def about(request):
     return response
 
 
+# function that renders the dashboard page
 @login_required
 def dashboard(request):
     context_dict = dict()
     user = get_user(request.user)
     context_dict['user_obj'] = user
 
+    # checks if the user description is not populated and adds the appropriate dictionary to render the page
     if user.description == "":
         context_dict['empty_fields'] = True
         context_dict['message'] = "Your account is not complete. Press Edit Profile below complete your registration"
 
+    # checks if is a post request if is for deleting deletes the user or if is for updating the user details updates them
     if request.method == 'POST':
-        print(request.POST)
         if 'delete' in request.POST:
             request.user.delete()
             return user_logout(request)
@@ -64,7 +68,9 @@ def dashboard(request):
                 context_dict['user_obj'] = user
             else:
                 print( form.errors)
+
     connections = list()
+    # gets the connection for the currect user either if is a student or teacher
     if hasattr(user, 'students'):
         form = TeacherUpdateForm(instance=user)
         for student in user.students.all() or []:
@@ -87,10 +93,13 @@ def dashboard(request):
     return render(request, 'tutorme/dashboard.html', context=context_dict)
 
 
+# search function renders the search page that is available for the student to search for teachers
 @login_required
 def search(request):
     context_dict = dict()
 
+    # gets the search request and trims everything except letters, numbers and spaces
+    # and returns the results otherwise returns 5 teachers
     if request.method == 'POST':
         search_string = request.POST.get('search')
         search_string = re.sub('[^A-Za-z0-9 ]+', '', search_string)
@@ -117,6 +126,7 @@ def search(request):
     return response
 
 
+# function that called when a student accepts a teacher and creates the connection
 @login_required
 def accept(request):
     if request.method == 'POST':
@@ -129,6 +139,7 @@ def accept(request):
     return HttpResponse("Bad request")
 
 
+# helper function to find a teacher by name
 def find_teacher(first_name):
     try:
         teacher = Teacher.objects.get(first_name=first_name)
@@ -137,6 +148,7 @@ def find_teacher(first_name):
         return None
 
 
+# helper function that finds the teacher by a given category
 def find_teachers_by_category(name):
     try:
         category = Category.objects.get(name=name)
@@ -145,6 +157,7 @@ def find_teachers_by_category(name):
         return None
 
 
+# helper function to get all categories
 def get_all_categories():
     try:
         return Category.objects.all()
@@ -152,6 +165,7 @@ def get_all_categories():
         return None
 
 
+# helper function to get the student or teacher given a user
 def get_user(user):
     response = None
     if not user.is_anonymous:
@@ -163,6 +177,7 @@ def get_user(user):
     return response
 
 
+# function to rate the teacher that is called from the dashboard javascript when a studen rates a teacher
 @login_required
 def rate(request):
     if request.method == 'POST':
@@ -174,34 +189,13 @@ def rate(request):
         print(teacher.first_name+student.first_name+request.POST.get('rating'))
         review = Review(reviewee=teacher, reviewer=student, rating=rating)
         review.save()
+        # call the teacher function to calculate overall rating
         teacher.calculate_rating()
         return HttpResponse("ok")
     return HttpResponse("Bad request")
 
 
-def show_category(request, category_name):
-    # Create a context dictionary which we can pass
-    # to the template rendering engine.
-    context_dict = dict()
-
-    try:
-        # Can we find a category name slug with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # The .get() method returns one model instance or raises an exception.
-        category = Category.objects.get(name=category_name)
-        teacher_list = category.teachers.all()
-        context_dict['category'] = category
-        context_dict['teachers'] = teacher_list
-    except Category.DoesNotExist:
-        # We get here if we didn't find the specified category.
-        # Don't do anything -
-        # the template will display the "no category" message for us.
-        context_dict['category'] = None
-
-    # Go render the response and return it to the client.
-    return render(request, 'tutorme/category.html', context=context_dict)
-
-
+# function used to register a student using either the register form or the fb details from a post request
 def register_student(request):
     registered = False
     registered_message = 'Thank you for registering!'
@@ -252,6 +246,7 @@ def register_student(request):
     return render(request, 'tutorme/register.html', context={'student': True, 'student_form': student_form, 'user_form': user_form, 'registered': registered, 'registered_message': registered_message})
 
 
+# function used to register a teacher using either the register form or the fb details from a post request
 def register_teacher(request):
     registered = False
     registered_message = 'Thank you for registering!'
@@ -305,6 +300,7 @@ def register_teacher(request):
     return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
+# function used to register a student or teacher that registering from fb
 def register_with_fb(request, teacher_student_flag):
     email = request.POST.get('email')
     first_name = request.POST.get('first_name')
@@ -323,6 +319,7 @@ def register_with_fb(request, teacher_student_flag):
     return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')
 
 
+# function used to render login page and login user
 def user_login(request):
     # If the request is a HTTP POST, try to pull out the relevant information.
     context_dict = dict()
