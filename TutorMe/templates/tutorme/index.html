@@ -10,9 +10,31 @@
 {% endblock %}
 
 {% block body_block %}
-
+{% if user.is_authenticated %}
+<div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-md-8 centered my-auto">
+                <div class="white-text welcome">
+                    <h2>Find teacher or Go to Dashboard</h2>
+                    <a href="{% url 'tutorme:search' %}" class="btn btn-transparent" id="registerTeacher">Search</a>
+                    <a href="{% url 'tutorme:dashboard' %}" class="btn btn-orange" id="registerStudent">Dashboard</a>
+                </div>
+            </div>
+        </div>
+</div>
+    {% else %}
+<div class="container1">
+        <div class="row">
+            <div class="col-sm-6 offset-md-8 centered my-auto">
+                <div class="white-text welcome">
+                    <h2>Get started</h2>
+                    <a href="{% url 'tutorme:login' %}" class="btn btn-orange" id="registerTeacher">Here</a>
+                </div>
+            </div>
+        </div>
+</div>
 <div class="row">
-    <div class="col-sm-6 offset-md-6 row-centered">
+    <div class="col-sm-6 offset-md-8 row-centered">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ul class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -23,21 +45,21 @@
                 <div class="carousel-item active">
                     <div class="card">
                         <div class="col-8">
-                            <p align="justify" class="content mb-5 mx-2">Quickest way to find a teacher!</p>
+                            <h5><p align="justify" class="content mb-5 mx-2">Quickest way to find a teacher!</p></h5>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="card">
                         <div class="col-8">
-                            <p align="justify" class="content mb-5 mx-2">Knowledge is just a click away!</p>
+                            <h5><p align="justify" class="content mb-5 mx-2">Knowledge is just a click away!</p></h5>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="card">
                         <div class="col-8">
-                            <p align="justify" class="content mb-5 mx-2">The best tutors in the local community! </p>
+                            <h5><p align="justify" class="content mb-5 mx-2">The best tutors in the community! </p></h5>
                         </div>
                     </div>
                 </div>
@@ -45,4 +67,5 @@
         </div>
     </div>
     </div>
+{% endif %}
 {% endblock %}

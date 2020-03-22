@@ -8,15 +8,7 @@
 
 .carousel li {
     float: right;
-    margin-left: 70px;
-}
-
-li a {
-    margin-left: 50px;
-    color: #000000;
-    text-align: center;
-    padding: 14ox 16px;
-    text-transform: uppercase;
+    margin-left: 80px;
 }
 
 .carousel li a::before {
@@ -38,13 +30,23 @@ body{
     background-size: cover;
 }
 
-.carouselcarousel{
-    margin-top: 40px;
-    margin-bottom: 40px;
+
+.container {
+margin-top: 100px;
 }
 
-.card{
-    background-color: #ffffff45;
-    min-height: 300px;
-    max-width: 400px;
+.container1 {
+margin-top: 50px;
 }
+
+.card {
+    margin-top: 50px;
+    background-color: transparent;
+    min-height: 100px;
+    max-width: 550px;
+    border: 5px;
+    color: #E68E00;
+    font-family: "Comic Sans MS";
+    font-size: 30px;
+}
+

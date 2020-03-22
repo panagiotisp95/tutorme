@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/about.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/about.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584826513094</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Navbar almost finished, about image fixed. continue index">
+      <created>1584866637164</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1584866637164</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,33 +131,34 @@
     <MESSAGE value="Index page almost finished." />
     <MESSAGE value="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3" />
     <MESSAGE value="Move navbar to base, play with base.css" />
-    <option name="LAST_COMMIT_MESSAGE" value="Move navbar to base, play with base.css" />
+    <MESSAGE value="Navbar almost finished, about image fixed. continue index" />
+    <option name="LAST_COMMIT_MESSAGE" value="Navbar almost finished, about image fixed. continue index" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="0" key="#manage" timestamp="1584816434478">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="361" y="0" key="#manage/0.0.1280.680@0.0.1280.680" timestamp="1584816434478" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584826511592">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584866635871">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584826511592" />
-    <state width="1259" height="210" key="GridCell.Tab.0.bottom" timestamp="1584866267089">
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584866635871" />
+    <state width="1259" height="210" key="GridCell.Tab.0.bottom" timestamp="1584872838182">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584866267089" />
-    <state width="1259" height="210" key="GridCell.Tab.0.center" timestamp="1584866267089">
+    <state width="1259" height="210" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584872838182" />
+    <state width="1259" height="210" key="GridCell.Tab.0.center" timestamp="1584872838181">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584866267089" />
-    <state width="1259" height="210" key="GridCell.Tab.0.left" timestamp="1584866267088">
+    <state width="1259" height="210" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584872838181" />
+    <state width="1259" height="210" key="GridCell.Tab.0.left" timestamp="1584872838181">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584866267088" />
-    <state width="1259" height="210" key="GridCell.Tab.0.right" timestamp="1584866267089">
+    <state width="1259" height="210" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584872838181" />
+    <state width="1259" height="210" key="GridCell.Tab.0.right" timestamp="1584872838181">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584866267089" />
+    <state width="1259" height="210" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584872838181" />
     <state x="354" y="57" key="MultipleFileMergeDialog" timestamp="1584620223488">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -176,10 +183,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="199" y="0" width="481" height="421" maximized="true" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1584866571857" />
-    <state x="134" y="0" width="481" height="523" maximized="true" key="dock-window-2" timestamp="1584548270997">
+    <state x="327" y="0" width="481" height="428" key="dock-window-2" timestamp="1584872782167">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="134" y="0" width="481" height="523" maximized="true" key="dock-window-2/0.0.1280.680@0.0.1280.680" timestamp="1584548270997" />
+    <state x="327" y="0" width="481" height="428" key="dock-window-2/0.0.1280.680@0.0.1280.680" timestamp="1584872782167" />
     <state x="684" y="34" width="481" height="468" maximized="true" key="dock-window-3" timestamp="1584548945838">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
