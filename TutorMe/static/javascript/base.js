@@ -36,10 +36,9 @@ function attemptLogin(postAddress){
 function getUserDetails(login_response, postAddress){
     var id = login_response.authResponse.userID;
     var user = '/'+id+'/';
-    FB.api(user, { locale: 'en_US', fields: 'first_name, last_name, email, picture.type(large)' }, function(api_response) {
+    FB.api(user, { locale: 'en_US', fields: 'first_name, last_name, email' }, function(api_response) {
             var postData = {fb: true};
             postData['email'] = api_response.email;
-            postData['picture_url'] = api_response.picture.data.url;
             postData['first_name'] = api_response.first_name;
             postData['last_name'] = api_response.last_name;
             sendRequest(postData, postAddress);

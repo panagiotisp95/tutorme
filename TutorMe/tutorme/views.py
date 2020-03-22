@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from tutorme.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from tutorme.forms import UserForm, StudentForm, TeacherForm, TeacherUpdateForm, StudentUpdateForm
@@ -9,9 +8,6 @@ from django.contrib.auth.decorators import login_required
 from tutorme.models import Category, Student, Teacher, User, Review
 from datetime import datetime
 from django.conf import settings
-from .picture_downloader import PictureDownloader
-from django.core.files.base import ContentFile
-from io import BytesIO
 import re
 
 
@@ -313,22 +309,15 @@ def register_with_fb(request, teacher_student_flag):
     email = request.POST.get('email')
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
-    picture_url = request.POST.get('picture_url')
-    img = PictureDownloader().get_image_from_url(picture_url)
-    image_io = BytesIO()
-    img.save(image_io, img.format, quality=60)
 
-    filename = first_name.lower()+".jpeg"
     user = User.objects.create_user(email, email)
     user.save()
 
     if teacher_student_flag:
         teacher = Teacher(user=user, first_name=first_name, last_name=last_name)
-        teacher.picture.save(filename, ContentFile(image_io.getvalue()))
         teacher.save()
     else:
         student = Student(user=user, first_name=first_name, last_name=last_name)
-        student.picture.save(filename, ContentFile(image_io.getvalue()))
         student.save()
 
     return HttpResponse('{"url" : "/tutorme/register_student/?registered=True"}')
@@ -361,7 +350,7 @@ def user_login(request):
 
                 login(request, user)
                 if request.POST.get('fb'):
-                    return HttpResponse('{"url" : "/tutorme/homepage/"}')
+                    return HttpResponse('{"url" : "/tutorme/"}')
                 return redirect(reverse('tutorme:index'))
             else:
                 # An inactive account was used - no logging in!
