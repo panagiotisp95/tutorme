@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from tutorme.models import Category, User, CommonInfo, Student, Teacher, Review
-import json
+
 
 
 class TestViews(TestCase):
