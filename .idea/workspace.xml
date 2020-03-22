@@ -4,7 +4,7 @@
     <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,22 +151,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584872960769" />
-    <state width="1259" height="55" key="GridCell.Tab.0.bottom" timestamp="1584873741424">
+    <state width="1259" height="121" key="GridCell.Tab.0.bottom" timestamp="1584892339704">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="55" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
-    <state width="1259" height="55" key="GridCell.Tab.0.center" timestamp="1584873741424">
+    <state width="1259" height="121" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584892339704" />
+    <state width="1259" height="121" key="GridCell.Tab.0.center" timestamp="1584892339703">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="55" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
-    <state width="1259" height="55" key="GridCell.Tab.0.left" timestamp="1584873741424">
+    <state width="1259" height="121" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584892339703" />
+    <state width="1259" height="121" key="GridCell.Tab.0.left" timestamp="1584892339703">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="55" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
-    <state width="1259" height="55" key="GridCell.Tab.0.right" timestamp="1584873741424">
+    <state width="1259" height="121" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584892339703" />
+    <state width="1259" height="121" key="GridCell.Tab.0.right" timestamp="1584892339703">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="55" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
+    <state width="1259" height="121" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584892339703" />
     <state x="354" y="57" key="MultipleFileMergeDialog" timestamp="1584620223488">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -179,18 +179,18 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1584465255982" />
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1584864523189">
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1584878180304">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584864523189" />
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584878180304" />
     <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584620160473">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1584620160473" />
-    <state x="199" y="0" width="481" height="421" maximized="true" key="dock-window-1" timestamp="1584866571857">
+    <state x="743" y="57" width="481" height="221" key="dock-window-1" timestamp="1584888714543">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="199" y="0" width="481" height="421" maximized="true" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1584866571857" />
+    <state x="743" y="57" width="481" height="221" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1584888714543" />
     <state x="327" y="0" width="481" height="428" maximized="true" key="dock-window-2" timestamp="1584873682159">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -199,5 +199,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="684" y="34" width="481" height="468" maximized="true" key="dock-window-3/0.0.1280.680@0.0.1280.680" timestamp="1584548945838" />
+    <state x="360" y="132" key="git4idea.merge.GitPullDialog" timestamp="1584885703888">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="360" y="132" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1584885703888" />
   </component>
 </project>
