@@ -2,6 +2,9 @@ TutorMe/.idea/workspace.xml
 *.pyc
 migrations/
 
+*.crt
+*.key
+
 # Django #
 *.log
 *.pot
