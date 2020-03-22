@@ -97,7 +97,8 @@ def dashboard(request):
 @login_required
 def search(request):
     context_dict = dict()
-
+    user = get_user(request.user)
+    context_dict['user_obj'] = user
     # gets the search request and trims everything except letters, numbers and spaces
     # and returns the results otherwise returns 5 teachers
     if request.method == 'POST':
