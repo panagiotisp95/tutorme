@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3">
+    <list default="true" id="48effeb2-4f72-4574-ac9b-8be973418ea2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TutorMe/static/css/about.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/about.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/static/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/TutorMe/templates/tutorme/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +97,14 @@
       <option name="presentableId" value="Default" />
       <updated>1584814825365</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Move navbar to base, play with base.css">
+      <created>1584826513094</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584826513094</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,33 +124,34 @@
     <MESSAGE value="Second Commit" />
     <MESSAGE value="Index page almost finished." />
     <MESSAGE value="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3" />
+    <MESSAGE value="Move navbar to base, play with base.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move navbar to base, play with base.css" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="0" key="#manage" timestamp="1584816434478">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="361" y="0" key="#manage/0.0.1280.680@0.0.1280.680" timestamp="1584816434478" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584816496844">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584826511592">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584816496844" />
-    <state width="1259" height="144" key="GridCell.Tab.0.bottom" timestamp="1584826376990">
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584826511592" />
+    <state width="1259" height="210" key="GridCell.Tab.0.bottom" timestamp="1584866267089">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="144" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584826376990" />
-    <state width="1259" height="144" key="GridCell.Tab.0.center" timestamp="1584826376990">
+    <state width="1259" height="210" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584866267089" />
+    <state width="1259" height="210" key="GridCell.Tab.0.center" timestamp="1584866267089">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="144" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584826376990" />
-    <state width="1259" height="144" key="GridCell.Tab.0.left" timestamp="1584826376989">
+    <state width="1259" height="210" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584866267089" />
+    <state width="1259" height="210" key="GridCell.Tab.0.left" timestamp="1584866267088">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="144" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584826376989" />
-    <state width="1259" height="144" key="GridCell.Tab.0.right" timestamp="1584826376990">
+    <state width="1259" height="210" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584866267088" />
+    <state width="1259" height="210" key="GridCell.Tab.0.right" timestamp="1584866267089">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="144" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584826376990" />
+    <state width="1259" height="210" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584866267089" />
     <state x="354" y="57" key="MultipleFileMergeDialog" timestamp="1584620223488">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -156,18 +164,18 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1584465255982" />
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1584814830385">
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1584864523189">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584814830385" />
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584864523189" />
     <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584620160473">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1584620160473" />
-    <state x="-7" y="0" width="653" height="687" maximized="true" key="dock-window-1" timestamp="1584471764902">
+    <state x="199" y="0" width="481" height="421" maximized="true" key="dock-window-1" timestamp="1584866571857">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="-7" y="0" width="653" height="687" maximized="true" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1584471764902" />
+    <state x="199" y="0" width="481" height="421" maximized="true" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1584866571857" />
     <state x="134" y="0" width="481" height="523" maximized="true" key="dock-window-2" timestamp="1584548270997">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
