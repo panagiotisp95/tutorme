@@ -1,3 +1,6 @@
+/*
+ * Function used to get a value from cookie given a name
+ */
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -14,11 +17,16 @@ function getCookie(name) {
     return cookieValue;
 }
 
+/*
+ * Function used to check if the HTTP methods do not require CSRF protection
+ */
 function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
+/*
+ * Function used to login using facebook
+ */
 function attemptLogin(postAddress){
     FB.login(function(login_response) {
         if(login_response){
@@ -33,6 +41,10 @@ function attemptLogin(postAddress){
     }, {scope: 'email'});
 }
 
+/*
+ * Function used by the login above to fetch the user details,
+ * Also it sends a request to the backend to attempt to login the user
+ */
 function getUserDetails(login_response, postAddress){
     var id = login_response.authResponse.userID;
     var user = '/'+id+'/';
@@ -45,6 +57,9 @@ function getUserDetails(login_response, postAddress){
     });
 }
 
+/*
+ * Function used to setup ajax so that has the csrftoken in the request
+ */
 function ajaxSetup(){
     var csrftoken = getCookie('csrftoken');
 
@@ -57,6 +72,11 @@ function ajaxSetup(){
     });
 }
 
+/*
+ * Function used to send the post request to the backend and checks if the
+ * user is successfully registered and redirects to the homepage or prints
+ * a message to register first and then login
+ */
 function sendRequest(postData, postAddress){
     ajaxSetup();
 
@@ -78,6 +98,10 @@ function sendRequest(postData, postAddress){
     });
 }
 
+/*
+ * Function used to blink the register buttons to highlight to the user
+ * where to click in order to register
+ */
 function blink(selector) {
     $(selector).fadeOut(400, function() {
         $(selector).fadeIn(500);
@@ -85,6 +109,9 @@ function blink(selector) {
 
 }
 
+/*
+ * refresh the page when a user uses the back arrow of the browser
+ */
 window.addEventListener( "pageshow", function ( event ) {
 	var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
 	if ( historyTraversal ) {

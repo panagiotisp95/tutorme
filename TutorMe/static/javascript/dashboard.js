@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    /* 1. Visualizing things on Hover - See next part for action on click */
+    /*
+     * Visualizing things on Hover over the stars so the user knows
+     */
     $('.stars li').on('mouseover', function(){
 
         var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -18,7 +20,9 @@ $(document).ready(function() {
         });
     });
 
-    /* 2. Action to perform on click */
+    /*
+     * Action to perform on click of the stars
+     */
     $('.stars li').on('click', function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently selected
         var stars = $(this).parent().children('li.star');
@@ -63,6 +67,10 @@ $(document).ready(function() {
 
 });
 
+/*
+ * Function used to make a post request in order to rate the teacher that the student
+ * clicked
+ */
 function rate(teacher_email, student_email, url, teacher_name, ratingValue){
     var postData = {"teacher_email": teacher_email, "student_email": student_email, "rating": ratingValue};
 
