@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'tutorme',
-    # needed fo ratings
-    'star_ratings',
 ]
 
 MIDDLEWARE = [

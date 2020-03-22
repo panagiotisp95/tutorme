@@ -254,14 +254,13 @@ def register_student(request):
         else:
             email = request.POST.get('email')
             if email:
-                try:
-                    User.objects.get(email=email)
+                if User.objects.filter(email=email).count() > 0:
                     registered = True
                     registered_message = "Account already exists with email '" + email + "'"
                     url = "/tutorme/register_student/?registered=True&registered_message="+registered_message
                     if request.POST.get('fb'):
                         return HttpResponse('{"url" : "'+url+'"}')
-                except User.DoesNotExist:
+                else:
                     if request.POST.get('fb'):
                         return register_with_fb(request, False)
                     else:
@@ -305,14 +304,13 @@ def register_teacher(request):
         else:
             email = request.POST.get('email')
             if email:
-                try:
-                    User.objects.get(email=email)
+                if User.objects.filter(email=email).count() > 0:
                     registered = True
                     registered_message = "Account already exists with email '" + email + "'"
                     url = "/tutorme/register_student/?registered=True&registered_message="+registered_message
                     if request.POST.get('fb'):
                         return HttpResponse('{"url" : "'+url+'"}')
-                except User.DoesNotExist:
+                else:
                     if request.POST.get('fb'):
                         return register_with_fb(request, True)
                     else:
