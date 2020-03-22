@@ -2,7 +2,7 @@ strong {
     color: #e68e00;
 }
 
-img {
+container.img {
     margin-top: 12px;
     margin-bottom: 12px;
 }
@@ -10,11 +10,4 @@ img {
 .tlc {
     color: #e68e00;
 }
-
-.container {
-    width: 900px;
-    text-align: left;
-}
-
-
 

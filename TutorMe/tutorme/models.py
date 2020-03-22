@@ -9,7 +9,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 
 
-# Create your models here.
+# Category model used to store a tutor category
 class Category(models.Model):
     NAME_MAX_LENGTH = 128
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
@@ -25,6 +25,9 @@ class Category(models.Model):
         return self.name
 
 
+# User model used to store a user but overrides the default user in django by inheriting from
+# AbstractBaseUser and PermissionsMixin to create a user that the unique attribute is the
+# email and not the username
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), blank=False, unique=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
@@ -40,6 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
 
+# Abstract model used to store the student and teacher common attributes
 class CommonInfo(models.Model):
     first_name = models.CharField(max_length=30, blank=False, default='')
     last_name = models.CharField(max_length=30, blank=False, default='')
@@ -51,6 +55,7 @@ class CommonInfo(models.Model):
         abstract = True
 
 
+# Student model that inherits from the commonInfo above
 class Student(CommonInfo):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
@@ -60,6 +65,7 @@ class Student(CommonInfo):
         verbose_name_plural = _('students')
 
 
+# Student model that inherits from the commonInfo above nad adds more attributes unique to the teacher
 class Teacher(CommonInfo):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     categories = models.ManyToManyField(Category, related_name="teachers", blank=True)
@@ -91,6 +97,7 @@ class Teacher(CommonInfo):
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    # function used to calculate the rating of the current teacher
     def calculate_rating(self, **kwargs):
         my_reviews = Review.objects.filter(reviewee=self)
         mean_rating = 0
@@ -101,6 +108,8 @@ class Teacher(CommonInfo):
         self.save()
 
 
+# Review model used to enable students add rating to the teachers
+# this will later include more attributes upon user request
 class Review(models.Model):
     rating = models.IntegerField(_('rating'), blank=False)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)

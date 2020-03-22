@@ -1,3 +1,7 @@
+/*
+ * Sets the autocomplete options and add the categories initialised
+ * in the html as data
+ */
 var options = {
     data : categories,
 
@@ -12,50 +16,16 @@ var options = {
     },
 };
 
+/*
+ * Adds the autocomplete to the chosen text input
+ */
 $("#search_box").easyAutocomplete(options);
 
-$(document).ready(function(){
-    /* 1. Visualizing things on Hover - See next part for action on click */
-    $('#stars li').on('mouseover', function(){
-        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-
-        // Now highlight all the stars that's not after the current hovered star
-        $(this).parent().children('li.star').each(function(e){
-            if (e < onStar) {
-                $(this).addClass('hover');
-            }else{
-                $(this).removeClass('hover');
-            }
-        });
-    }).on('mouseout', function(){
-        $(this).parent().children('li.star').each(function(e){
-            $(this).removeClass('hover');
-        });
-    });
-
-    /* 2. Action to perform on click */
-    $('#stars li').on('click', function(){
-        var onStar = parseInt($(this).data('value'), 10); // The star currently selected
-        var stars = $(this).parent().children('li.star');
-
-        for (i = 0; i < stars.length; i++) {
-            $(stars[i]).removeClass('selected');
-        }
-
-        for (i = 0; i < onStar; i++) {
-            $(stars[i]).addClass('selected');
-        }
-
-        // JUST RESPONSE (Not needed)
-        var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-        var user = $("#stars").parent().parent().attr('class');
-        console.log(user);
-        console.log(ratingValue);
-    });
-
-
-});
-
+/*
+ * Function executes when a user presses the accept button on a teacher card
+ * and sends a post request so that they are linked and could see each other
+ * in their dashboards
+ */
 function accept(teacher_email, teacher_name, url, student){
     var postData = {"teacher_email": teacher_email, "student_email": student};
 
@@ -69,8 +39,11 @@ function accept(teacher_email, teacher_name, url, student){
     })
 }
 
+/*
+ * Function remove a teacher from the current view because a student chose to
+ * decline him/her
+ */
 function decline(id){
-
     carousel = $("#"+id).parent().children('.carousel-item').first();
     if(carousel.attr("id") == id){
         carousel = $("#"+id).parent().children('.carousel-item').last();

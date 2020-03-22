@@ -1,26 +1,8 @@
 from django import forms
 from tutorme.models import Category, Student, Teacher, Review, User
 
-RATING = [
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
-    ('4', '4'),
-    ('5', '5'),
-]
 
-
-class CategoryForm(forms.ModelForm):
-    name = forms.CharField(max_length=Category.NAME_MAX_LENGTH,help_text="Please enter the category name.")
-    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
-    # An inline class to provide additional information on the form.
-    class Meta:
-        # Provide an association between the ModelForm and a model
-        model = Category
-        fields = ('name',)
-
-
+# Form used to register and login the user by using the user model
 class UserForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -30,6 +12,7 @@ class UserForm(forms.ModelForm):
         fields = ('email', 'password',)
 
 
+# Form used to register a student
 class StudentForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -41,6 +24,7 @@ class StudentForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'description', 'location', 'picture',)
 
 
+# Form used to register a teacher
 class TeacherForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -58,16 +42,7 @@ class TeacherForm(forms.ModelForm):
         self.fields["categories"].queryset = Category.objects.all()
 
 
-class ReviewForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    rating = forms.CharField(label='What is your rating?', widget=forms.Select(choices=RATING))
-
-    class Meta:
-        model = Review
-        fields = ('title', 'description', 'rating',)
-
-
+# Form used to update the given teacher tuple
 class TeacherUpdateForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -77,6 +52,7 @@ class TeacherUpdateForm(forms.ModelForm):
         model = Teacher
         fields = ('description', 'location', 'picture', 'active', 'categories',)
 
+    # initialise categories attribute with all the categories in the db
     def __init__(self, *args, **kwargs):
         super(TeacherUpdateForm, self).__init__(*args, **kwargs)
         self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
@@ -84,6 +60,7 @@ class TeacherUpdateForm(forms.ModelForm):
         self.fields["categories"].queryset = Category.objects.all()
 
 
+# Form used to update the given student tuple
 class StudentUpdateForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

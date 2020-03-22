@@ -1,9 +1,3 @@
-
-nav {
-    background-color: #c3eff745;
-    border: 5px solid #E68E00;
-}
-
 .carousel ul {
     margin: 0;
     padding:0;
@@ -14,17 +8,7 @@ nav {
 
 .carousel li {
     float: right;
-    margin-left: 70px;
-}
-
-.carousel li a {
-    color: #000000;
-    text-align: center;
-    padding: 14ox 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 18px;
-    display: block;
+    margin-left: 80px;
 }
 
 .carousel li a::before {
@@ -34,7 +18,7 @@ nav {
     background-color: #444;
 
     position: absolute;
-    top: 0;
+    top: 10;
     width: 0%;
     transition: all ease-in-out 250ms;
 }
@@ -46,13 +30,21 @@ body{
     background-size: cover;
 }
 
-.carouselcarousel{
-    margin-top: 40px;
-    margin-bottom: 40px;
+.container {
+    margin-top: 100px;
 }
 
-.card{
-    background-color: #ffffff45;
-    min-height: 300px;
-    max-width: 400px;
+.container1 {
+    margin-top: 50px;
 }
+
+.card {
+    margin-top: 70px;
+    background-color: transparent;
+    height: 70px;
+    width: 650px;
+    color: #E68E00;
+    font-size: 40px;
+    border: none;
+}
+

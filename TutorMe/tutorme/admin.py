@@ -2,6 +2,7 @@ from django.contrib import admin
 from tutorme.models import Category, Student, Teacher, Review, User
 
 
+# adds all models to the admin page for easier troubleshooting
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 

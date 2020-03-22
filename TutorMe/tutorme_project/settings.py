@@ -39,10 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
     'tutorme',
-    # needed fo ratings
-    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +70,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = 'tutorme_project.wsgi.application'

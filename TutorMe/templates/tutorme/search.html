@@ -10,26 +10,28 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
-    <br/>
-	<div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-            <form action="#" class="card card-sm" method="post">
-                {% csrf_token %}
-                <div class="card-body row no-gutters align-items-center">
-                    <div class="col-md-1">
-                        <i class="fa fa-search h4 text-body"></i>
+    <div class="container">
+        <br/>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form action="#" class="card card-sm" method="post">
+                    {% csrf_token %}
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-md-1">
+                            <i class="fa fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col-md-8 my-auto">
+                            <input id="search_box" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Enter a category you wish to learn or a teacher">
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary float-center" type="submit">Search</button>
+                        </div>
                     </div>
-                    <div class="col-md-8 my-auto">
-                        <input id="search_box" class="form-control form-control-lg form-control-borderless" name="search" type="search" placeholder="Enter a category you wish to learn or a teacher">
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-primary float-center" type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 </br>
 <div class="col-5 carousel-card">
@@ -53,33 +55,52 @@
                                     <h5 class="mb-3 mt-2">Overall rating</h5>
                                     <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
 >>>>>>> f0624917044b7002071ef3c30b069753736e45c2
+=======
+    </br>
+    <div class="col-5 carousel-card">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% if teachers %}
+                    {% for teacher in teachers %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}" id="{{ teacher.first_name }}">
+                            <div class="card">
+                                <div class="row justify-content-center"> <img src="{% if teacher.picture %}{{ MEDIA_URL }}{{ teacher.picture }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" class="img-fluid profile-pic mb-4 mt-3"> </div>
+                                <h4 class="mb-3 mt-2">{{ teacher.first_name }} {{ teacher.last_name }}</h4>
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <p align="justify" class="content mb-5 mx-2">{{ teacher.description }}</p>
+                                        <div id="accepted_{{ teacher.first_name }}"><p></p></div>
+                                        <h5 class="mb-3 mt-2">Overall rating</h5>
+                                        <div class="Stars" style="--rating: {{ teacher.rating }};"></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                <div class="col-8 mb-3">
+                                    <button type="button" onclick='decline("{{ teacher.first_name }}")' class="btn btn-danger btn-circle btn-xl float-left">Decline</button>
+                                    <button type="button" onclick='accept("{{ teacher.user.email }}", "{{ teacher.first_name }}", "{% url "tutorme:accept" %}", "{{ user.email }}" )' class="btn btn-success btn-circle btn-xl float-right">Accept</button>
+                                </div>
+>>>>>>> 86c80c0bb831b5ef851743df118d13e89b30a004
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
-                            <div class="col-8 mb-3">
-                                <button type="button" onclick='decline("{{ teacher.first_name }}")' class="btn btn-danger btn-circle btn-xl float-left">Decline</button>
-                                <button type="button" onclick='accept("{{ teacher.user.email }}", "{{ teacher.first_name }}", "{% url "tutorme:accept" %}", "{{ user.email }}" )' class="btn btn-success btn-circle btn-xl float-right">Accept</button>
-                            </div>
-                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            {% endif %}
+                    {% endfor %}
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block afterBody_block %}
     <script>
+        <!--  the script here is used to initialize the categories variable used in the autocomplete using the django template -->
         var categories = [  {% for category in all_categories %}
                                 {% if forloop.last %}
                                     "{{ last_category }}"
