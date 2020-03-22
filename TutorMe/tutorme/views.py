@@ -81,8 +81,10 @@ def dashboard(request):
                     user.picture = request.FILES['picture']
 
                 user.save()
+                form.save_m2m()
                 context_dict['user_obj'] = user
-
+            else:
+                print( form.errors)
     connections = list()
     if hasattr(user, 'students'):
         form = TeacherUpdateForm(instance=user)
