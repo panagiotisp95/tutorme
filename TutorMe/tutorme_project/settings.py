@@ -73,7 +73,6 @@ TEMPLATES = [
 ]
 
 
-
 WSGI_APPLICATION = 'tutorme_project.wsgi.application'
 
 AUTH_USER_MODEL = 'tutorme.User'

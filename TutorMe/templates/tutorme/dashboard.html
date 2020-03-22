@@ -4,7 +4,7 @@
 {% load tutorme_templates_tags %}
 
 {% block title_block %}
-    Dashboard (Teacher)
+    {{ user_obj.first_name }} Dashboard
 {% endblock %}
 
 {% block head_block %}
@@ -67,9 +67,9 @@
                                                     {% if student %}
                                                         <div id="stars_rating_for_user_{{ connection.first_name }}">
                                                             <h4>Star rating </h4>
-                                                            {% get_at_index has_review forloop.counter0 as koko %}
-                                                            {% if koko %}
-                                                                <div class="Stars" style="--rating: {{ koko }};"></div>
+                                                            {% get_at_index has_review forloop.counter0 as rating %}
+                                                            {% if rating %}
+                                                                <div class="Stars" style="--rating: {{ rating }};"></div>
                                                             {% else %}
                                                                 <div id="{{ connection.first_name }}" class="{{ connection.first_name }}" about="{{ connection.user.email }} {{ user.email }} {% url 'tutorme:rate' %}">
                                                                     <div class='rating-stars text-center'>

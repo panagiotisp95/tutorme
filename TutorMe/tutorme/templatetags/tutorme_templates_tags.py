@@ -11,5 +11,4 @@ def get_category_list(current_category=None):
 
 @register.simple_tag
 def get_at_index(my_list, index):
-    print("koko")
     return my_list[index]

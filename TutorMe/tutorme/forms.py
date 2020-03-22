@@ -1,25 +1,6 @@
 from django import forms
 from tutorme.models import Category, Student, Teacher, Review, User
 
-RATING = [
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
-    ('4', '4'),
-    ('5', '5'),
-]
-
-
-class CategoryForm(forms.ModelForm):
-    name = forms.CharField(max_length=Category.NAME_MAX_LENGTH,help_text="Please enter the category name.")
-    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
-    # An inline class to provide additional information on the form.
-    class Meta:
-        # Provide an association between the ModelForm and a model
-        model = Category
-        fields = ('name',)
-
 
 class UserForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -56,16 +37,6 @@ class TeacherForm(forms.ModelForm):
         self.fields["categories"].widget = forms.widgets.CheckboxSelectMultiple()
         self.fields["categories"].help_text = ""
         self.fields["categories"].queryset = Category.objects.all()
-
-
-class ReviewForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    rating = forms.CharField(label='What is your rating?', widget=forms.Select(choices=RATING))
-
-    class Meta:
-        model = Review
-        fields = ('title', 'description', 'rating',)
 
 
 class TeacherUpdateForm(forms.ModelForm):
