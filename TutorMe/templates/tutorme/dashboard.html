@@ -36,8 +36,13 @@
                         <p class="card-text"></p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ user_obj.location }}</li>
+                        <li class="list-group-item">{{ user_obj.description }}</li>
+                        <li class="list-group-item">Location: {{ user_obj.location }}</li>
                     </ul>
+                    {% if not student %}
+                        <h4>Your Overall rating</h4>
+                        <div class="Stars" style="--rating: {{ user_obj.rating }};"></div>
+                    {% endif %}
                     {% if empty_fields %}
                         <div class="bold-red form-group">
                             <p><h2>{{ message }}</h2></p>
