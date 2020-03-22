@@ -4,14 +4,11 @@ chardet==3.0.4
 cryptography==2.8
 Django==2.1.5
 django-braces==1.14.0
-django-extensions==2.2.8
 django-model-utils==4.0.0
 idna==2.9
 Pillow==7.0.0
 pycparser==2.20
-pyOpenSSL==19.1.0
 pytz==2019.3
 six==1.14.0
 swapper==1.1.2.post1
 urllib3==1.25.8
-Werkzeug==1.0.0
