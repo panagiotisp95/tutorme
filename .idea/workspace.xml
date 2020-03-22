@@ -110,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584866637164</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Save before fixing urls">
+      <created>1584872962320</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1584872962320</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,33 +139,34 @@
     <MESSAGE value="Merge branch 'master' into Theodora&#10;&#10;# Conflicts:&#10;#&#9;TutorMe/db.sqlite3" />
     <MESSAGE value="Move navbar to base, play with base.css" />
     <MESSAGE value="Navbar almost finished, about image fixed. continue index" />
-    <option name="LAST_COMMIT_MESSAGE" value="Navbar almost finished, about image fixed. continue index" />
+    <MESSAGE value="Save before fixing urls" />
+    <option name="LAST_COMMIT_MESSAGE" value="Save before fixing urls" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="0" key="#manage" timestamp="1584816434478">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="361" y="0" key="#manage/0.0.1280.680@0.0.1280.680" timestamp="1584816434478" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584866635871">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1584872960769">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584866635871" />
-    <state width="1259" height="210" key="GridCell.Tab.0.bottom" timestamp="1584872838182">
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584872960769" />
+    <state width="1259" height="55" key="GridCell.Tab.0.bottom" timestamp="1584873741424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584872838182" />
-    <state width="1259" height="210" key="GridCell.Tab.0.center" timestamp="1584872838181">
+    <state width="1259" height="55" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
+    <state width="1259" height="55" key="GridCell.Tab.0.center" timestamp="1584873741424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584872838181" />
-    <state width="1259" height="210" key="GridCell.Tab.0.left" timestamp="1584872838181">
+    <state width="1259" height="55" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
+    <state width="1259" height="55" key="GridCell.Tab.0.left" timestamp="1584873741424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584872838181" />
-    <state width="1259" height="210" key="GridCell.Tab.0.right" timestamp="1584872838181">
+    <state width="1259" height="55" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
+    <state width="1259" height="55" key="GridCell.Tab.0.right" timestamp="1584873741424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="210" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584872838181" />
+    <state width="1259" height="55" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584873741424" />
     <state x="354" y="57" key="MultipleFileMergeDialog" timestamp="1584620223488">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -183,10 +191,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="199" y="0" width="481" height="421" maximized="true" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1584866571857" />
-    <state x="327" y="0" width="481" height="428" key="dock-window-2" timestamp="1584872782167">
+    <state x="327" y="0" width="481" height="428" maximized="true" key="dock-window-2" timestamp="1584873682159">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="327" y="0" width="481" height="428" key="dock-window-2/0.0.1280.680@0.0.1280.680" timestamp="1584872782167" />
+    <state x="327" y="0" width="481" height="428" maximized="true" key="dock-window-2/0.0.1280.680@0.0.1280.680" timestamp="1584873682159" />
     <state x="684" y="34" width="481" height="468" maximized="true" key="dock-window-3" timestamp="1584548945838">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
