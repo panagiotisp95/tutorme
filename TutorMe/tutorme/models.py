@@ -45,19 +45,30 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 # Abstract model used to store the student and teacher common attributes
 class CommonInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30, blank=False, default='')
     last_name = models.CharField(max_length=30, blank=False, default='')
     picture = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     location = models.CharField(_('location'), max_length=30, blank=False)
     description = models.CharField(_('description'), max_length=100, blank=False)
+    rating = models.IntegerField(_('rating'), default=0)
 
     class Meta:
         abstract = True
 
+    # function used to calculate the rating of the current teacher
+    def calculate_rating(self, **kwargs):
+        my_reviews = Review.objects.filter(reviewee=self.user)
+        mean_rating = 0
+        for review in my_reviews:
+            mean_rating = mean_rating + review.rating
+        mean_rating = mean_rating/len(my_reviews)
+        self.rating = mean_rating
+        self.save()
+
 
 # Student model that inherits from the commonInfo above
 class Student(CommonInfo):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     class Meta(CommonInfo.Meta):
         db_table = 'students'
@@ -67,11 +78,9 @@ class Student(CommonInfo):
 
 # Student model that inherits from the commonInfo above nad adds more attributes unique to the teacher
 class Teacher(CommonInfo):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     categories = models.ManyToManyField(Category, related_name="teachers", blank=True)
     active = models.BooleanField(default=True)
     students = models.ManyToManyField(Student, related_name="teachers")
-    rating = models.IntegerField(_('rating'), default=0)
 
     class Meta(CommonInfo.Meta):
         db_table = 'teachers'
@@ -97,24 +106,14 @@ class Teacher(CommonInfo):
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
-    # function used to calculate the rating of the current teacher
-    def calculate_rating(self, **kwargs):
-        my_reviews = Review.objects.filter(reviewee=self)
-        mean_rating = 0
-        for review in my_reviews:
-            mean_rating = mean_rating + review.rating
-        mean_rating = mean_rating/len(my_reviews)
-        self.rating = mean_rating
-        self.save()
-
 
 # Review model used to enable students add rating to the teachers
 # this will later include more attributes upon user request
 class Review(models.Model):
     rating = models.IntegerField(_('rating'), blank=False)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
-    reviewee = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-    reviewer = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
+    reviewee = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reviewee')
+    reviewer = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reviewer')
 
     class Meta:
         verbose_name = _('review')

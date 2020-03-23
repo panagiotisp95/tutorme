@@ -70,11 +70,19 @@ def dashboard(request):
                 print( form.errors)
 
     connections = list()
+
     # gets the connection for the currect user either if is a student or teacher
     if hasattr(user, 'students'):
         form = TeacherUpdateForm(instance=user)
-        for student in user.students.all() or []:
-            connections.append(student)
+        connections = user.students.all()
+        has_review = list()
+        for connection in connections:
+            try:
+                review = Review.objects.get(reviewee=connection.user, reviewer=request.user)
+                has_review.append(review.rating)
+            except Review.DoesNotExist:
+                has_review.append(None)
+        context_dict['has_review'] = has_review
     else:
         form = StudentUpdateForm(instance=user)
         context_dict['student'] = True
@@ -82,7 +90,7 @@ def dashboard(request):
         has_review = list()
         for connection in connections:
             try:
-                review = Review.objects.get(reviewee=connection, reviewer=user)
+                review = Review.objects.get(reviewee=connection.user, reviewer=request.user)
                 has_review.append(review.rating)
             except Review.DoesNotExist:
                 has_review.append(None)
@@ -124,6 +132,8 @@ def search(request):
         context_dict['teachers'] = Teacher.objects.order_by('-first_name').filter(active=True)[:5]
     context_dict['all_categories'] = get_all_categories()
     response = render(request, 'tutorme/search.html', context=context_dict)
+    if hasattr(user, 'students'):
+        return dashboard(request)
     return response
 
 
@@ -182,16 +192,15 @@ def get_user(user):
 @login_required
 def rate(request):
     if request.method == 'POST':
-        user = User.objects.get(email=request.POST.get('teacher_email'))
-        teacher = get_user(user)
-        student_user = User.objects.get(email=request.POST.get('student_email'))
-        student = get_user(student_user)
+        print(request.POST)
+        reviewer = User.objects.get(email=request.POST.get('reviewer_email'))
+        reviewee = User.objects.get(email=request.POST.get('reviewee_email'))
         rating = int(request.POST.get('rating'))
-        print(teacher.first_name+student.first_name+request.POST.get('rating'))
-        review = Review(reviewee=teacher, reviewer=student, rating=rating)
+        review = Review(reviewee=reviewee, reviewer=reviewer, rating=rating)
         review.save()
         # call the teacher function to calculate overall rating
-        teacher.calculate_rating()
+        teacher_or_student = get_user(reviewee)
+        teacher_or_student.calculate_rating()
         return HttpResponse("ok")
     return HttpResponse("Bad request")
 

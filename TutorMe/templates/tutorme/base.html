@@ -51,9 +51,11 @@
                             <li class="nav-link">
                                 <h5><a href="{% url 'tutorme:dashboard' %}">Dashboard </a></h5>
                             </li>
-                            <li class="nav-link">
-                                <h5><a href="{% url 'tutorme:search' %}">Search </a></h5>
-                            </li>
+                            {% if not user_obj.categories %}
+                                <li class="nav-link">
+                                    <h5><a href="{% url 'tutorme:search' %}">Search </a></h5>
+                                </li>
+                            {% endif %}
                             <li class="nav-link">
                                 <h5><a href="{% url 'tutorme:logout' %}">Logout </a></h5>
                             </li>

@@ -36,10 +36,10 @@
                         <li class="list-group-item">{{ user_obj.description }}</li>
                         <li class="list-group-item">Location: {{ user_obj.location }}</li>
                     </ul>
-                    {% if not student %}
-                        <h4>Your Overall rating</h4>
-                        <div class="Stars" style="--rating: {{ user_obj.rating }};"></div>
-                    {% endif %}
+
+                    <h4>Your Overall rating</h4>
+                    <div class="Stars" style="--rating: {{ user_obj.rating }};"></div>
+
                     {% if empty_fields %}
                         <div class="bold-red form-group">
                             <p><h2>{{ message }}</h2></p>
@@ -64,27 +64,25 @@
                                             <div class="row justify-content-center">
                                                 <div class="col-8">
                                                     <p align="justify" class="content mb-5 mx-2">{{ connection.description }}</p>
-                                                    {% if student %}
-                                                        <div id="stars_rating_for_user_{{ connection.first_name }}">
-                                                            <h4>Star rating </h4>
-                                                            {% get_at_index has_review forloop.counter0 as rating %}
-                                                            {% if rating %}
-                                                                <div class="Stars" style="--rating: {{ rating }};"></div>
-                                                            {% else %}
-                                                                <div id="{{ connection.first_name }}" class="{{ connection.first_name }}" about="{{ connection.user.email }} {{ user.email }} {% url 'tutorme:rate' %}">
-                                                                    <div class='rating-stars text-center'>
-                                                                        <ul id='stars' class="stars">
-                                                                            <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
-                                                                            <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
-                                                                            <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
-                                                                            <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
-                                                                            <li class='star' title='WOW!!!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
-                                                                        </ul>
-                                                                    </div>
+                                                    <div id="stars_rating_for_user_{{ connection.first_name }}">
+                                                        <h4>Star rating </h4>
+                                                        {% get_at_index has_review forloop.counter0 as rating %}
+                                                        {% if rating %}
+                                                            <div class="Stars" style="--rating: {{ rating }};"></div>
+                                                        {% else %}
+                                                            <div id="{{ connection.first_name }}" class="{{ connection.first_name }}" about="{{ connection.user.email }} {{ user.email }} {% url 'tutorme:rate' %}">
+                                                                <div class='rating-stars text-center'>
+                                                                    <ul id='stars' class="stars">
+                                                                        <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
+                                                                        <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
+                                                                        <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
+                                                                        <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
+                                                                        <li class='star' title='WOW!!!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+                                                                    </ul>
                                                                 </div>
-                                                            {% endif %}
-                                                        </div>
-                                                    {% endif %}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
                                                     <div><p align="left" class="content mb-5 mx-2">Contact Info: {{ connection.user.email }}</p></div>
                                                 </div>
                                             </div>

@@ -71,15 +71,15 @@ $(document).ready(function() {
  * Function used to make a post request in order to rate the teacher that the student
  * clicked
  */
-function rate(teacher_email, student_email, url, teacher_name, ratingValue){
-    var postData = {"teacher_email": teacher_email, "student_email": student_email, "rating": ratingValue};
+function rate(reviewee_email, reviewer_email, url, connection_name, ratingValue){
+    var postData = {"reviewee_email": reviewee_email, "reviewer_email": reviewer_email, "rating": ratingValue};
 
     ajaxSetup();
     $.post(url, postData, function(data){
         if(data == "ok"){
-            var koko = "#"+teacher_name;
+            var koko = "#"+connection_name;
             $(koko).remove();
-            $("#stars_rating_for_user_"+teacher_name).append('<div class="Stars" style="--rating: '+ ratingValue +';"></div>');
+            $("#stars_rating_for_user_"+connection_name).append('<div class="Stars" style="--rating: '+ ratingValue +';"></div>');
         }
         return;
     })
