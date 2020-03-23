@@ -15,9 +15,11 @@
             {% if user.is_authenticated %}
                 <div class="col-md-5 offset-md-8 row-centered">
                     <div class="white-text welcome">
-                        <h2>Find teacher or Go to Dashboard</h2>
                         {% if not user_obj.categories %}
+                            <h2>Find teacher or Go to Dashboard</h2>
                             <a href="{% url 'tutorme:search' %}" class="btn btn-transparent" id="search">Search</a>
+                        {% else %}
+                            <h2>Go to Dashboard</h2>
                         {% endif %}
                         <a href="{% url 'tutorme:dashboard' %}" class="btn btn-orange" id="dashboard">Dashboard</a>
                     </div>

@@ -144,7 +144,7 @@ def accept(request):
         teacher = get_user(user)
         student_user = User.objects.get(email=request.POST.get('student_email'))
         student = get_user(student_user)
-        if teacher.students.get(user=student.user):
+        if teacher.students.filter(user=student.user).count() > 0:
             return HttpResponse("Already")
         body = "Hello, "+teacher.first_name+" you have a new student, go to your dashboard!"
         teacher.email_user(subject="New student Notification", message=body, from_email="2455656p@student.gla.ac.uk")
@@ -182,14 +182,13 @@ def get_all_categories():
 
 # helper function to get the student or teacher given a user
 def get_user(user):
-    response = None
     if not user.is_anonymous:
-        try:
-            response = Student.objects.get(user=user)
-        except Student.DoesNotExist:
-            response = Teacher.objects.get(user=user)
+        if Student.objects.filter(user=user).count() > 0:
+            return Student.objects.get(user=user)
+        else:
+            return Teacher.objects.get(user=user)
 
-    return response
+    return None
 
 
 # function to rate the teacher that is called from the dashboard javascript when a studen rates a teacher
