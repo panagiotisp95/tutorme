@@ -35,6 +35,7 @@ def populate():
         'Economics': {'teachers': []},
         'Microeconomics': {'teachers': []},
         'Macroeconomics': {'teachers': []},
+        'Woodworking': {'teachers': []},
         'Entrepreneurship': {'teachers': []}
     }
 

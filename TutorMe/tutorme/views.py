@@ -127,7 +127,6 @@ def search(request):
                     teachers.append(teacher)
 
         context_dict['teachers'] = teachers
-        print(teachers)
     else:
         context_dict['teachers'] = Teacher.objects.order_by('-first_name').filter(active=True)[:5]
     context_dict['all_categories'] = get_all_categories()
@@ -145,6 +144,11 @@ def accept(request):
         teacher = get_user(user)
         student_user = User.objects.get(email=request.POST.get('student_email'))
         student = get_user(student_user)
+        if teacher.students.get(user=student.user):
+            return HttpResponse("Already")
+        body = "Hello, "+teacher.first_name+" you have a new student, go to your dashboard!"
+        teacher.email_user(subject="New student Notification", message=body, from_email="2455656p@student.gla.ac.uk")
+
         teacher.students.add(student)
         return HttpResponse("ok")
     return HttpResponse("Bad request")
@@ -192,7 +196,6 @@ def get_user(user):
 @login_required
 def rate(request):
     if request.method == 'POST':
-        print(request.POST)
         reviewer = User.objects.get(email=request.POST.get('reviewer_email'))
         reviewee = User.objects.get(email=request.POST.get('reviewee_email'))
         rating = int(request.POST.get('rating'))
@@ -298,15 +301,12 @@ def register_teacher(request):
                     if request.POST.get('fb'):
                         return register_with_fb(request, True)
                     else:
-                        print(user_form.errors)
-                        print(teacher_form.errors)
                         return HttpResponse(teacher_form.errors)
             else:
                 return HttpResponse("popo")
     else:
         user_form = UserForm()
         teacher_form = TeacherForm()
-        print(teacher_form)
     return render(request, 'tutorme/register.html', context={'student': False, 'teacher_form': teacher_form, 'user_form': user_form, 'registered': registered})
 
 
@@ -363,7 +363,7 @@ def user_login(request):
                 # An inactive account was used - no logging in!
                 context_dict['message'] = "Your account is disabled."
         else:
-            # Bad login details were provided. So we can't log the user in. print(f"Invalid login details: {username}, {password}")
+            # Bad login details were provided. So we can't log the user in.
             if request.POST.get('fb'):
                 return HttpResponse('{"registered" : false}')
             context_dict['message'] = "Invalid login details supplied."

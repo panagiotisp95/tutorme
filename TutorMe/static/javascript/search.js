@@ -34,6 +34,9 @@ function accept(teacher_email, teacher_name, url, student){
         if(data == "ok"){
             var name = "#accepted_"+teacher_name+" p"
             $(name ).text( "Accepted" );
+        }else if(data="Already"){
+            var name = "#accepted_"+teacher_name+" p"
+            $(name ).text( "Already accepted" );
         }
         return;
     })
