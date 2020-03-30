@@ -100,6 +100,7 @@ class Teacher(CommonInfo):
     categories = models.ManyToManyField(Category, related_name="teachers", blank=True)
     active = models.BooleanField(default=True)
     students = models.ManyToManyField(Student, related_name="teachers")
+    notify = models.BooleanField(default=False)
 
     class Meta(CommonInfo.Meta):
         db_table = 'teachers'

@@ -57,8 +57,28 @@
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 {% for connection in connections %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <div class="carousel-item  {% if notify %}{% if forloop.last %}active{% endif %}{% else %}{% if forloop.first %}active{% endif %}{% endif %}">
                                         <div class="card">
+                                            {% if forloop.last %}
+                                                {% if notify %}
+                                                    <div class="modal fade" id="newUser" tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title ">You have a new connection!</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <h6 class="mb-3 mt-2">{{ connection.first_name }} {{ connection.last_name }} joined you!</h6>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="newUser bold-red"><h3>New!</h3></div>
+                                                {% endif %}
+                                            {% endif %}
                                             <div class="row justify-content-center"> <img src="{% if connection.picture %}{{ MEDIA_URL }}{{ connection.picture }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" class="img-fluid profile-pic mb-4 mt-3" alt="User does not have profile picture"> </div>
                                             <h6 class="mb-3 mt-2">{{ connection.first_name }} {{ connection.last_name }}</h6>
                                             <div class="row justify-content-center">

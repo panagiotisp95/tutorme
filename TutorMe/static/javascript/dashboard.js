@@ -64,7 +64,9 @@ $(document).ready(function() {
         });
     });
 
-
+    if($('#newUser')){
+            $('#newUser').modal('show');
+        }
 });
 
 /*

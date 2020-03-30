@@ -70,9 +70,13 @@ def dashboard(request):
                 print( form.errors)
 
     connections = list()
-
     # gets the connection for the currect user either if is a student or teacher
     if hasattr(user, 'students'):
+        if user.notify:
+            print("true")
+            context_dict['notify'] = True
+            user.notify = False
+            user.save()
         form = TeacherUpdateForm(instance=user)
         connections = user.students.all()
         has_review = list()
@@ -150,6 +154,8 @@ def accept(request):
         teacher.email_user(subject="New student Notification", message=body, from_email="2455656p@student.gla.ac.uk")
 
         teacher.students.add(student)
+        teacher.notify = True
+        teacher.save()
         return HttpResponse("ok")
     return HttpResponse("Bad request")
 
